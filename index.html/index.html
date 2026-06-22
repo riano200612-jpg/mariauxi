@@ -71,14 +71,22 @@ nav {
   transition: background .5s, border-color .5s, backdrop-filter .5s;
 }
 nav.scrolled {
-  background: rgba(250,248,245,0.93); backdrop-filter: blur(18px);
+  background: rgba(250,248,245,0.96); backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
 }
-.nav-logo { font-family:var(--f-serif); font-size:clamp(0.95rem,1vw,1.05rem); font-weight:400; letter-spacing:.14em; color:var(--text); text-decoration:none; white-space:nowrap; }
-.nav-logo em { font-style:italic; color:var(--rose); }
+
+/* Estilos de letras superiores (Nav) brillantes sobre el video */
+.nav-logo { font-family:var(--f-serif); font-size:clamp(0.95rem,1vw,1.05rem); font-weight:400; letter-spacing:.14em; color:var(--white); text-shadow: 0 2px 12px rgba(0,0,0,0.3); text-decoration:none; white-space:nowrap; transition:color .5s, text-shadow .5s; }
+.nav-logo em { font-style:italic; color:#E5D5B5; /* Un tono crema sutil para resaltar sin perder elegancia */ }
 .nav-links { display:flex; gap:clamp(1.6rem,2.5vw,2.5rem); list-style:none; }
-.nav-links a { font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--text-lt); text-decoration:none; transition:color .3s; }
-.nav-links a:hover { color:var(--rose); }
+.nav-links a { font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,0.95); text-shadow: 0 2px 10px rgba(0,0,0,0.3); text-decoration:none; transition:color .3s, opacity .3s; }
+.nav-links a:hover { color:var(--white); opacity: 1; }
+
+/* Letras Nav cuando se hace scroll (oscuro) */
+nav.scrolled .nav-logo { color:var(--text); text-shadow:none; }
+nav.scrolled .nav-logo em { color:var(--rose); }
+nav.scrolled .nav-links a { color:var(--text-lt); text-shadow:none; }
+nav.scrolled .nav-links a:hover { color:var(--rose); }
 
 /* ─ HERO MINIMALISTA (SÓLO VIDEO LIMPIO) ── */
 #hero {
@@ -283,10 +291,10 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   position:fixed;
   right:25px; /* Movido a la derecha */
   bottom:25px;
-  width:50px; /* Más sutil */
+  width:50px; /* Tamaño sutil */
   height:50px;
   border-radius:50%;
-  background:var(--rose); /* Ahora usa el azul Oporto */
+  background:var(--rose); /* Azul oscuro corporativo */
   color:#fff;
   display:flex;
   align-items:center;
@@ -303,7 +311,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   box-shadow:0 10px 28px rgba(40,70,95,.3);
 }
 
-/* ── BOTÓN DE SONIDO INDIVIDUAL (Sutil) ── */
+/* ── BOTÓN DE SONIDO INDIVIDUAL CON SVG BLANCO ── */
 .video-sound-btn{
   position:absolute;
   right:12px;
@@ -312,24 +320,24 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   height:34px;
   border:none;
   border-radius:50%;
-  background:rgba(40,70,95,0.45); /* Translúcido para no manchar el video */
+  background:rgba(28,51,71,0.55); /* Azul muy sutil y translúcido */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color:white;
-  font-size: 0.75rem;
   cursor:pointer;
   z-index:20;
   display:flex;
   align-items:center;
   justify-content:center;
   transition:.4s ease;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
 }
 .video-sound-btn:hover{
   background:var(--rose);
   transform:scale(1.05);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.4);
 }
+.video-sound-btn svg { width: 15px; height: 15px; } /* Tamaño del icono SVG */
 </style>
 </head>
 <body>
@@ -346,7 +354,8 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 <!-- ── HERO MINIMALISTA (Sólo video limpio y nav) ── -->
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
-    <video src="../videos/video3.mp4" autoplay loop muted playsinline preload="auto" style="pointer-events:none;"></video>
+    <!-- VÍDEO PRINCIPAL INTERCAMBIADO -->
+    <video src="../videos/cartagena.mp4" autoplay loop muted playsinline preload="auto" style="pointer-events:none;"></video>
   </div>
 </section>
 
@@ -372,7 +381,8 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 
 <section id="inversion-cartagena" class="reveal">
   <div class="video-background">
-    <video src="../videos/cartagena.mp4" autoplay loop muted playsinline preload="auto"></video>
+    <!-- VÍDEO DE INVERSIÓN INTERCAMBIADO -->
+    <video src="../videos/video3.mp4" autoplay loop muted playsinline preload="auto"></video>
   </div>
   <div class="overlay-dark"></div>
   <div class="inversion-content">
@@ -392,7 +402,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
         <video src="../videos/video3-1.mp4" loop playsinline preload="metadata" muted></video>
-        <button class="video-sound-btn">🔇</button>
+        <button class="video-sound-btn" aria-label="Activar sonido"></button>
         <div class="video-badge">Disponible</div>
       </div>
     </div>
@@ -419,7 +429,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
         <video src="../videos/mari.mp4" loop playsinline preload="metadata" muted></video>
-        <button class="video-sound-btn">🔇</button>
+        <button class="video-sound-btn" aria-label="Activar sonido"></button>
         <div style="position:absolute;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;align-items:center;pointer-events:none;">
           <div style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);padding:.25rem .7rem;">
             <span style="font-size:0.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,0.9);">Descubre</span>
@@ -762,20 +772,22 @@ document.querySelectorAll('.video-phone video').forEach(v => {
   vidObs.observe(v);
 });
 
-/* ── Sonido individual para cada video ── */
+/* ── Sonido individual para cada video con SVG ── */
+const svgMuted = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>';
+const svgSound = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+
 document.querySelectorAll('.video-phone').forEach(card=>{
   const video=card.querySelector('video');
   const btn=card.querySelector('.video-sound-btn');
 
   if(!video || !btn) return;
 
+  // Estado inicial
+  btn.innerHTML = video.muted ? svgMuted : svgSound;
+
   btn.addEventListener('click',()=>{
-    video.muted=!video.muted;
-    if(video.muted){
-      btn.innerHTML='🔇';
-    }else{
-      btn.innerHTML='🔊';
-    }
+    video.muted = !video.muted;
+    btn.innerHTML = video.muted ? svgMuted : svgSound;
   });
 });
 </script>
