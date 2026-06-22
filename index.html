@@ -16,6 +16,7 @@
 <link rel="canonical" href="https://tudominio.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -60,7 +61,7 @@ body {
   font-size: var(--size-base);
   font-weight: 300;
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ── NAV ── */
@@ -69,6 +70,7 @@ nav {
   padding: clamp(1.4rem,2.5vw,2rem) var(--pad-x);
   display: flex; justify-content:space-between; align-items:center;
   transition: background .5s, border-color .5s, backdrop-filter .5s;
+  will-change: background, backdrop-filter;
 }
 nav.scrolled {
   background: rgba(250,248,245,0.96); backdrop-filter: blur(18px);
@@ -77,7 +79,7 @@ nav.scrolled {
 
 /* Estilos de letras superiores (Nav) brillantes sobre el video */
 .nav-logo { font-family:var(--f-serif); font-size:clamp(0.95rem,1vw,1.05rem); font-weight:400; letter-spacing:.14em; color:var(--white); text-shadow: 0 2px 12px rgba(0,0,0,0.3); text-decoration:none; white-space:nowrap; transition:color .5s, text-shadow .5s; }
-.nav-logo em { font-style:italic; color:#E5D5B5; /* Un tono crema sutil para resaltar sin perder elegancia */ }
+.nav-logo em { font-style:italic; color:#E5D5B5; }
 .nav-links { display:flex; gap:clamp(1.6rem,2.5vw,2.5rem); list-style:none; }
 .nav-links a { font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,0.95); text-shadow: 0 2px 10px rgba(0,0,0,0.3); text-decoration:none; transition:color .3s, opacity .3s; }
 .nav-links a:hover { color:var(--white); opacity: 1; }
@@ -91,6 +93,7 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 /* ─ HERO MINIMALISTA (SÓLO VIDEO LIMPIO) ── */
 #hero {
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,7 +105,7 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(250, 248, 245, 0.15); /* Velo extra sutil */
+  background: rgba(250, 248, 245, 0.15);
   pointer-events: none;
   z-index: 1;
 }
@@ -163,7 +166,7 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .sec-link { font-size:var(--size-xs); letter-spacing:.28em; text-transform:uppercase; color:var(--text-lt); text-decoration:none; transition:color .3s; }
 .sec-link:hover { color:var(--rose); }
 .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(0.9rem,1.5vw,1.4rem); }
-.card { background:var(--white); border:1px solid var(--border); overflow:hidden; position:relative; transition:border-color .4s,box-shadow .4s; }
+.card { background:var(--white); border:1px solid var(--border); overflow:hidden; position:relative; transition:border-color .4s,box-shadow .4s; will-change: transform; }
 .card:hover { border-color:rgba(40,70,95,0.25); box-shadow:0 8px 30px rgba(40,70,95,0.06); }
 .c-xl   { grid-column:span 7; min-height:clamp(400px,50vw,510px); }
 .c-lg   { grid-column:span 5; min-height:clamp(310px,38vw,410px); }
@@ -171,7 +174,7 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .c-sm   { grid-column:span 3; min-height:clamp(250px,30vw,330px); }
 .c-wide { grid-column:span 8; min-height:clamp(320px,40vw,430px); }
 .c-fill { grid-column:span 4; min-height:clamp(270px,33vw,350px); }
-.swatch { position:absolute; inset:0; transition:transform .65s ease; }
+.swatch { position:absolute; inset:0; transition:transform .65s ease; will-change: transform; }
 .card:hover .swatch { transform:scale(1.025); }
 .s-kairos  { background:linear-gradient(148deg,#F3E9E7,#EEDaD7,#F5EDEC); }
 .s-crystal { background:linear-gradient(148deg,#EEE7E9,#E5D9DD,#EEE4E6); }
@@ -183,7 +186,7 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .s-itaca   { background:linear-gradient(148deg,#E7ECF0,#DAE0E7,#E6EAF0); }
 .s-marduk  { background:linear-gradient(148deg,#F0EBE7,#E7E0DB,#F0EDE9); }
 .s-oporto  { background:linear-gradient(148deg, #28465F, #1C3347, #345775); }
-.orb { position:absolute; border-radius:50%; filter:blur(72px); opacity:.42; animation:orbFloat 11s ease-in-out infinite alternate; }
+.orb { position:absolute; border-radius:50%; filter:blur(72px); opacity:.42; animation:orbFloat 11s ease-in-out infinite alternate; will-change: transform; }
 @keyframes orbFloat { from{transform:translate(0,0) scale(1)} to{transform:translate(7px,-11px) scale(1.05)} }
 .s-kairos  .orb { background:#D4ABAE; width:200px; height:200px; top:-55px; right:-35px; }
 .s-crystal .orb { background:#C8A8B0; width:240px; height:240px; top:-65px; right:-45px; }
@@ -289,19 +292,19 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 /* ── BOTÓN FLOTANTE WHATSAPP (Sutil y elegante) ── */
 .whatsapp-float{
   position:fixed;
-  right:25px; /* Movido a la derecha */
+  right:25px;
   bottom:25px;
-  width:50px; /* Tamaño sutil */
+  width:50px;
   height:50px;
   border-radius:50%;
-  background:var(--rose); /* Azul oscuro corporativo */
+  background:var(--rose);
   color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:9999;
   box-shadow:0 6px 20px rgba(40,70,95,.2);
-  opacity: 0.85; /* Transparencia sutil */
+  opacity: 0.85;
   transition: transform .4s ease, box-shadow .4s ease, opacity .4s ease, background .4s ease;
 }
 .whatsapp-float:hover{
@@ -320,7 +323,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   height:34px;
   border:none;
   border-radius:50%;
-  background:rgba(28,51,71,0.55); /* Azul muy sutil y translúcido */
+  background:rgba(28,51,71,0.55);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color:white;
@@ -337,7 +340,12 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   transform:scale(1.05);
   border-color: rgba(255,255,255,0.4);
 }
-.video-sound-btn svg { width: 15px; height: 15px; } /* Tamaño del icono SVG */
+.video-sound-btn svg { width: 15px; height: 15px; }
+
+/* ── OPTIMIZACIÓN: Pausar animaciones cuando no son visibles ── */
+.orb.paused {
+  animation-play-state: paused;
+}
 </style>
 </head>
 <body>
@@ -354,8 +362,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 <!-- ── HERO MINIMALISTA (Sólo video limpio y nav) ── -->
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
-    <!-- VÍDEO PRINCIPAL INTERCAMBIADO -->
-    <video src="videos/cartagena.mp4" autoplay loop muted playsinline preload="auto" style="pointer-events:none;"></video>
+    <video src="videos/cartagena.mp4" autoplay loop muted playsinline preload="metadata" fetchpriority="high" decoding="async" style="pointer-events:none;"></video>
   </div>
 </section>
 
@@ -381,8 +388,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 
 <section id="inversion-cartagena" class="reveal">
   <div class="video-background">
-    <!-- VÍDEO DE INVERSIÓN INTERCAMBIADO -->
-    <video src="videos/video3.mp4" autoplay loop muted playsinline preload="auto"></video>
+    <video src="videos/video3.mp4" autoplay loop muted playsinline preload="metadata" decoding="async"></video>
   </div>
   <div class="overlay-dark"></div>
   <div class="inversion-content">
@@ -401,7 +407,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   <div class="oporto-grid">
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
-        <video src="videos/video3-1.mp4" loop playsinline preload="metadata" muted></video>
+        <video src="videos/video3-1.mp4" loop playsinline preload="metadata" muted decoding="async"></video>
         <button class="video-sound-btn" aria-label="Activar sonido"></button>
         <div class="video-badge">Disponible</div>
       </div>
@@ -428,7 +434,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
     </div>
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
-        <video src="videos/mari.mp4" loop playsinline preload="metadata" muted></video>
+        <video src="videos/mari.mp4" loop playsinline preload="metadata" muted decoding="async"></video>
         <button class="video-sound-btn" aria-label="Activar sonido"></button>
         <div style="position:absolute;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;align-items:center;pointer-events:none;">
           <div style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);padding:.25rem .7rem;">
@@ -710,8 +716,11 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 /* ── Nav scroll ── */
 const navEl = document.querySelector('nav');
+let lastScroll = 0;
 window.addEventListener('scroll', () => {
-  navEl.classList.toggle('scrolled', window.scrollY > 60);
+  const currentScroll = window.scrollY;
+  navEl.classList.toggle('scrolled', currentScroll > 60);
+  lastScroll = currentScroll;
 }, { passive: true });
 
 /* ── Efecto 3D tarjetas (solo desktop) ── */
@@ -728,39 +737,54 @@ if (!('ontouchstart' in window)) {
 }
 
 /* ══════════════════════════════════════════════
-   GESTIÓN ROBUSTA DE VÍDEOS
+   GESTIÓN ROBUSTA DE VÍDEOS OPTIMIZADA
    ══════════════════════════════════════════════ */
 function safePlay(vid) {
   if (!vid) return;
   vid.muted = true;
   vid.loop  = true;
+  
   const attempt = () => {
     const p = vid.play();
     if (p !== undefined) {
       p.catch(() => {
-        const retry = () => { vid.play().catch(()=>{}); document.removeEventListener('click', retry); document.removeEventListener('touchstart', retry); };
+        const retry = () => { 
+          vid.play().catch(()=>{}); 
+          document.removeEventListener('click', retry); 
+          document.removeEventListener('touchstart', retry); 
+        };
         document.addEventListener('click', retry, { once: true });
         document.addEventListener('touchstart', retry, { once: true });
       });
     }
   };
-  if (vid.readyState >= 2) { attempt(); }
-  else { vid.addEventListener('loadedmetadata', attempt, { once: true }); }
+  
+  if (vid.readyState >= 2) { 
+    attempt(); 
+  } else { 
+    vid.addEventListener('loadedmetadata', attempt, { once: true }); 
+  }
+  
+  // Manejo de errores
+  vid.addEventListener('error', (e) => {
+    console.warn('Video error:', vid.src, e);
+  });
 }
 
 document.querySelectorAll('#hero-video-bg video, #inversion-cartagena .video-background video')
   .forEach(v => safePlay(v));
 
+/* ── Observer optimizado para videos de teléfonos ── */
 const vidObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const v = entry.target;
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
       v.muted = true;
       v.loop  = true;
       v.play().catch(() => {});
     } else {
       v.pause();
-      v.currentTime = 0;
+      // No resetear currentTime para evitar buffering innecesario
     }
   });
 }, { threshold: [0, 0.15, 0.3], rootMargin: '0px 0px -5% 0px' });
@@ -768,7 +792,7 @@ const vidObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.video-phone video').forEach(v => {
   v.muted = true;
   v.loop  = true;
-  v.preload = 'auto';
+  // Mantener preload="metadata" del HTML, no sobrescribir
   vidObs.observe(v);
 });
 
@@ -790,6 +814,20 @@ document.querySelectorAll('.video-phone').forEach(card=>{
     btn.innerHTML = video.muted ? svgMuted : svgSound;
   });
 });
+
+/* ── Optimización: Pausar animaciones orb cuando no son visibles ── */
+const orbObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const orb = entry.target;
+    if (entry.isIntersecting) {
+      orb.classList.remove('paused');
+    } else {
+      orb.classList.add('paused');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.orb').forEach(orb => orbObs.observe(orb));
 </script>
 </body>
 </html>
