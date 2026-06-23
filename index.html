@@ -9,6 +9,7 @@
 <meta name="keywords" content="apartamentos Cartagena, proyectos residenciales, inversión inmobiliaria, lujo Caribe, María Auxi, Reserva 90 NUO, Oporto">
 <meta name="author" content="María Auxi · Líder de Proyectos">
 <meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FAFAF8"> <!-- Mejora: Color de barra de estado en móviles -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="María Auxi · Proyectos Residenciales de Lujo en Cartagena">
 <meta property="og:description" content="Espacios que transforman · Descubre portafolio exclusivo en Punta Canoa, Manga, Serena del Mar y Zona Norte.">
@@ -62,6 +63,18 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: clip;
+}
+
+/* ── MEJORA: BARRA DE PROGRESO DE LECTURA ── */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--rose-lt);
+  z-index: 10000;
+  transition: width 0.1s ease;
 }
 
 /* ── NAV ── */
@@ -154,8 +167,22 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .inversion-content h2 { font-family:var(--f-serif); font-size:clamp(1.8rem,3.2vw,3rem); font-weight:300; line-height:1.2; margin-bottom:1.4rem; }
 .inversion-content h2 em { font-style:italic; }
 .inversion-content p { font-size:var(--size-md); line-height:1.85; color:rgba(255,255,255,0.85); margin:0 auto 2.4rem; font-weight:300; max-width:540px; }
-.btn-outline { font-family:var(--f-sans); font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--white); background:transparent; border:1px solid rgba(255,255,255,0.4); padding:0.9rem 2.4rem; text-decoration:none; display:inline-block; transition:all .4s; border-radius:1px;}
-.btn-outline:hover { background:var(--white); color:var(--rose-dk); border-color:var(--white); }
+
+/* ── MEJORA BOTONES: Curvas fluidas y elevación sutil ── */
+.btn-outline { 
+  font-family:var(--f-sans); font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--white); 
+  background:transparent; border:1px solid rgba(255,255,255,0.4); padding:0.9rem 2.4rem; text-decoration:none; display:inline-block; 
+  transition:all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius:1px;
+}
+.btn-outline:hover { background:var(--white); color:var(--rose-dk); border-color:var(--white); transform: translateY(-2px) scale(1.02); }
+
+.btn-p { 
+  font-family:var(--f-sans); font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--white); 
+  background:var(--rose); border:none; padding:0.9rem 2.4rem; text-decoration:none; display:inline-block; 
+  transition:all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-radius:1px; 
+}
+.btn-p:hover { background:var(--rose-lt); transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 20px rgba(40,70,95,0.15); }
+
 
 /* ── OPORTO ── */
 #oporto { padding:clamp(3rem,5vw,5rem) var(--pad-x); max-width:1100px; margin:0 auto; }
@@ -163,8 +190,6 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .video-phone { position:relative; width:clamp(220px,85%,260px); aspect-ratio:9/16; overflow:hidden; box-shadow: 0 10px 40px rgba(40,70,95,.08), 0 2px 10px rgba(0,0,0,.04); background:#1a1014; border-radius:2px; margin:0 auto; }
 .video-phone video { width:100%; height:100%; display:block; object-fit:cover; }
 .video-badge { position:absolute; top:1rem; right:1rem; background:rgba(40,70,95,0.15); backdrop-filter:blur(8px); border:1px solid rgba(40,70,95,0.2); padding:.3rem .8rem; pointer-events:none; font-size:0.6rem; letter-spacing:.25em; text-transform:uppercase; color:rgba(255,255,255,0.95); }
-.btn-p { font-family:var(--f-sans); font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--white); background:var(--rose); border:none; padding:0.9rem 2.4rem; text-decoration:none; display:inline-block; transition:background .4s; border-radius:1px; }
-.btn-p:hover { background:var(--rose-lt); }
 
 /* ── MARÍA AUXI ── */
 .mari-section { padding:clamp(1rem,2vw,2rem) var(--pad-x) clamp(5rem,7vw,7rem); max-width:1100px; margin:0 auto; }
@@ -249,12 +274,16 @@ nav.scrolled .nav-links a:hover { color:var(--rose); }
 .map-art { height:clamp(340px,40vw,400px); background:var(--white); border:1px solid var(--border); position:relative; overflow:hidden; border-radius: 2px;}
 .map-art iframe { width:100%; height:100%; border:0; }
 
-/* ── CONTACTO Y FORMS ── */
+/* ── MEJORA: CONTACTO Y FORMS CON FOCO SUAVE ── */
 #contacto { padding:clamp(4rem,7vw,7rem) var(--pad-x); max-width:550px; margin:0 auto; }
 input, select, textarea {
-  width:100%; padding:0.9rem 1rem; border:1px solid var(--border); background:transparent; font-family:var(--f-sans); color:var(--text); font-size:var(--size-sm); transition:border-color .3s; outline:none; border-radius:1px;
+  width:100%; padding:0.9rem 1rem; border:1px solid var(--border); background:transparent; 
+  font-family:var(--f-sans); color:var(--text); font-size:var(--size-sm); transition:all .3s ease; outline:none; border-radius:1px;
 }
-input:focus, select:focus, textarea:focus { border-color:var(--rose-lt); }
+input:focus, select:focus, textarea:focus { 
+  border-color:var(--rose-lt); 
+  box-shadow: 0 0 0 3px rgba(58, 99, 128, 0.12); /* Efecto halo elegante */
+}
 select { color:var(--text-lt); cursor:pointer;}
 
 /* ── FOOTER ── */
@@ -274,9 +303,9 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 .ft-copy { font-size:var(--size-xs); letter-spacing:.2em; color:var(--text-lt); opacity:.7; text-transform:uppercase;}
 .ft-badge { font-size:var(--size-xs); letter-spacing:.2em; color:var(--rose-lt); border:1px solid var(--border); padding:.3rem .8rem; text-transform:uppercase;}
 
-/* ── ANIMACIONES ── */
+/* ── MEJORA: ANIMACIONES CUBIC-BEZIER MÁS FLUIDAS ── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-.reveal { opacity:0; transform:translateY(24px); transition:opacity .9s ease,transform .9s ease; }
+.reveal { opacity:0; transform:translateY(24px); transition:all .9s cubic-bezier(.4,0,.2,1); }
 .reveal.vis { opacity:1; transform:translateY(0); }
 .d1{transition-delay:.1s} .d2{transition-delay:.22s} .d3{transition-delay:.34s} .d4{transition-delay:.46s}
 
@@ -370,6 +399,9 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 </head>
 <body>
 
+<!-- BARRA DE PROGRESO INYECTADA -->
+<div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
 <nav>
   <a href="#" class="nav-logo">María Auxi <em>·</em> Líder de Proyectos</a>
   <ul class="nav-links">
@@ -379,6 +411,7 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
   </ul>
 </nav>
 
+<!-- ── HERO MINIMALISTA ── -->
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
     <video src="videos/cartagena.mp4" autoplay loop muted playsinline fetchpriority="high" preload="auto" style="pointer-events:none;"></video>
@@ -703,26 +736,44 @@ footer { padding:clamp(4rem,6vw,6rem) var(--pad-x) clamp(2rem,3vw,2.8rem); borde
 <a href="https://wa.me/573104325477"
    class="whatsapp-float"
    target="_blank"
-   rel="noopener noreferrer">
+   rel="noopener noreferrer"
+   aria-label="Contacto por WhatsApp">
   <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor">
   <path d="M19.11 17.42c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.28-.47-2.43-1.49-.9-.8-1.5-1.8-1.67-2.1-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.08-.8.37-.27.3-1.05 1.02-1.05 2.5 0 1.47 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.14 4.55.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.12-.28-.2-.58-.35z"/>
   </svg>
 </a>
 
 <script>
-/* ── IntersectionObserver reveal ── */
+/* ── MEJORA: IntersectionObserver reveal MÁS FLUIDO ── */
 const revealObs = new IntersectionObserver((entries, obs) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* ── Nav scroll ── */
+/* ── MEJORA DE RENDIMIENTO: Nav scroll y Progress Bar con requestAnimationFrame ── */
 const navEl = document.querySelector('nav');
-let lastScroll = 0;
+const progressBar = document.getElementById('progress-bar');
+let ticking = false;
+
 window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-  navEl.classList.toggle('scrolled', currentScroll > 60);
-  lastScroll = currentScroll;
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      const currentScroll = window.scrollY;
+      navEl.classList.toggle('scrolled', currentScroll > 60);
+      
+      /* Progress Bar Logic */
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = height > 0 ? (scrollTop / height) * 100 : 0;
+      if(progressBar) {
+          progressBar.style.width = progress + '%';
+          progressBar.setAttribute('aria-valuenow', Math.round(progress));
+      }
+
+      ticking = false;
+    });
+    ticking = true;
+  }
 }, { passive: true });
 
 /* ── Efecto 3D tarjetas (solo desktop) ── */
