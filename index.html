@@ -336,6 +336,39 @@
     opacity:0.95;
   }
 
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    max-width: 900px;
+  }
+
+  .hero-content h1 {
+    font-family: var(--f-serif);
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-content h1 em {
+    font-style: italic;
+    color: #E5D5B5;
+  }
+
+  .hero-content p {
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+
   .stats {
     background:var(--white);
     border-top:1px solid var(--border);
@@ -384,16 +417,6 @@
     margin-bottom:2.5rem;
     display:block;
   }
-
-  .manifesto-text {
-    font-family:var(--f-serif);
-    font-size:clamp(1.4rem,2.5vw,2.2rem);
-    font-weight:300;
-    line-height:1.5;
-    color:var(--text);
-  }
-
-  .manifesto-text em { font-style:italic; color:var(--rose-lt); }
 
   .manifesto-foot {
     margin-top:2.5rem;
@@ -810,6 +833,36 @@
     color:var(--text-lt);
   }
 
+  .testimonial {
+    padding: clamp(4rem, 7vw, 7rem) var(--pad-x);
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .testimonial-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .testimonial blockquote {
+    font-family: var(--f-serif);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+  }
+
+  .testimonial cite {
+    font-size: var(--size-xs);
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--text-lt);
+    font-style: normal;
+  }
+
   #ubicaciones {
     background:var(--cream2);
     border-top:1px solid var(--border);
@@ -1210,8 +1263,6 @@
 </head>
 <body>
 
-<h1 class="sr-only">Proyectos residenciales de lujo en Cartagena de Indias</h1>
-
 <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de lectura"></div>
 
 <nav aria-label="Principal">
@@ -1234,13 +1285,18 @@
     <li><a href="#proyectos">Proyectos</a></li>
     <li><a href="#ubicaciones">Ubicaciones</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="https://wa.me/573104325477" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+    <li><a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
   </ul>
 </div>
 
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
     <video src="videos/cartagena.mp4" poster="img/poster-cartagena.webp" autoplay loop muted playsinline fetchpriority="high" preload="auto" style="pointer-events:none;"></video>
+  </div>
+  <div class="hero-content">
+    <h1>Inversiones inmobiliarias de <em>alto valor</em><br>en Cartagena de Indias</h1>
+    <p>Más de 25 años liderando proyectos residenciales que combinan ubicación estratégica, valorización y calidad constructiva en el Caribe colombiano.</p>
+    <a href="#contacto" class="btn-outline">Solicitar asesoría personalizada</a>
   </div>
 </section>
 
@@ -1253,14 +1309,14 @@
 
 <section id="manifesto">
   <span class="tag reveal">Mi Historia</span>
-  <div class="manifesto-foot reveal manifesto-text-custom">
-    <p class="text-rose">
+  <div class="manifesto-foot reveal">
+    <p style="color: var(--rose);">
       A lo largo de los años, he acompañado a cientos de familias e inversionistas en la elección de espacios que representan crecimiento, estabilidad y calidad de vida. Mi experiencia en negociación, lectura de mercado y posicionamiento comercial me permite entender cada proyecto desde una perspectiva integral: ubicación, valorización, proyección y estilo de vida.
     </p>
     <p>Mi trayectoria no se limita a vender propiedades, consiste en interpretar el potencial de cada proyecto, comprender el comportamiento del mercado y anticipar las decisiones que transforman una inversión en patrimonio.</p>
   </div>
-  <div class="manifesto-foot reveal manifesto-foot-extra">
-    <p class="text-rose text-full text-light">En un mercado donde todos ofrecen metros cuadrados, construyo confianza, relaciones y oportunidades que permanecen en el tiempo.</p>
+  <div class="manifesto-foot reveal" style="margin-top: 2rem;">
+    <p style="color: var(--rose); max-width: 100%; font-weight: 300;">En un mercado donde todos ofrecen metros cuadrados, construyo confianza, relaciones y oportunidades que permanecen en el tiempo.</p>
   </div>
 </section>
 
@@ -1273,17 +1329,17 @@
     <span class="eyebrow">Oportunidad de Inversión</span>
     <h2>Cartagena de Indias:<br><em>El valor de lo eterno</em></h2>
     <p>Asegura tu patrimonio en la ciudad más exclusiva y con mayor proyección del Caribe colombiano. Un estilo de vida inigualable respaldado por una alta valorización en finca raíz.</p>
-    <a href="https://wa.me/573104325477" target="_blank" rel="noopener noreferrer" class="btn-outline" data-track="whatsapp_click" data-project="cartagena">Invertir ahora</a>
+    <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-outline" data-track="whatsapp_click" data-project="cartagena">Invertir ahora</a>
   </div>
 </section>
 
 <section id="oporto">
   <div class="sec-head reveal">
     <h2 class="sec-title">Proyecto <em>Oporto</em></h2>
-    <span class="sec-subtitle">Nuevo · 2026</span>
+    <span style="font-size:var(--size-xs);letter-spacing:.28em;text-transform:uppercase;color:var(--rose-lt);">Nuevo · 2026</span>
   </div>
   <div class="oporto-grid">
-    <div class="reveal flex-center">
+    <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
         <video src="videos/video3-1.mp4" poster="img/poster-oporto.webp" loop playsinline preload="none" muted></video>
         <button type="button" class="video-sound-btn" aria-label="Activar sonido" aria-pressed="false"></button>
@@ -1291,10 +1347,14 @@
       </div>
     </div>
     <div class="reveal d2">
-      <span class="tag tag-short">Nuevo Desarrollo</span>
-      <p class="oporto-title">Una nueva forma de<br><em>vivir en Cartagena</em></p>
-      <p class="oporto-desc">Oporto es la más reciente apuesta de Mejía Villegas Constructores, un proyecto que fusiona arquitectura contemporánea y ubicación estratégica al costado del Portal de Transcaribe, facilitando la movilidad y la comodidad en cada proyecto.</p>
-      <a href="https://wa.me/573104325477" target="_blank" rel="noopener noreferrer" class="btn-p" data-track="whatsapp_click" data-project="oporto">Más información</a>
+      <span class="tag" style="margin-bottom:1.4rem;">Nuevo Desarrollo</span>
+      <p style="font-family:var(--f-serif);font-size:clamp(1.4rem,2.2vw,2rem);font-weight:300;line-height:1.3;margin-bottom:1.8rem;color:var(--text);">
+        Una nueva forma de<br><em style="color:var(--rose-lt);">vivir en Cartagena</em>
+      </p>
+      <p style="font-size:var(--size-sm);line-height:1.85;color:var(--text-lt);margin-bottom:2.2rem;">
+        Oporto es la más reciente apuesta de Mejía Villegas Constructores, un proyecto que fusiona arquitectura contemporánea y ubicación estratégica al costado del Portal de Transcaribe, facilitando la movilidad y la comodidad en cada proyecto.
+      </p>
+      <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-p" data-track="whatsapp_click" data-project="oporto">Solicitar asesoría personalizada</a>
     </div>
   </div>
 </section>
@@ -1303,19 +1363,19 @@
   <div class="mari-grid">
     <div>
       <span class="tag reveal">María Auxi · Líder de Proyectos</span>
-      <h2 class="sec-title reveal mari-title">La persona detrás<br>de cada <em>proyecto</em></h2>
-      <p class="reveal mari-desc">Con más de 25 años liderando desarrollos residenciales en Cartagena de Indias, María Auxi combina visión estratégica, sensibilidad estética y un profundo conocimiento del mercado inmobiliario del Caribe colombiano.</p>
+      <h2 class="sec-title reveal" style="margin-bottom:1.4rem;">La persona detrás<br>de cada <em>proyecto</em></h2>
+      <p class="reveal" style="font-size:var(--size-sm);line-height:1.85;color:var(--text-lt);max-width:400px;">Con más de 25 años liderando desarrollos residenciales en Cartagena de Indias, María Auxi combina visión estratégica, sensibilidad estética y un profundo conocimiento del mercado inmobiliario del Caribe colombiano.</p>
     </div>
-    <div class="reveal flex-center">
+    <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
         <video src="videos/mari.mp4" poster="img/poster-mari.webp" loop playsinline preload="none" muted></video>
         <button type="button" class="video-sound-btn" aria-label="Activar sonido" aria-pressed="false"></button>
-        <div class="video-phone-overlay">
-          <div class="video-phone-label">
-            <span>Descubre</span>
+        <div style="position:absolute;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;align-items:center;pointer-events:none;">
+          <div style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);padding:.25rem .7rem;">
+            <span style="font-size:0.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,0.9);">Descubre</span>
           </div>
-          <div class="video-phone-brand">
-            <span>Cartagena</span>
+          <div style="background:rgba(40,70,95,0.15);backdrop-filter:blur(8px);border:1px solid rgba(40,70,95,0.2);padding:.25rem .7rem;">
+            <span style="font-family:var(--f-serif);font-size:0.9rem;font-style:italic;font-weight:300;color:rgba(255,255,255,0.95);">Cartagena</span>
           </div>
         </div>
       </div>
@@ -1332,15 +1392,15 @@
   <div class="grid">
     <div class="card reveal">
       <div class="swatch s-oporto"><div class="orb"></div></div>
-      <div class="pill pill-dark">Nuevo</div>
-      <div class="card-in card-in-dark">
-        <span class="c-tag c-tag-light">La Providencia · VIS</span>
-        <h3 class="c-name c-name-white">Oporto <em>Apartamentos</em></h3>
-        <p class="c-desc c-desc-light">¡Avanza en familia! Torres de 20 pisos cerca al Portal de Transcaribe.</p>
+      <div class="pill" style="background:rgba(40,70,95,0.85); border-color:rgba(40,70,95,0.6); color:var(--rose-lt);">Nuevo</div>
+      <div class="card-in" style="color:rgba(255,255,255,0.85);">
+        <span class="c-tag" style="color:var(--rose-lt);">La Providencia · VIS</span>
+        <h3 class="c-name" style="color:#fff;">Oporto <em>Apartamentos</em></h3>
+        <p class="c-desc" style="color:rgba(255,255,255,0.75);">Diseñado para familias que buscan crecimiento patrimonial con conectividad inmediata al Portal de Transcaribe.</p>
         <div class="c-foot">
-          <span class="c-price c-price-light">62.5 m²</span>
-          <span class="c-loc c-loc-light">La Providencia</span>
-          <a href="docum/oporto-book-digital.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr c-arr-dark" aria-label="Brochure Oporto">
+          <span class="c-price" style="color:var(--rose-lt);">62.5 m²</span>
+          <span class="c-loc" style="color:rgba(255,255,255,0.75);">La Providencia</span>
+          <a href="docum/oporto-book-digital.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" style="border-color:rgba(255,255,255,0.2); color:#fff;" aria-label="Brochure Oporto">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
         </div>
@@ -1349,13 +1409,13 @@
 
     <div class="card reveal d1">
       <div class="swatch s-reserva"><div class="orb"></div></div>
-      <div class="pill pill-vis">VIS</div>
+      <div class="pill" style="background:rgba(107,175,114,0.18);border-color:rgba(107,175,114,0.35);color:#4A7C50;">VIS</div>
       <div class="card-in">
-        <span class="c-tag c-tag-green">Vía 90A ·</span>
-        <h3 class="c-name">Reserva <em class="em-green">90 NEO</em></h3>
-        <p class="c-desc">Refugio natural. 4 torres de 5 pisos diseñados para una vida tranquila y verde.</p>
+        <span class="c-tag" style="color:#5A9A62;">Vía 90A ·</span>
+        <h3 class="c-name">Reserva <em style="color:#7BBF82;">90 NEO</em></h3>
+        <p class="c-desc">Refugio natural ideal para inversionistas que valoran la tranquilidad, espacios verdes y valorización sostenida en Cartagena.</p>
         <div class="c-foot">
-          <span class="c-price c-price-green">Desde $310M</span>
+          <span class="c-price" style="color:#5A9A62;">Desde $310M</span>
           <span class="c-loc">52 m² · 2 Alc</span>
           <a href="docum/reserva-90-NUO-book-digital.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" aria-label="Descargar brochure Reserva 90 NEO">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1370,7 +1430,7 @@
       <div class="card-in">
         <span class="c-tag">Barrio Country ·</span>
         <h3 class="c-name">Country Club <em>House</em></h3>
-        <p class="c-desc">Exclusividad y naturaleza en armonía. Espacios diseñados para el bienestar.</p>
+        <p class="c-desc">Exclusividad y naturaleza en armonía. Diseñado para familias que buscan bienestar, privacidad y ubicación privilegiada.</p>
         <div class="c-foot"><span class="c-price">Desde $310M</span><span class="c-loc">Barrio Country</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1381,7 +1441,7 @@
       <div class="card-in">
         <span class="c-tag">Manga · Bahía</span>
         <h3 class="c-name">Crystal Bay <em>Tower</em></h3>
-        <p class="c-desc">Vistas panorámicas absolutas sobre la bahía desde 25 pisos de elegancia.</p>
+        <p class="c-desc">Para inversionistas y residentes que buscan vistas panorámicas absolutas y la dirección más exclusiva de Cartagena.</p>
         <div class="c-foot"><span class="c-price">En venta</span><span class="c-loc">Manga</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1392,7 +1452,7 @@
       <div class="card-in">
         <span class="c-tag">Manga · Alto nivel</span>
         <h3 class="c-name">Terra <em>Club House</em></h3>
-        <p class="c-desc">Exclusividad absoluta en 17 pisos para quienes entienden el valor de la escasez.</p>
+        <p class="c-desc">Exclusividad absoluta pensada para quienes entienden el valor de la escasez y buscan un patrimonio diferenciado.</p>
         <div class="c-foot"><span class="c-price">Exclusivo</span><span class="c-loc">Manga</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1402,7 +1462,7 @@
       <div class="card-in">
         <span class="c-tag">Manga · Familia</span>
         <h3 class="c-name"><em>Bari</em> Club House</h3>
-        <p class="c-desc">Espacios ideales diseñados pensando en la familia y el desarrollo integral.</p>
+        <p class="c-desc">Espacios ideales para familias que valoran la tradición, el espacio amplio y una ubicación consolidada en Cartagena.</p>
         <div class="c-foot"><span class="c-price">25 Pisos</span><span class="c-loc">Manga</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1413,7 +1473,7 @@
       <div class="card-in">
         <span class="c-tag">Serena del Mar</span>
         <h3 class="c-name">Zinnia <em>Club</em></h3>
-        <p class="c-desc">14 torres en reserva natural. Lagos y senderos que respetan el ecosistema.</p>
+        <p class="c-desc">Ideal para inversionistas que buscan sostenibilidad certificada, naturaleza y alta demanda de arriendo en zona en crecimiento.</p>
         <div class="c-foot"><span class="c-price">336 Unidades</span><span class="c-loc">Zona Norte</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1423,7 +1483,7 @@
       <div class="card-in">
         <span class="c-tag">Torices · VIS</span>
         <h3 class="c-name"><em>Entrelagos</em></h3>
-        <p class="c-desc">Certificación EDGE. Sostenibilidad real medida en ahorro para todos.</p>
+        <p class="c-desc">Certificación EDGE con ahorro real. Diseñado para inversionistas que buscan rentabilidad y familias que buscan calidad de vida.</p>
         <div class="c-foot"><span class="c-price">256 Unidades</span><span class="c-loc">Torices</span><div class="c-arr">→</div></div>
       </div>
     </div>
@@ -1434,11 +1494,11 @@
       <div class="card-in">
         <span class="c-tag">Manga · Residencial</span>
         <h3 class="c-name">Ítaca <em>Tower</em></h3>
-        <p class="c-desc">Interiores contemporáneos, piscina panorámica y amenidades exclusivas.</p>
+        <p class="c-desc">Interiores contemporáneos y piscina panorámica. Para quienes buscan estilo, funcionalidad y ubicación premium en Cartagena.</p>
         <div class="c-foot">
-          <span class="c-price c-price-dark">Brochure</span>
+          <span class="c-price" style="color:var(--text);">Brochure</span>
           <span class="c-loc">Manga</span>
-          <a href="docum/itaca-tower-book-digital-2024.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr c-arr-link" aria-label="Brochure Ítaca Tower">
+          <a href="docum/itaca-tower-book-digital-2024.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" style="text-decoration:none;" aria-label="Brochure Ítaca Tower">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
         </div>
@@ -1451,11 +1511,11 @@
       <div class="card-in">
         <span class="c-tag">Manga · 2da Av.</span>
         <h3 class="c-name">Marduk <em>Tower</em></h3>
-        <p class="c-desc">Apartamentos modernos desde 61.5m² con diseño versátil y helipuerto privado.</p>
+        <p class="c-desc">Apartamentos modernos con diseño versátil y helipuerto privado. Para inversionistas y residentes que buscan diferenciarse.</p>
         <div class="c-foot">
-          <span class="c-price c-price-dark">Brochure</span>
+          <span class="c-price" style="color:var(--text);">Brochure</span>
           <span class="c-loc">Manga</span>
-          <a href="docum/marduk-book-digital-2026.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr c-arr-link" aria-label="Brochure Marduk Tower">
+          <a href="docum/marduk-book-digital-2026.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" style="text-decoration:none;" aria-label="Brochure Marduk Tower">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
         </div>
@@ -1469,9 +1529,18 @@
   <span class="quote-src">María Auxi · Líder de Proyectos</span>
 </div>
 
+<section class="testimonial reveal">
+  <div class="testimonial-inner">
+    <blockquote>
+      "El acompañamiento fue excelente desde la selección del proyecto hasta la entrega. Una experiencia profesional y transparente."
+    </blockquote>
+    <cite>— Cliente propietario</cite>
+  </div>
+</section>
+
 <section id="contacto">
-  <span class="tag reveal tag-center">Contacto Directo</span>
-  <h2 class="sec-title reveal sec-title-center">¿Listo para <em>invertir</em>?</h2>
+  <span class="tag reveal" style="text-align:center;">Contacto Directo</span>
+  <h2 class="sec-title reveal" style="text-align:center; margin-bottom:3rem;">¿Listo para <em>invertir</em>?</h2>
 
   <div class="urgencia reveal">
     <strong>Agenda una asesoría privada</strong>
@@ -1488,10 +1557,16 @@
   </div>
 
   <form id="lead-form" action="https://formspree.io/f/xgoqdogn" method="POST" class="reveal">
-    <div class="form-grid">
+    <div style="display:flex; flex-direction:column; gap:1.2rem;">
       <input type="text" name="nombre" placeholder="Nombre completo" required autocomplete="name">
       <input type="email" name="email" placeholder="Correo electrónico" required autocomplete="email">
       <input type="tel" name="telefono" placeholder="WhatsApp (opcional)" autocomplete="tel">
+      <select name="interes" aria-label="¿Qué le interesa?">
+        <option value="">¿Qué le interesa?</option>
+        <option value="comprar">Comprar vivienda</option>
+        <option value="invertir">Invertir</option>
+        <option value="informacion">Información general</option>
+      </select>
       <select name="proyecto" aria-label="Proyecto de interés">
         <option value="consulta-general">Proyecto de interés</option>
         <option value="country-club">Country Club House</option>
@@ -1500,7 +1575,7 @@
         <option value="reserva-90">Reserva 90 NEO</option>
       </select>
       <textarea name="mensaje" placeholder="¿Tienes alguna consulta específica?" rows="3"></textarea>
-      <button type="submit" class="btn-p btn-submit">Enviar solicitud</button>
+      <button type="submit" class="btn-p" style="margin-top: 0.5rem; padding: 1.1rem;">Enviar solicitud</button>
     </div>
   </form>
 
@@ -1582,7 +1657,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/573104325477"
+<a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios."
    class="whatsapp-float"
    target="_blank"
    rel="noopener noreferrer"
@@ -1766,7 +1841,8 @@ if (leadForm) {
   leadForm.addEventListener('submit', function() {
     trackEvent('generate_lead', {
       form_type: 'contacto',
-      project: this.proyecto.value
+      project: this.proyecto.value,
+      interes: this.interes.value
     });
   });
 }
