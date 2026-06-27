@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T9XLKSQB');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>María Auxi · Líder de Proyectos</title>
@@ -37,7 +42,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; media-src *; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; frame-src https://www.google.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; media-src *; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; frame-src https://www.google.com https://www.googletagmanager.com;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -59,30 +64,6 @@
   "url": "https://mariaauxi.com"
 }
 </script>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', 'TU_PIXEL_ID');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"
-/></noscript>
 
 <style>
 @layer base;
@@ -1278,7 +1259,8 @@
 </style>
 </head>
 <body>
-
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9XLKSQB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de lectura"></div>
 
 <nav aria-label="Principal">
@@ -1527,7 +1509,7 @@
       <div class="card-in">
         <span class="c-tag">Manga · 2da Av.</span>
         <h3 class="c-name">Marduk <em>Tower</em></h3>
-        <p class="c-desc">Apartamentos modernos con diseño versátil y helipuerto privado. Para inversionistas y residentes que buscan diferenciarse.</p>
+        <p class="c-desc">Apartamentos modernos con diseño versátil y helipuerto privado. Para inversionistas y residentes que buscan de diferenciarse.</p>
         <div class="c-foot">
           <span class="c-price" style="color:var(--text);">Brochure</span>
           <span class="c-loc">Manga</span>
@@ -1823,17 +1805,13 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
+// Función de seguimiento optimizada para Google Tag Manager (GTM) usando dataLayer
 function trackEvent(eventName, params = {}) {
-  if (typeof gtag !== 'undefined') gtag('event', eventName, params);
-
-  if (typeof fbq !== 'undefined') {
-    const fbMap = {
-      'whatsapp_click': 'Contact',
-      'generate_lead': 'Lead',
-      'catalog_download': 'Download'
-    };
-    if (fbMap[eventName]) fbq('track', fbMap[eventName], params);
-  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'event': eventName,
+    ...params
+  });
 }
 
 document.querySelectorAll('[data-track]').forEach(el => {
