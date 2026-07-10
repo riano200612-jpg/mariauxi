@@ -56,7 +56,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="canonical" href="https://mariauxi.com/">
 
 <!-- OPTIMIZACIÓN #2: Solo preload del video hero (los demás cargan bajo demanda) -->
-<link rel="preload" href="videos/cartagena.webm" as="video" type="video/webm">
+<link rel="preload" href="videos/cartagena-opt.webm" as="video" type="video/webm">
 <link rel="preload" href="videos/cartagena.mp4" as="video" type="video/mp4">
 <link rel="preload" href="https://fonts.gstatic.com/s/cormorantgaramond/v16/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="https://fonts.gstatic.com/s/jost/v15/92zdtBnL2WJr3Xg8e8bDUzU.woff2" as="font" type="font/woff2" crossorigin>
@@ -79,7 +79,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; media-src *; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; frame-src https://www.google.com https://www.googletagmanager.com; form-action https://formspree.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; media-src *; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.google.com https://www.googletagmanager.com; form-action https://formspree.io;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -652,7 +652,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
     <video autoplay muted loop playsinline preload="metadata" fetchpriority="high" poster="img/poster-cartagena.webp" style="pointer-events:none;">
-      <source src="videos/cartagena.webm" type="video/webm">
+      <source src="videos/cartagena-opt.webm" type="video/webm">
       <source src="videos/cartagena.mp4" type="video/mp4">
     </video>
   </div>
