@@ -482,6 +482,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .s-itaca   { background:linear-gradient(148deg,#E7ECF0,#DAE0E7,#E6EAF0); }
   .s-marduk  { background:linear-gradient(148deg,#F0EBE7,#E7E0DB,#F0EDE9); }
   .s-oporto  { background:linear-gradient(148deg, #28465F, #1C3347, #345775); }
+  .s-torremare { background:linear-gradient(148deg, #1DC9D4, #1AA0B2, #158E9E); }
+
+  .card.torremare .pill { background:rgba(29,201,212,0.16); border-color:rgba(29,201,212,0.3); color:#0F8E9A; }
+  .card.torremare .card-in { color:rgba(255,255,255,0.85); }
+  .card.torremare .c-tag,
+  .card.torremare .c-price { color:#1DC9D4; }
+  .card.torremare .c-name { color:#fff; }
+  .card.torremare .c-desc { color:rgba(255,255,255,0.75); }
+  .card.torremare .c-loc { color:#fff; }
+  .card.torremare .c-arr { border-color:rgba(29,201,212,0.2); color:#1DC9D4; }
 
   .orb { position:absolute; border-radius:var(--radius-full); filter:blur(72px); opacity:.42; animation:orbFloat 11s ease-in-out infinite alternate; will-change: transform; transform: translateZ(0); }
   @keyframes orbFloat { from{transform:translate(0,0) scale(1) translateZ(0)} to{transform:translate(7px,-11px) scale(1.05) translateZ(0)} }
@@ -495,6 +505,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .s-itaca   .orb { background:#B0C4DE; width:230px; height:230px; top:-45px; left:-45px; }
   .s-marduk  .orb { background:#DDBCA0; width:200px; height:200px; bottom:-28px; right:-28px; }
   .s-oporto .orb { background:#3A6380; width:200px; height:200px; top:-40px; right:-30px; }
+  .s-torremare .orb { background:#2AD3DE; width:200px; height:200px; top:-40px; right:-30px; }
 
   .card-in { position:relative; z-index:2; height:100%; min-height:inherit; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(1.4rem,2vw,1.8rem); }
   .pill { position:absolute; top:1.2rem; right:1.2rem; z-index:3; background:rgba(255,255,255,0.72); backdrop-filter:blur(8px); border:1px solid var(--border); padding:.3rem .8rem; font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--mauve); border-radius: var(--radius-sm); }
@@ -778,17 +789,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
 
-    <div class="card reveal">
-      <div class="swatch s-oporto" style="background:linear-gradient(148deg, #1DC9D4, #1AA0B2, #158E9E);"><div class="orb" style="background:#2AD3DE;"></div></div>
-      <div class="pill" style="background:rgba(40,70,95,0.85); border-color:rgba(40,70,95,0.6); color:#fff;" data-i18n="pill_new">Nuevo · Torices</div>
-      <div class="card-in" style="color:rgba(255,255,255,0.85);">
-        <span class="c-tag" style="color:var(--rose-lt);">Torices ·</span>
-        <h3 class="c-name" style="color:#fff;">Torremare <em>Apartamentos</em></h3>
-        <p class="c-desc" style="color:rgba(255,255,255,0.75);">Elegancia costera y diseño exclusivo, creado para quienes buscan inversión con vista al mar y estilo de vida premium.</p>
+    <div class="card reveal torremare">
+      <div class="swatch s-torremare"><div class="orb"></div></div>
+      <div class="pill" data-i18n="pill_new">Nuevo · Torices</div>
+      <div class="card-in">
+        <span class="c-tag">Torices ·</span>
+        <h3 class="c-name">Torremare <em>Apartamentos</em></h3>
+        <p class="c-desc">Elegancia costera y diseño exclusivo, creado para quienes buscan inversión con vista al mar y estilo de vida premium.</p>
         <div class="c-foot">
-          <span class="c-price" style="color:var(--rose-lt);">Brochure</span>
-          <span class="c-loc" style="color:#fff;">Torices</span>
-          <a href="docum/Torremare Book digital JUN2026.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" style="border-color:rgba(255,255,255,0.2); color:#fff; text-decoration:none;" aria-label="Brochure Torremare" data-track="download_pdf" data-project="torremare">
+          <span class="c-price">Brochure</span>
+          <span class="c-loc">Torices</span>
+          <a href="docum/Torremare Book digital JUN2026.pdf" target="_blank" rel="noopener noreferrer" download class="c-arr" aria-label="Brochure Torremare" data-track="download_pdf" data-project="torremare">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </a>
         </div>
