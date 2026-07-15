@@ -493,6 +493,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .card.torremare .c-loc { color:#0a4262; }
   .card.torremare .c-arr { border-color:rgba(10,66,98,0.25); color:#0a4262; }
 
+  /* Oporto: dark swatch, pill with dark background and white text */
+  .card.oporto .pill { background:rgba(40,70,95,0.85); border-color:rgba(40,70,95,0.6); color:#ffffff; }
+  .card.oporto .card-in { color:#ffffff; }
+  .card.oporto .c-desc { color:rgba(255,255,255,0.85); }
+  .card.oporto .c-arr { border-color:rgba(255,255,255,0.2); color:#ffffff; }
+
+  /* Reserva: light green swatch, pill with subtle green accent */
+  .card.reserva .pill { background:rgba(255,255,255,0.9); border-color:rgba(107,175,114,0.2); color:#4A7C50; }
+  .card.reserva .card-in { color:var(--text); }
+  .card.reserva .c-tag, .card.reserva .c-price { color:#5A9A62; }
+  .card.reserva .c-arr { border-color:var(--rose); color:var(--rose); }
+
   .orb { position:absolute; border-radius:var(--radius-full); filter:blur(72px); opacity:.42; animation:orbFloat 11s ease-in-out infinite alternate; will-change: transform; transform: translateZ(0); }
   @keyframes orbFloat { from{transform:translate(0,0) scale(1) translateZ(0)} to{transform:translate(7px,-11px) scale(1.05) translateZ(0)} }
   .s-kairos  .orb { background:#D4ABAE; width:200px; height:200px; top:-55px; right:-35px; }
@@ -772,9 +784,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 
   <div class="grid">
-    <div class="card reveal">
+    <div class="card reveal oporto">
       <div class="swatch s-oporto"><div class="orb"></div></div>
-      <div class="pill" style="background:rgba(40,70,95,0.85); border-color:rgba(40,70,95,0.6); color:var(--rose-lt);" data-i18n="pill_new">Nuevo</div>
+      <div class="pill" data-i18n="pill_new">Nuevo</div>
       <div class="card-in" style="color:rgba(255,255,255,0.85);">
         <span class="c-tag" style="color:var(--rose-lt);">La Providencia · VIS</span>
         <h3 class="c-name" style="color:#fff;">Oporto <em>Apartamentos</em></h3>
@@ -806,9 +818,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
 
-    <div class="card reveal d1">
+    <div class="card reveal reserva d1">
       <div class="swatch s-reserva"><div class="orb"></div></div>
-      <div class="pill" style="background:rgba(107,175,114,0.18);border-color:rgba(107,175,114,0.35);color:#4A7C50;">VIS</div>
+      <div class="pill" data-i18n="pill_new">Nuevo</div>
       <div class="card-in">
         <span class="c-tag" style="color:#5A9A62;">Vía 90A ·</span>
         <h3 class="c-name">Reserva <em style="color:#7BBF82;">90 NEO</em></h3>
