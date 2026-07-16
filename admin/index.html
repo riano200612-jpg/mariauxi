@@ -4,6 +4,29 @@
   <meta charset="utf-8">
   <title>Panel de Administración | María Auxi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script>
+    window.CMS_CONFIG = {
+      backend: {
+        name: "git-gateway",
+        repo: "riano200612-jpg/mariauxi",
+        branch: "main",
+        base_url: "https://mariauxi-oauth.riano200612.workers.dev"
+      },
+      media_folder: "img/uploads",
+      public_folder: "/img/uploads",
+      collections: [{
+        name: "proyectos",
+        label: "Proyectos",
+        folder: "contenido/proyectos",
+        create: true,
+        fields: [
+          {label: "Título", name: "titulo", widget: "string"},
+          {label: "Ubicación", name: "ubicacion", widget: "string"}
+        ]
+      }]
+    };
+  </script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
