@@ -1,5 +1,5 @@
 backend:
-  name: github
+  name: git-gateway
   repo: riano200612-jpg/mariauxi
   branch: main
   base_url: https://mariauxi-oauth.riano200612.workers.dev
