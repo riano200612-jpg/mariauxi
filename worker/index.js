@@ -12,8 +12,21 @@ function callbackUrl(url) {
 function errorResponse(message, status = 400) {
   return new Response(message, {
     status,
-    headers: { 'content-type': 'text/plain; charset=utf-8' },
+    headers: {
+      'cache-control': 'no-store',
+      'content-type': 'text/plain; charset=utf-8',
+      'x-content-type-options': 'nosniff',
+    },
   });
+}
+
+function getCmsOrigin(env) {
+  try {
+    const origin = new URL(env.CMS_ORIGIN).origin;
+    return origin.startsWith('https://') ? origin : null;
+  } catch {
+    return null;
+  }
 }
 
 function getCookie(request, name) {
@@ -25,21 +38,27 @@ function getCookie(request, name) {
   return entry?.slice(name.length + 1);
 }
 
-function callbackResponse(status, payload) {
+function callbackResponse(status, payload, cmsOrigin) {
   const message = `authorization:github:${status}:${JSON.stringify(payload)}`.replace(/</g, '\\u003c');
   return new Response(`<!doctype html>
 <html><head><meta charset="utf-8"><title>Autorizando Decap CMS</title></head>
 <body><p>Autorizando Decap CMS…</p><script>
-  const receiveMessage = () => {
-    window.opener.postMessage(${JSON.stringify(message)}, '*');
+  const cmsOrigin = ${JSON.stringify(cmsOrigin)};
+  const receiveMessage = event => {
+    if (event.origin !== cmsOrigin || !window.opener) return;
+    window.opener.postMessage(${JSON.stringify(message)}, cmsOrigin);
     window.removeEventListener('message', receiveMessage, false);
   };
   window.addEventListener('message', receiveMessage, false);
-  window.opener.postMessage('authorizing:github', '*');
+  window.opener?.postMessage('authorizing:github', cmsOrigin);
 </script></body></html>`, {
     headers: {
+      'cache-control': 'no-store',
+      'content-security-policy': "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'",
       'content-type': 'text/html; charset=utf-8',
+      'referrer-policy': 'no-referrer',
       'set-cookie': `${STATE_COOKIE}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax`,
+      'x-content-type-options': 'nosniff',
     },
   });
 }
@@ -47,6 +66,7 @@ function callbackResponse(status, payload) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const cmsOrigin = getCmsOrigin(env);
 
     if (request.method !== 'GET') {
       return errorResponse('Method not allowed.', 405);
@@ -59,13 +79,16 @@ export default {
       if (!env.GITHUB_OAUTH_ID || !env.GITHUB_OAUTH_SECRET) {
         return errorResponse('Missing Worker OAuth secrets.', 500);
       }
+      if (!cmsOrigin) {
+        return errorResponse('Missing or invalid CMS_ORIGIN Worker variable.', 500);
+      }
 
       const state = crypto.randomUUID();
       const authorization = new URL('https://github.com/login/oauth/authorize');
       authorization.search = new URLSearchParams({
         client_id: env.GITHUB_OAUTH_ID,
         redirect_uri: callbackUrl(url),
-        scope: env.GITHUB_REPO_PRIVATE === '1' ? 'repo,user' : 'public_repo,user',
+        scope: env.GITHUB_REPO_PRIVATE === '1' ? 'repo' : 'public_repo',
         state,
       }).toString();
 
@@ -81,29 +104,41 @@ export default {
     if (url.pathname === '/callback') {
       const code = url.searchParams.get('code');
       const state = url.searchParams.get('state');
+      if (!cmsOrigin) {
+        return errorResponse('Missing or invalid CMS_ORIGIN Worker variable.', 500);
+      }
       if (url.searchParams.get('provider') !== 'github' || !code) {
-        return errorResponse('Invalid OAuth callback.');
+        return callbackResponse('error', { error: 'Invalid OAuth callback.' }, cmsOrigin);
       }
       if (!state || state !== getCookie(request, STATE_COOKIE)) {
-        return errorResponse('Invalid OAuth state.', 403);
+        return callbackResponse('error', { error: 'Invalid OAuth state.' }, cmsOrigin);
+      }
+      if (!env.GITHUB_OAUTH_ID || !env.GITHUB_OAUTH_SECRET) {
+        return callbackResponse('error', { error: 'Missing Worker OAuth secrets.' }, cmsOrigin);
       }
 
-      const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          client_id: env.GITHUB_OAUTH_ID,
-          client_secret: env.GITHUB_OAUTH_SECRET,
-          code,
-          redirect_uri: callbackUrl(url),
-        }),
-      });
-      const token = await tokenResponse.json();
+      let tokenResponse;
+      let token;
+      try {
+        tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_id: env.GITHUB_OAUTH_ID,
+            client_secret: env.GITHUB_OAUTH_SECRET,
+            code,
+            redirect_uri: callbackUrl(url),
+          }),
+        });
+        token = await tokenResponse.json();
+      } catch {
+        return callbackResponse('error', { error: 'Unable to contact GitHub.' }, cmsOrigin);
+      }
 
       if (!tokenResponse.ok || !token.access_token) {
-        return callbackResponse('error', { error: token.error || 'Unable to obtain GitHub token.' });
+        return callbackResponse('error', { error: token.error || 'Unable to obtain GitHub token.' }, cmsOrigin);
       }
-      return callbackResponse('success', { token: token.access_token });
+      return callbackResponse('success', { token: token.access_token }, cmsOrigin);
     }
 
     return errorResponse('Not found.', 404);
