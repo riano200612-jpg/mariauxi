@@ -7,12 +7,34 @@
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body>
+  <div id="cms-status" style="font-family: Arial, sans-serif; max-width: 720px; margin: 3rem auto; padding: 1.5rem; border: 1px solid #ddd; border-radius: 8px; line-height: 1.5;">
+    <h1 style="margin-top: 0;">Panel de administración</h1>
+    <p>El panel de Decap CMS se está cargando. Si aparece un error 404 o el login no inicia, revisa que la ruta /admin/config.yml y el endpoint /api/auth estén disponibles en el servidor.</p>
+  </div>
 
 <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
 <script>
-CMS.init({
-  config: "/admin/config.yml"
+window.CMS_MANUAL_INIT = true;
+window.addEventListener('DOMContentLoaded', () => {
+  fetch('./config.yml')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('No se pudo cargar /admin/config.yml');
+      }
+      return response.text();
+    })
+    .then(() => {
+      window.CMS.init({
+        config: './config.yml'
+      });
+    })
+    .catch((error) => {
+      const status = document.getElementById('cms-status');
+      if (status) {
+        status.innerHTML += '<p style="color:#b91c1c;"><strong>Error:</strong> ' + error.message + '</p>';
+      }
+    });
 });
 </script>
 
