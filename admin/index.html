@@ -16,8 +16,19 @@
 
 <script>
 window.CMS_MANUAL_INIT = true;
+function showError(message) {
+  const status = document.getElementById('cms-status');
+  if (status) {
+    status.innerHTML += '<p style="color:#b91c1c;"><strong>Error:</strong> ' + message + '</p>';
+  }
+}
 window.addEventListener('DOMContentLoaded', () => {
-  fetch('./config.yml')
+  if (!window.CMS) {
+    showError('Decap CMS no pudo cargarse desde el CDN.');
+    return;
+  }
+
+  fetch('./config.yml', { cache: 'no-store' })
     .then((response) => {
       if (!response.ok) {
         throw new Error('No se pudo cargar /admin/config.yml');
@@ -30,10 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch((error) => {
-      const status = document.getElementById('cms-status');
-      if (status) {
-        status.innerHTML += '<p style="color:#b91c1c;"><strong>Error:</strong> ' + error.message + '</p>';
-      }
+      showError(error.message);
     });
 });
 </script>
