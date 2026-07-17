@@ -1,0 +1,10 @@
+name = "mariauxi-oauth"
+main = "worker/index.js"
+compatibility_date = "2026-07-17"
+
+# Configure these as Cloudflare Worker secrets; never commit their values:
+# npx wrangler secret put GITHUB_OAUTH_ID
+# npx wrangler secret put GITHUB_OAUTH_SECRET
+# Set to "1" only if riano200612-jpg/mariauxi is private.
+# [vars]
+# GITHUB_REPO_PRIVATE = "0"
