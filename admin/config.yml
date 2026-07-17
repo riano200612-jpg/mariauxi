@@ -1,17 +1,14 @@
 backend:
-  name: github
+  name: git-gateway
   repo: riano200612-jpg/mariauxi
   branch: main
   base_url: https://mariauxi-oauth.riano200612.workers.dev
-  auth_endpoint: auth
 
 site_url: https://mariauxi.com
 display_url: https://mariauxi.com
 logo_url: /img/logo.png
-
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
-
 publish_mode: editorial_workflow
 
 collections:
@@ -22,39 +19,12 @@ collections:
     create: true
     delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-
     fields:
-      - label: "Nombre del Proyecto"
-        name: "titulo"
-        widget: "string"
-
-      - label: "Ubicación"
-        name: "ubicacion"
-        widget: "string"
-
-      - label: "Precio"
-        name: "precio"
-        widget: "string"
-
-      - label: "Descripción"
-        name: "descripcion"
-        widget: "text"
-
-      - label: "Imagen Principal"
-        name: "imagen"
-        widget: "image"
-
-      - label: "Video"
-        name: "video"
-        widget: "file"
-        required: false
-
-      - label: "Brochure PDF"
-        name: "pdf"
-        widget: "file"
-        required: false
-
-      - label: "Disponible"
-        name: "disponible"
-        widget: "boolean"
-        default: true
+      - {label: "Nombre del Proyecto", name: "titulo", widget: "string"}
+      - {label: "Ubicación", name: "ubicacion", widget: "string"}
+      - {label: "Precio", name: "precio", widget: "string"}
+      - {label: "Descripción", name: "descripcion", widget: "text"}
+      - {label: "Imagen Principal", name: "imagen", widget: "image"}
+      - {label: "Video", name: "video", widget: "file", required: false}
+      - {label: "Brochure PDF", name: "pdf", widget: "file", required: false}
+      - {label: "Disponible", name: "disponible", widget: "boolean", default: true}
