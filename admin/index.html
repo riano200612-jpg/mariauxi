@@ -7,6 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <div id="cms-status" style="font-family: Arial, sans-serif; max-width: 720px; margin: 3rem auto; padding: 1.5rem; border: 1px solid #ddd; border-radius: 8px; line-height: 1.5;">
+    <h1 style="margin-top: 0;">Panel de administración</h1>
+    <p>El panel de Decap CMS se está cargando. Si el botón de login no inicia la autenticación, el problema suele estar en la configuración del backend de GitHub o en el entorno de despliegue.</p>
+    <p><strong>Para un despliegue real:</strong> usa un host que permita la autenticación OAuth de GitHub y asegúrate de que el repositorio y la cuenta tengan permisos de escritura.</p>
+    <p><strong>En desarrollo local:</strong> el login puede no completarse correctamente sin un entorno de autenticación apropiado; en ese caso, usa el flujo de edición mediante GitHub directamente o despliega el sitio en GitHub Pages o Netlify con la configuración correcta.</p>
+  </div>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>

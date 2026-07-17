@@ -44,11 +44,12 @@ Este repositorio usa Decap CMS (antes Netlify CMS) con backend GitHub para admin
 ## Flujo de despliegue sugerido
 
 1. Sube los cambios al repositorio GitHub.
-2. Publica el sitio en GitHub Pages o en tu hosting estático.
+2. Publica el sitio en Cloudflare Pages o Netlify.
 3. Asegúrate de que `https://<tu-dominio>/admin/index.html` sea accesible.
-4. Accede a la página y autentícate con GitHub.
+4. En Cloudflare Pages, añade las variables de entorno `GITHUB_CLIENT_ID` y `GITHUB_CLIENT_SECRET` para el endpoint de autenticación `/api/auth`.
+5. Accede a la página y autentícate con GitHub.
 
-> Para GitHub Pages, mueve el sitio al branch `main` o `gh-pages` según tu configuración de Pages.
+> Para Cloudflare Pages, el proyecto ya incluye un endpoint de autenticación en `functions/api/auth.js` para el backend GitHub del CMS.
 
 ## Validaciones realizadas
 
