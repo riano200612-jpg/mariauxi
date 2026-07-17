@@ -6,7 +6,7 @@ backend:
 
 site_url: https://mariauxi.com
 display_url: https://mariauxi.com
-logo_url: /img/logo.png
+logo_url: /favicon-192x192.png
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
 publish_mode: editorial_workflow

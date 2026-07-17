@@ -9,10 +9,11 @@
 <body>
   <script>
     window.CMS_MANUAL_INIT = true;
+    window.CMS_CONFIG_PATH = new URL('./config.yml', window.location.href).toString();
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    CMS.init({ config: '/admin/config.yml' });
+    CMS.init({ config: window.CMS_CONFIG_PATH });
   </script>
 </body>
 </html>
