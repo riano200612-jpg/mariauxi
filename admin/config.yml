@@ -2,9 +2,7 @@ backend:
   name: github
   repo: riano200612-jpg/mariauxi
   branch: main
-  auth_scope: repo
-  base_url: https://api.netlify.com
-  auth_endpoint: /auth
+  auth_scope: public_repo
 
 site_url: https://mariauxi.com
 display_url: https://mariauxi.com
