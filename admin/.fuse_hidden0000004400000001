@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: riano200612-jpg/mariauxi
+  branch: main
+  base_url: https://mariauxi-oauth.riano200612.workers.dev
+  auth_endpoint: auth
+
+site_url: https://mariauxi.com
+display_url: https://mariauxi.com
+logo_url: /favicon-192x192.png
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+publish_mode: editorial_workflow
+locale: es
+
+collections:
+  - name: "proyectos"
+    label: "Proyectos"
+    label_singular: "Proyecto"
+    folder: "contenido/proyectos"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    fields:
+      - {label: "Nombre del Proyecto", name: "titulo", widget: "string", required: true}
+      - {label: "Ubicación", name: "ubicacion", widget: "string", required: false}
+      - {label: "Precio", name: "precio", widget: "string", required: false}
+      - {label: "Descripción", name: "descripcion", widget: "text", required: false}
+      - {label: "Imagen Principal", name: "imagen", widget: "image", required: false}
+      - {label: "Video", name: "video", widget: "file", required: false}
+      - {label: "Brochure PDF", name: "pdf", widget: "file", required: false}
+      - {label: "Disponible", name: "disponible", widget: "boolean", default: true}
