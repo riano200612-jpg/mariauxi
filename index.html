@@ -404,12 +404,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   #hero-video-bg { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
   #hero-video-bg video { width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity:0.95; }
 
-  .hero-content { position: relative; z-index: 2; text-align: center; color: var(--white); padding: 0 clamp(1.5rem, 4vw, 3rem); max-width: 700px; margin: 0 auto; }
-  .hero-content h1 { font-family: var(--f-serif); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; line-height: 1.3; margin-bottom: 1rem; text-wrap: balance; letter-spacing: 0.02em; opacity: 0.95; }
-  .hero-content h1 em { font-style: italic; color: #E5D5B5; font-weight: 300; }
-  .hero-content p { font-size: clamp(0.85rem, 1.1vw, 0.95rem); line-height: 1.7; color: rgba(255,255,255,0.75); max-width: 500px; margin: 0 auto 2rem; font-weight: 300; letter-spacing: 0.01em; }
-  .hero-content .btn-outline { font-size: var(--size-xs); padding: 0.75rem 2rem; opacity: 0.9; transition: all 0.4s ease; }
-  .hero-content .btn-outline:hover { opacity: 1; transform: translateY(-2px); }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 clamp(1.5rem, 4vw, 3rem); max-width: 700px; margin: 0 auto; }
+  
+  /* ESTILO DORADO PREMIUM PARA EL HERO */
+  .hero-content h1 { 
+    font-family: var(--f-serif); 
+    font-size: clamp(1.6rem, 3vw, 2.4rem); 
+    font-weight: 300; 
+    line-height: 1.3; 
+    margin-bottom: 1rem; 
+    text-wrap: balance; 
+    letter-spacing: 0.02em; 
+    background: linear-gradient(135deg, #F4E5B8 0%, #D4AF37 50%, #C5A028 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #D4AF37; /* Fallback */
+  }
+  .hero-content h1 em { 
+    font-style: italic; 
+    font-weight: 400; 
+    background: linear-gradient(135deg, #FFF8DC 0%, #F4E5B8 50%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-content p { 
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem); 
+    line-height: 1.7; 
+    color: rgba(244, 229, 184, 0.85); /* Dorado suave/crema */
+    max-width: 500px; 
+    margin: 0 auto 2rem; 
+    font-weight: 300; 
+    letter-spacing: 0.01em; 
+  }
+  .hero-content .btn-outline { 
+    font-size: var(--size-xs); 
+    padding: 0.75rem 2rem; 
+    opacity: 0.9; 
+    transition: all 0.4s ease; 
+    color: #D4AF37;
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+  .hero-content .btn-outline:hover { 
+    opacity: 1; 
+    transform: translateY(-2px); 
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #D4AF37;
+    color: #F4E5B8;
+  }
 
   .stats { background:var(--white); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:clamp(2rem,3vw,2.5rem) var(--pad-x); display:grid; grid-template-columns:repeat(4,1fr); }
   .stat { padding:0 clamp(1.2rem,2vw,2rem); border-right:1px solid var(--border); }
@@ -656,7 +699,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </video>
   </div>
   <div class="hero-content">
-    <h1 data-i18n="hero_title">Inversiones de <em>alto valor</em><br>en Cartagena</h1>
+    <h1 data-i18n="hero_title"><em>Proyectos Exclusivos</em><br>en Cartagena</h1>
     <p data-i18n="hero_subtitle">Más de 25 años liderando proyectos residenciales con ubicación estratégica y valorización en el Caribe colombiano.</p>
     <a href="#contacto" class="btn-outline" data-i18n="hero_cta">Solicitar asesoría</a>
   </div>
@@ -975,7 +1018,7 @@ const translations = {
     nav_projects: 'Proyectos',
     nav_locations: 'Ubicaciones',
     nav_contact: 'Contacto',
-    hero_title: 'Inversiones de <em>alto valor</em><br>en Cartagena',
+    hero_title: '<em>Proyectos Exclusivos</em><br>en Cartagena',
     hero_subtitle: 'Más de 25 años liderando proyectos residenciales con ubicación estratégica y valorización en el Caribe colombiano.',
     hero_cta: 'Solicitar asesoría',
     stat_projects: 'Proyectos activos',
@@ -1073,7 +1116,7 @@ const translations = {
     nav_projects: 'Projects',
     nav_locations: 'Locations',
     nav_contact: 'Contact',
-    hero_title: 'High-Value <em>Investments</em><br>in Cartagena',
+    hero_title: '<em>Exclusive Projects</em><br>in Cartagena',
     hero_subtitle: 'Over 25 years leading residential projects with strategic locations and appreciation in the Colombian Caribbean.',
     hero_cta: 'Request Consultation',
     stat_projects: 'Active Projects',
