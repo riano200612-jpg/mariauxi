@@ -7,8 +7,18 @@
   <meta name="robots" content="noindex,nofollow">
 </head>
 <body>
-
-<script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
-
+  <!-- Script para corregir el bug de Decap CMS v3 con OAuth -->
+  <script>
+    (function() {
+      // Si la URL tiene /#/access_token, redirige a /#access_token
+      var hash = window.location.hash;
+      if (hash && hash.startsWith('#/access_token=')) {
+        var cleanHash = hash.replace('#/', '#');
+        window.location.replace(window.location.origin + window.location.pathname + cleanHash);
+      }
+    })();
+  </script>
+  
+  <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
 </body>
 </html>
