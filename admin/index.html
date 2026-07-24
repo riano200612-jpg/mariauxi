@@ -1,24 +1,25 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Mariauxi CMS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<title>Test</title>
 </head>
 <body>
-  <!-- Script para corregir el bug de Decap CMS v3 con OAuth -->
-  <script>
-    (function() {
-      // Si la URL tiene /#/access_token, redirige a /#access_token
-      var hash = window.location.hash;
-      if (hash && hash.startsWith('#/access_token=')) {
-        var cleanHash = hash.replace('#/', '#');
-        window.location.replace(window.location.origin + window.location.pathname + cleanHash);
-      }
-    })();
-  </script>
-  
-  <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
+
+<script>
+alert("SCRIPT EJECUTADO");
+
+if (location.hash.startsWith("#/access_token=")) {
+    alert("CORRIGIENDO HASH");
+    location.replace(
+        location.origin +
+        location.pathname +
+        location.hash.replace("#/", "#")
+    );
+}
+</script>
+
+<script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
+
 </body>
 </html>
