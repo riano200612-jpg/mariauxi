@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es-CO">
 <head>
 <script>
@@ -450,7 +450,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .stat-l { font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--text-lt); }
 
   #manifesto { padding:clamp(5rem,8vw,8.5rem) var(--pad-x); max-width:850px; margin:0 auto; }
-  .tag { font-size:var(--size-xs); letter-spacing:.4em; text-transform:uppercase; color:#D7BE82; margin-bottom:2.5rem; display:block; }
+  .tag { font-size:var(--size-xs); letter-spacing:.4em; text-transform:uppercase; color:#C9A84C; margin-bottom:2.5rem; display:block; }
   .manifesto-foot { margin-top:2.5rem; padding-top:2.5rem; border-top:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.5rem, 3vw, 2.5rem); }
   .manifesto-foot p { font-size:var(--size-base); line-height:1.9; color:var(--text-lt); }
 
@@ -842,6 +842,92 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   .orb.paused { animation-play-state: paused; }
+
+  /* ===== GOOGLE REVIEWS ===== */
+  .google-reviews {
+    padding: clamp(5rem, 8vw, 8.5rem) var(--pad-x);
+    background:
+      linear-gradient(rgba(8, 35, 60, 0.82), rgba(8, 35, 60, 0.88)),
+      url("img/bahia-cartagena.webp") center/cover no-repeat;
+    position: relative;
+  }
+  .google-reviews::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8,35,60,0.3) 0%, transparent 40%, transparent 60%, rgba(8,35,60,0.4) 100%);
+    pointer-events: none;
+  }
+  .reviews-overlay {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .google-reviews .tag {
+    color: #D7BE82;
+    margin-bottom: 1.4rem;
+    display: block;
+  }
+  .google-reviews h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.4rem;
+    color: #D7BE82;
+    text-wrap: balance;
+  }
+  .google-reviews h2 em { font-style: italic; }
+  .reviews-subtitle {
+    font-size: var(--size-sm);
+    line-height: 1.85;
+    color: rgba(255,255,255,0.85);
+    max-width: 540px;
+    margin: 0 auto 2.4rem;
+    font-weight: 300;
+  }
+  .rating-box { margin: 2.5rem 0; }
+  .stars {
+    color: #D7BE82;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    letter-spacing: 4px;
+    display: block;
+    font-family: var(--f-sans);
+    margin-bottom: 0.6rem;
+  }
+  .rating-text {
+    color: rgba(255,255,255,0.85);
+    font-size: var(--size-sm);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .review-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .review-buttons .btn-p,
+  .review-buttons .btn-outline {
+    text-decoration: none;
+  }
+  @media (max-width: 600px) {
+    .google-reviews {
+      padding: clamp(3.5rem, 6vw, 5rem) var(--pad-x);
+    }
+    .review-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    .review-buttons .btn-p,
+    .review-buttons .btn-outline {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+  }
 }
 
 @layer utilities {
@@ -873,6 +959,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 @media(max-width:480px){ .btn-p,.btn-outline { padding:.8rem 1.8rem; } }
 </style>
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -1166,16 +1253,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       "El acompañamiento fue excelente desde la selección del proyecto hasta la entrega. Una experiencia profesional y transparente."
     </blockquote>
     <cite data-i18n="testimonial_cite">— Cliente propietario</cite>
-    <div class="testimonial-cta">
-      <button type="button" class="btn-testimonial" id="btn-open-testimonial" aria-label="Compartir tu experiencia">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Comparte tu experiencia
-      </button>
-    </div>
+
     <div class="testimonials-dynamic" id="testimonials-dynamic" style="display:none;">
       <h3 style="font-family:var(--f-serif);font-size:clamp(1.1rem,1.8vw,1.3rem);font-weight:300;color:#D7BE82;text-align:center;margin-bottom:0.3rem;">Experiencias de nuestros clientes</h3>
       <div class="testimonials-grid" id="testimonials-grid"></div>
     </div>
+  </div>
+</section>
+
+
+<!-- ==============================
+     RESEÑAS GOOGLE - MARIAUXI
+     ============================== -->
+
+<section id="google-reviews" class="google-reviews">
+  <div class="reviews-overlay">
+
+    <span class="tag">Testimonios</span>
+
+    <h2>La confianza de nuestros <em>clientes</em></h2>
+
+    <p class="reviews-subtitle">
+      Cada proyecto representa un compromiso con la excelencia, la transparencia
+      y el acompañamiento personalizado.
+    </p>
+
+    <div class="rating-box">
+      <span class="stars">★★★★★</span>
+      <span class="rating-text">Tu opinión hace crecer a Mariauxi</span>
+    </div>
+
+    <div class="review-buttons">
+
+      <a href="https://g.page/r/CZBdH3BwoHvpEAE/review"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn-p"
+         data-track="google_review_write">
+        ⭐ Escribir una reseña
+      </a>
+
+      <a href="https://www.google.com/maps?cid=9666485187267109717"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn-outline"
+         style="border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.85);"
+         data-track="google_review_view">
+        Ver reseñas en Google
+      </a>
+
+    </div>
+
   </div>
 </section>
 
