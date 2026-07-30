@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es-CO">
 <head>
 <script>
@@ -34,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_CO">
-<meta property="og:title" content="María Auxi ">
+<meta property="og:title" content="María Auxi">
 <meta property="og:description" content="Espacios que transforman · Descubre portafolio exclusivo en Manga, Serena del Mar y Zona Norte. Más de 25 años liderando proyectos inmobiliarios.">
 <meta property="og:image" content="https://mariauxi.com/img/cover.jpg">
 <meta property="og:image:secure_url" content="https://mariauxi.com/img/cover.jpg">
@@ -73,7 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; frame-src https://www.google.com https://www.googletagmanager.com; form-action https://formspree.io;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https://*.trustindex.io; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.trustindex.io; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://cdn.trustindex.io; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.trustindex.io; frame-src https://www.google.com https://www.googletagmanager.com https://*.trustindex.io; form-action https://formspree.io;">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -904,79 +904,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
-  /* TARJETAS DE RESEÑAS */
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: clamp(1rem, 2vw, 1.5rem);
+  /* CONTENEDOR TRUSTINDEX */
+  .trustindex-container {
     margin: 2.5rem 0;
-    text-align: left;
+    min-height: 200px;
   }
-  .review-card {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--radius-sm);
-    padding: clamp(1.4rem, 2vw, 1.8rem);
-    backdrop-filter: blur(8px);
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .review-card:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: rgba(215, 190, 130, 0.25);
-    transform: translateY(-3px);
-  }
-  .review-header {
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    margin-bottom: 1rem;
-  }
-  .review-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-full);
-    background: linear-gradient(135deg, var(--rose), var(--rose-lt));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--f-sans);
-    font-size: var(--size-xs);
-    font-weight: 500;
-    color: var(--white);
-    letter-spacing: 0.05em;
-    flex-shrink: 0;
-  }
-  .review-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-  .review-name {
-    font-family: var(--f-sans);
-    font-size: var(--size-sm);
-    font-weight: 400;
-    color: var(--white);
-  }
-  .review-stars {
-    color: #D7BE82;
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
-  }
-  .review-text {
-    font-family: var(--f-serif);
-    font-size: var(--size-md);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 0.8rem;
-    text-wrap: pretty;
-  }
-  .review-date {
-    font-size: var(--size-xs);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+  .trustindex-container [class*="ti-widget"] {
+    margin: 0 auto !important;
   }
 
   .review-buttons {
@@ -991,17 +925,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-decoration: none;
   }
 
-  @media (max-width: 860px) {
-    .reviews-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
   @media (max-width: 600px) {
     .google-reviews {
       padding: clamp(3.5rem, 6vw, 5rem) var(--pad-x);
-    }
-    .reviews-grid {
-      grid-template-columns: 1fr;
     }
     .review-buttons {
       flex-direction: column;
@@ -1045,20 +971,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 @media(max-width:480px){ .btn-p,.btn-outline { padding:.8rem 1.8rem; } }
 </style>
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9XLKSQB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de lectura"></div>
 
 <nav aria-label="Principal">
-  <a href="#" class="nav-logo">María Auxi <em>·</em> <span data-i18n="nav_logo">Líder de Proyectos</span></a>
+  <a href="#" target="_self" class="nav-logo">María Auxi <em>·</em> <span data-i18n="nav_logo">Líder de Proyectos</span></a>
   <ul class="nav-links">
-    <li><a href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
-    <li><a href="#ubicaciones" data-i18n="nav_locations">Ubicaciones</a></li>
-    <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+    <li><a href="#proyectos" target="_self" data-i18n="nav_projects">Proyectos</a></li>
+    <li><a href="#ubicaciones" target="_self" data-i18n="nav_locations">Ubicaciones</a></li>
+    <li><a href="#contacto" target="_self" data-i18n="nav_contact">Contacto</a></li>
     <li>
       <div class="lang-switcher">
         <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
@@ -1082,30 +1005,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <button class="lang-btn" data-lang="en" aria-label="English">EN — English</button>
       </div>
     </li>
-    <li><a href="#proyectos" data-i18n="nav_projects">Proyectos</a></li>
-    <li><a href="#ubicaciones" data-i18n="nav_locations">Ubicaciones</a></li>
-    <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
-    <li><!-- MODAL TESTIMONIOS -->
-<div class="modal-overlay" id="modal-testimonial" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-box">
-    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
-    <h3 class="modal-title" id="modal-title">Comparte tu experiencia</h3>
-    <p class="modal-subtitle">Tu testimonio nos ayuda a seguir creciendo. Cuéntanos cómo fue tu experiencia con María Auxi.</p>
-    <form class="modal-form" id="testimonial-form">
-      <label for="t-nombre" class="sr-only">Tu nombre</label>
-      <input type="text" id="t-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
-      <label for="t-mensaje" class="sr-only">Tu mensaje</label>
-      <textarea id="t-mensaje" name="mensaje" placeholder="¿Cómo fue tu experiencia?" required rows="4"></textarea>
-      <button type="submit" class="btn-p">Publicar testimonio</button>
-    </form>
-    <div class="modal-success" id="modal-success" style="display:none;">
-      <p>¡Gracias por compartir!</p>
-      <span>Tu testimonio ha sido publicado.</span>
-    </div>
-  </div>
-</div>
-
-<a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+    <li><a href="#proyectos" target="_self" data-i18n="nav_projects">Proyectos</a></li>
+    <li><a href="#ubicaciones" target="_self" data-i18n="nav_locations">Ubicaciones</a></li>
+    <li><a href="#contacto" target="_self" data-i18n="nav_contact">Contacto</a></li>
+    <li><a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
   </ul>
 </div>
 
@@ -1118,7 +1021,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
   <div class="hero-content">
     <p data-i18n="hero_subtitle">Más de 25 años liderando proyectos residenciales con ubicación estratégica y valorización en el Caribe colombiano.</p>
-    <a href="#contacto" class="btn-outline" data-i18n="hero_cta">Solicitar asesoría</a>
+    <a href="#contacto" target="_self" class="btn-outline" data-i18n="hero_cta">Solicitar asesoría</a>
   </div>
 </section>
 
@@ -1153,27 +1056,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="inversion-content">
     <span class="eyebrow" data-i18n="inversion_eyebrow">Oportunidad de Inversión</span>
     <p data-i18n="inversion_desc">Asegura tu patrimonio en la ciudad más exclusiva y con mayor proyección del Caribe colombiano. Un estilo de vida inigualable respaldado por una alta valorización en finca raíz.</p>
-    <!-- MODAL TESTIMONIOS -->
-<div class="modal-overlay" id="modal-testimonial" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-box">
-    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
-    <h3 class="modal-title" id="modal-title">Comparte tu experiencia</h3>
-    <p class="modal-subtitle">Tu testimonio nos ayuda a seguir creciendo. Cuéntanos cómo fue tu experiencia con María Auxi.</p>
-    <form class="modal-form" id="testimonial-form">
-      <label for="t-nombre" class="sr-only">Tu nombre</label>
-      <input type="text" id="t-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
-      <label for="t-mensaje" class="sr-only">Tu mensaje</label>
-      <textarea id="t-mensaje" name="mensaje" placeholder="¿Cómo fue tu experiencia?" required rows="4"></textarea>
-      <button type="submit" class="btn-p">Publicar testimonio</button>
-    </form>
-    <div class="modal-success" id="modal-success" style="display:none;">
-      <p>¡Gracias por compartir!</p>
-      <span>Tu testimonio ha sido publicado.</span>
-    </div>
-  </div>
-</div>
-
-<a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-outline" data-track="whatsapp_click" data-project="cartagena" data-i18n="inversion_cta">Invertir ahora</a>
+    <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-outline" data-track="whatsapp_click" data-project="cartagena" data-i18n="inversion_cta">Invertir ahora</a>
   </div>
 </section>
 
@@ -1201,27 +1084,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p style="font-size:var(--size-sm);line-height:1.85;color:var(--text-lt);margin-bottom:2.2rem;" data-i18n="oporto_desc">
         Oporto es la más reciente apuesta de Mejía Villegas Constructores, un proyecto que fusiona arquitectura contemporánea y ubicación estratégica al costado del Portal de Transcaribe, facilitando la movilidad y la comodidad en cada proyecto.
       </p>
-      <!-- MODAL TESTIMONIOS -->
-<div class="modal-overlay" id="modal-testimonial" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-box">
-    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
-    <h3 class="modal-title" id="modal-title">Comparte tu experiencia</h3>
-    <p class="modal-subtitle">Tu testimonio nos ayuda a seguir creciendo. Cuéntanos cómo fue tu experiencia con María Auxi.</p>
-    <form class="modal-form" id="testimonial-form">
-      <label for="t-nombre" class="sr-only">Tu nombre</label>
-      <input type="text" id="t-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
-      <label for="t-mensaje" class="sr-only">Tu mensaje</label>
-      <textarea id="t-mensaje" name="mensaje" placeholder="¿Cómo fue tu experiencia?" required rows="4"></textarea>
-      <button type="submit" class="btn-p">Publicar testimonio</button>
-    </form>
-    <div class="modal-success" id="modal-success" style="display:none;">
-      <p>¡Gracias por compartir!</p>
-      <span>Tu testimonio ha sido publicado.</span>
-    </div>
-  </div>
-</div>
-
-<a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-p" data-track="whatsapp_click" data-project="oporto" data-i18n="oporto_cta">Solicitar asesoría personalizada</a>
+      <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-p" data-track="whatsapp_click" data-project="oporto" data-i18n="oporto_cta">Solicitar asesoría personalizada</a>
     </div>
   </div>
 </section>
@@ -1256,7 +1119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="proyectos">
   <div class="sec-head reveal">
     <h2 class="sec-title" data-i18n="portafolio_title">Portafolio <em>2026</em></h2>
-    <a href="#contacto" class="sec-link" data-i18n="portafolio_link">Consultar disponibilidad →</a>
+    <a href="#contacto" target="_self" class="sec-link" data-i18n="portafolio_link">Consultar disponibilidad →</a>
   </div>
 
   <div class="grid">
@@ -1369,58 +1232,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span class="rating-text">5.0 · Basado en opiniones reales de Google</span>
     </div>
 
-    <!-- TARJETAS DE RESEÑAS — Reemplaza los textos por los reales de tu perfil -->
-    <div class="reviews-grid">
-
-      <article class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">JL</div>
-          <div class="review-meta">
-            <span class="review-name">Juan López</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-        </div>
-        <p class="review-text">"El acompañamiento de María Auxi fue excepcional desde el primer contacto. Nos guió en la elección de nuestro apartamento en Manga con una visión clara del mercado y mucha paciencia."</p>
-        <span class="review-date">Hace 2 semanas</span>
-      </article>
-
-      <article class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">MR</div>
-          <div class="review-meta">
-            <span class="review-name">María Rodríguez</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-        </div>
-        <p class="review-text">"Invertí en Reserva 90 NEO gracias a su asesoría. La transparencia en cada etapa del proceso me dio total confianza. Sin duda, la mejor experiencia inmobiliaria en Cartagena."</p>
-        <span class="review-date">Hace 1 mes</span>
-      </article>
-
-      <article class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">CP</div>
-          <div class="review-meta">
-            <span class="review-name">Carlos Pérez</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-        </div>
-        <p class="review-text">"Profesionalismo y conocimiento del mercado inmobiliario de Cartagena. María Auxi entiende exactamente lo que el inversionista necesita. Totalmente recomendada."</p>
-        <span class="review-date">Hace 2 meses</span>
-      </article>
-
-      <article class="review-card">
-        <div class="review-header">
-          <div class="review-avatar">AG</div>
-          <div class="review-meta">
-            <span class="review-name">Ana Gómez</span>
-            <span class="review-stars">★★★★★</span>
-          </div>
-        </div>
-        <p class="review-text">"Compramos en Oporto y el proceso fue impecable. Su experiencia de más de 25 años se nota en cada detalle. Gracias por hacer realidad nuestro hogar en el Caribe."</p>
-        <span class="review-date">Hace 3 meses</span>
-      </article>
-
-    </div>
+    <!-- WIDGET TRUSTINDEX — Reseñas reales de Google -->
+    <div class="trustindex-container" data-widget-id="58b357878eae1336bb86e5b43f0"></div>
 
     <div class="review-buttons">
 
@@ -1533,22 +1346,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div>
       <p class="ft-col-t" data-i18n="footer_projects">Proyectos</p>
       <ul class="ft-links">
-        <li><a href="#oporto">Oporto Apartamentos</a></li>
-        <li><a href="#proyectos">Reserva 90 NEO</a></li>
+        <li><a href="#oporto" target="_self">Oporto Apartamentos</a></li>
+        <li><a href="#proyectos" target="_self">Reserva 90 NEO</a></li>
       </ul>
     </div>
     <div>
       <p class="ft-col-t" data-i18n="footer_company">Compañía</p>
       <ul class="ft-links">
-        <li><a href="#manifesto" data-i18n="footer_history">Nuestra historia</a></li>
-        <li><a href="#manifesto" data-i18n="footer_philosophy">Filosofía de diseño</a></li>
-        <li><a href="#contacto" data-i18n="footer_alliances">Alianzas</a></li>
+        <li><a href="#manifesto" target="_self" data-i18n="footer_history">Nuestra historia</a></li>
+        <li><a href="#manifesto" target="_self" data-i18n="footer_philosophy">Filosofía de diseño</a></li>
+        <li><a href="#contacto" target="_self" data-i18n="footer_alliances">Alianzas</a></li>
       </ul>
     </div>
     <div>
       <p class="ft-col-t" data-i18n="nav_contact">Contacto</p>
       <ul class="ft-links">
-        <li><a href="#ubicaciones">Cartagena de Indias</a></li>
+        <li><a href="#ubicaciones" target="_self">Cartagena de Indias</a></li>
         <li><a href="tel:+573104325477" data-track="phone_click">+57 310 432 5477</a></li>
         <li><a href="mailto:proyectoentrelagos1@gmail.com" data-track="email_click">proyectoentrelagos1@gmail.com</a></li>
       </ul>
@@ -1559,26 +1372,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="ft-badge">Luxury Defined · Cartagena</div>
   </div>
 </footer>
-
-<!-- MODAL TESTIMONIOS -->
-<div class="modal-overlay" id="modal-testimonial" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-box">
-    <button type="button" class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
-    <h3 class="modal-title" id="modal-title">Comparte tu experiencia</h3>
-    <p class="modal-subtitle">Tu testimonio nos ayuda a seguir creciendo. Cuéntanos cómo fue tu experiencia con María Auxi.</p>
-    <form class="modal-form" id="testimonial-form">
-      <label for="t-nombre" class="sr-only">Tu nombre</label>
-      <input type="text" id="t-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name">
-      <label for="t-mensaje" class="sr-only">Tu mensaje</label>
-      <textarea id="t-mensaje" name="mensaje" placeholder="¿Cómo fue tu experiencia?" required rows="4"></textarea>
-      <button type="submit" class="btn-p">Publicar testimonio</button>
-    </form>
-    <div class="modal-success" id="modal-success" style="display:none;">
-      <p>¡Gracias por compartir!</p>
-      <span>Tu testimonio ha sido publicado.</span>
-    </div>
-  </div>
-</div>
 
 <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios."
    class="whatsapp-float"
@@ -1599,7 +1392,6 @@ const translations = {
     nav_projects: 'Proyectos',
     nav_locations: 'Ubicaciones',
     nav_contact: 'Contacto',
-    hero_title: '<em>Proyectos Exclusivos</em><br>en Cartagena',
     hero_subtitle: 'Más de 25 años liderando proyectos residenciales con ubicación estratégica y valorización en el Caribe colombiano.',
     hero_cta: 'Solicitar asesoría',
     stat_projects: 'Proyectos activos',
@@ -1611,7 +1403,6 @@ const translations = {
     manifesto_p2: 'Mi trayectoria no se limita a vender propiedades, consiste en interpretar el potencial de cada proyecto, comprender el comportamiento del mercado y anticipar las decisiones que transforman una inversión en patrimonio.',
     manifesto_p3: 'En un mercado donde todos ofrecen metros cuadrados, construyo confianza, relaciones y oportunidades que permanecen en el tiempo.',
     inversion_eyebrow: 'Oportunidad de Inversión',
-    inversion_title: '',
     inversion_desc: 'Asegura tu patrimonio en la ciudad más exclusiva y con mayor proyección del Caribe colombiano. Un estilo de vida inigualable respaldado por una alta valorización en finca raíz.',
     inversion_cta: 'Invertir ahora',
     oporto_title: 'Proyecto <em>Oporto</em>',
@@ -1655,9 +1446,6 @@ const translations = {
     contact_title: '¿Listo para <em>invertir</em>?',
     contact_urgency_title: 'Agenda una asesoría privada',
     contact_urgency_desc: 'Respuesta personalizada en menos de 15 minutos.',
-    catalog_title: 'Descarga nuestro catálogo completo',
-    catalog_desc: 'Accede a todos los proyectos, planos y precios actualizados',
-    catalog_btn: 'Descargar PDF',
     form_name_label: 'Nombre completo',
     form_name_ph: 'Nombre completo',
     form_email_label: 'Correo electrónico',
@@ -1697,7 +1485,6 @@ const translations = {
     nav_projects: 'Projects',
     nav_locations: 'Locations',
     nav_contact: 'Contact',
-    hero_title: '<em>Exclusive Projects</em><br>in Cartagena',
     hero_subtitle: 'Over 25 years leading residential projects with strategic locations and appreciation in the Colombian Caribbean.',
     hero_cta: 'Request Consultation',
     stat_projects: 'Active Projects',
@@ -1709,7 +1496,6 @@ const translations = {
     manifesto_p2: 'My career is not limited to selling properties; it consists of interpreting the potential of each project, understanding market behavior, and anticipating decisions that transform an investment into lasting wealth.',
     manifesto_p3: 'In a market where everyone offers square meters, I build trust, relationships, and opportunities that stand the test of time.',
     inversion_eyebrow: 'Investment Opportunity',
-    inversion_title: '',
     inversion_desc: 'Secure your assets in the most exclusive city with the greatest potential in the Colombian Caribbean. An unparalleled lifestyle backed by high real estate appreciation.',
     inversion_cta: 'Invest Now',
     oporto_title: 'Project <em>Oporto</em>',
@@ -1753,9 +1539,6 @@ const translations = {
     contact_title: 'Ready to <em>invest</em>?',
     contact_urgency_title: 'Schedule a Private Consultation',
     contact_urgency_desc: 'Personalized response in less than 15 minutes.',
-    catalog_title: 'Download our complete catalog',
-    catalog_desc: 'Access all projects, floor plans, and updated prices',
-    catalog_btn: 'Download PDF',
     form_name_label: 'Full name',
     form_name_ph: 'Full name',
     form_email_label: 'Email address',
@@ -2039,88 +1822,7 @@ if (leadForm) {
   });
 }
 
-/* ===== TESTIMONIOS ===== */
-(function() {
-  const modal = document.getElementById('modal-testimonial');
-  const btnOpen = document.getElementById('btn-open-testimonial');
-  const btnClose = document.getElementById('modal-close');
-  const form = document.getElementById('testimonial-form');
-  const successMsg = document.getElementById('modal-success');
-  const grid = document.getElementById('testimonials-grid');
-  const dynamicSection = document.getElementById('testimonials-dynamic');
-
-  function openModal() {
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    form.style.display = 'flex';
-    successMsg.style.display = 'none';
-    form.reset();
-    if (typeof trackEvent === 'function') trackEvent('testimonial_modal_open');
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  if (btnOpen) btnOpen.addEventListener('click', openModal);
-  if (btnClose) btnClose.addEventListener('click', closeModal);
-  if (modal) {
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-    });
-  }
-
-  function loadTestimonials() {
-    try {
-      const data = JSON.parse(localStorage.getItem('mariauxi_testimonials') || '[]');
-      if (data.length === 0) {
-        dynamicSection.style.display = 'none';
-        return;
-      }
-      dynamicSection.style.display = 'block';
-      grid.innerHTML = data.map(function(t) {
-        const date = new Date(t.date).toLocaleDateString('es-CO', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        });
-        return '<div class="testimonial-card reveal vis">' +
-          '<q>' + (t.mensaje || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</q>' +
-          '<cite>— ' + (t.nombre || 'Anónimo').replace(/</g, '&lt;') + '</cite>' +
-          '<span class="t-date">' + date + '</span>' +
-          '</div>';
-      }).join('');
-    } catch(e) {}
-  }
-
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const nombre = form.nombre.value.trim() || 'Anónimo';
-      const mensaje = form.mensaje.value.trim();
-      if (!mensaje) return;
-      try {
-        const data = JSON.parse(localStorage.getItem('mariauxi_testimonials') || '[]');
-        data.unshift({ nombre: nombre, mensaje: mensaje, date: new Date().toISOString() });
-        localStorage.setItem('mariauxi_testimonials', JSON.stringify(data));
-      } catch(err) {}
-      form.style.display = 'none';
-      successMsg.style.display = 'block';
-      loadTestimonials();
-      if (typeof trackEvent === 'function') {
-        trackEvent('testimonial_submitted', { author: nombre.substring(0, 30) });
-      }
-      setTimeout(closeModal, 2200);
-    });
-  }
-
-  loadTestimonials();
-})();
-
 </script>
+<script defer async src="https://cdn.trustindex.io/loader.js?58b357878eae1336bb86e5b43f0"></script>
 </body>
 </html>
