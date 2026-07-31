@@ -65,7 +65,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="dns-prefetch" href="//www.google-analytics.com">
 <link rel="dns-prefetch" href="//connect.facebook.net">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@200;300;400;500&amp;display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet"></noscript>
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -1020,6 +1022,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </video>
   </div>
   <div class="hero-content">
+    <h1 class="sr-only">María Auxi · Líder de Proyectos Inmobiliarios en Cartagena</h1>
     <p data-i18n="hero_subtitle">Más de 25 años liderando proyectos residenciales con ubicación estratégica y valorización en el Caribe colombiano.</p>
     <a href="#contacto" target="_self" class="btn-outline" data-i18n="hero_cta">Solicitar asesoría</a>
   </div>
@@ -1047,7 +1050,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <section id="inversion-cartagena" class="reveal">
   <div class="video-background">
-    <video muted loop playsinline preload="none" poster="img/poster-video3.webp">
+    <video aria-hidden="true" muted loop playsinline preload="none" poster="img/poster-video3.webp">
       <source src="videos/video3.webm" type="video/webm">
       <source src="videos/video3.mp4" type="video/mp4">
     </video>
@@ -1068,7 +1071,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="oporto-grid">
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
-        <video loop playsinline preload="none" muted poster="img/poster-oporto.webp">
+        <video aria-hidden="true" loop playsinline preload="none" muted poster="img/poster-oporto.webp">
           <source src="videos/video3-1.webm" type="video/webm">
           <source src="videos/video3-1.mp4" type="video/mp4">
         </video>
@@ -1098,7 +1101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
     <div class="reveal" style="display:flex;justify-content:center;">
       <div class="video-phone">
-        <video loop playsinline preload="none" muted poster="img/poster-mari.webp">
+        <video aria-hidden="true" loop playsinline preload="none" muted poster="img/poster-mari.webp">
           <source src="videos/mari.webm" type="video/webm">
           <source src="videos/mari.mp4" type="video/mp4">
         </video>
@@ -1823,6 +1826,6 @@ if (leadForm) {
 }
 
 </script>
-<script defer async src="https://cdn.trustindex.io/loader.js?58b357878eae1336bb86e5b43f0"></script>
+<script async src="https://cdn.trustindex.io/loader.js?58b357878eae1336bb86e5b43f0"></script>
 </body>
 </html>
