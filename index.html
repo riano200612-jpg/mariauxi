@@ -973,6 +973,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 @media(max-width:480px){ .btn-p,.btn-outline { padding:.8rem 1.8rem; } }
 </style>
+<base target="_blank">
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9XLKSQB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1016,7 +1017,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <section id="hero">
   <div id="hero-video-bg" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="metadata" fetchpriority="high" poster="img/poster-cartagena.webp" style="pointer-events:none;">
+    <video autoplay muted loop playsinline preload="metadata" fetchpriority="low" poster="img/poster-cartagena.webp" style="pointer-events:none;">
       <source src="videos/cartagena-opt.webm" type="video/webm">
       <source src="videos/cartagena.mp4" type="video/mp4">
     </video>
@@ -1027,6 +1028,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="#contacto" target="_self" class="btn-outline" data-i18n="hero_cta">Solicitar asesoría</a>
   </div>
 </section>
+
+<main>
 
 <div class="stats reveal">
   <div class="stat"><div class="stat-n">7</div><div class="stat-l" data-i18n="stat_projects">Proyectos activos</div></div>
@@ -1334,6 +1337,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="ft-grid">
@@ -1680,13 +1685,19 @@ const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').mat
 
 if (hoverCapable) {
   document.querySelectorAll('.card').forEach(card => {
+    let rafId = null;
     card.addEventListener('pointermove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `translateY(-3px) rotateX(${-y * 2.2}deg) rotateY(${x * 2.2}deg) translateZ(0)`;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-3px) rotateX(${-y * 2.2}deg) rotateY(${x * 2.2}deg) translateZ(0)`;
+        rafId = null;
+      });
     });
     card.addEventListener('pointerleave', () => {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       card.style.transform = 'translateY(-3px) translateZ(0)';
     });
   });
