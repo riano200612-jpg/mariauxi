@@ -367,7 +367,8 @@
      * de las tarjetas creadas dinámicamente.
      */
     grid.querySelectorAll('.reveal').forEach(function (element) {
-      element.classList.add('visible');
+      element.classList.add('vis');
+        element.classList.remove('reveal');
     });
 
     grid.querySelectorAll('.orb').forEach(function (orb) {
