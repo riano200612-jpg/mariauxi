@@ -526,6 +526,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .s-marduk  .orb { background:#DDBCA0; width:200px; height:200px; bottom:-28px; right:-28px; }
   .s-oporto .orb { background:#245B93; width:200px; height:200px; top:-40px; right:-30px; }
 
+  /* Ocultar texto sobrepuesto en tarjetas Itaca y Marduk (mostrar solo las imágenes) */
+  .swatch.s-itaca + .card-in,
+  .swatch.s-marduk + .card-in {
+    display: none;
+  }
+
   .card-in { position:relative; z-index:2; height:100%; min-height:inherit; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(1.4rem,2vw,1.8rem); }
   .pill { position:absolute; top:1.2rem; right:1.2rem; z-index:3; background:rgba(255,255,255,0.75); backdrop-filter:blur(10px); border:1px solid var(--border); padding:.3rem .8rem; font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--mauve); border-radius: var(--radius-sm); transition: all 0.35s ease; }
   .card:hover .pill { background:rgba(255,255,255,0.9); border-color:rgba(16,63,110,0.15); }
