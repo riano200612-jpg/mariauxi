@@ -175,6 +175,8 @@
       `
       : '';
 
+    const cover = project.cover ? escapeHTML(project.cover) : '';
+
     const price = project.precio
       ? escapeHTML(project.precio)
       : 'Brochure';
@@ -187,15 +189,20 @@
 
     return `
       <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}">
-        <div class="swatch ${escapeHTML(theme.swatch)}">
-          <div class="orb"></div>
+        <div
+          class="swatch ${escapeHTML(theme.swatch)}"
+          ${cover ? `style="background-image:url('${cover}');background-size:cover;background-position:center;"` : ''}
+        >
+          ${cover ? '' : '<div class="orb"></div>'}
         </div>
 
         ${
-          project.featured
-            ? '<div class="pill">Destacado</div>'
-            : ''
-        }
+            project.estado
+              ? `<div class="pill">${escapeHTML(project.estado)}</div>`
+              : project.featured
+                ? '<div class="pill">Destacado</div>'
+                : ''
+          }
 
         <div
           class="card-in"
