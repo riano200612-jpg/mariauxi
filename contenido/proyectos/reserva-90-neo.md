@@ -11,7 +11,7 @@ habitaciones: 0
 banos: 0
 parqueaderos: 0
 mapa: ""
-cover: ""
+cover: "img/covers/reserva-90-neo-cover-05.jpg"
 gallery: []
 video: ""
 pdf: "docum/reserva-90-NEO-book-digital.pdf"
