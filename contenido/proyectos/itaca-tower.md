@@ -11,7 +11,7 @@ habitaciones: 0
 banos: 0
 parqueaderos: 0
 mapa: ""
-cover: ""
+cover: "img/covers/itaca-tower-cover-02.jpg"
 gallery: []
 video: ""
 pdf: "docum/itaca-tower-book-digital-2024.pdf"

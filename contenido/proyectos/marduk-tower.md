@@ -11,7 +11,7 @@ habitaciones: 0
 banos: 0
 parqueaderos: 0
 mapa: ""
-cover: ""
+cover: "img/covers/marduk-tower-cover-05.jpg"
 gallery: []
 video: ""
 pdf: "docum/marduk-book-digital-2026.pdf"
