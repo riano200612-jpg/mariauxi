@@ -368,7 +368,6 @@
      */
     grid.querySelectorAll('.reveal').forEach(function (element) {
       element.classList.add('vis');
-        element.classList.remove('reveal');
     });
 
     grid.querySelectorAll('.orb').forEach(function (orb) {
