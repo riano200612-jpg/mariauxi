@@ -269,7 +269,7 @@
   .card { background:var(--white); border:1px solid var(--border); overflow:hidden; position:relative; transition:border-color .4s,box-shadow .4s, transform .4s; will-change: transform; min-height: 380px; border-radius: var(--radius-sm); transform-style: preserve-3d; content-visibility: auto; contain-intrinsic-size: 400px; transform: translateZ(0); }
   .card:hover { border-color:rgba(16,63,110,0.25); box-shadow:0 8px 30px rgba(16,63,110,0.06); transform: translateY(-3px) translateZ(0); }
 
-  .swatch { position:absolute; inset:0; transition:transform .65s ease; will-change: transform; }
+  .swatch { position:absolute; inset:0; background-position:center 30%; background-position:center 30%; transition:transform .65s ease; will-change: transform; }
   .card:hover .swatch { transform:scale(1.03); }
   .s-kairos  { background:linear-gradient(148deg,#F3E9E7,#EEDAD7,#F5EDEC); }
   .s-crystal { background:linear-gradient(148deg,#EEE7E9,#E5D9DD,#EEE4E6); }
