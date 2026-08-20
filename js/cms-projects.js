@@ -7,6 +7,54 @@
   const RAW_BASE =
     'https://raw.githubusercontent.com/riano200612-jpg/mariauxi/main/';
 
+  /* ── Fallback: datos de los proyectos estáticos ── */
+  const FALLBACK_PROJECTS = [
+    {
+      slug: 'oporto',
+      title: 'Oporto Apartamentos',
+      ciudad: 'Cartagena',
+      sector: 'La Providencia',
+      precio: 'Brochure',
+      body: 'Diseñado para familias que buscan crecimiento patrimonial con conectividad inmediata al Portal de Transcaribe.',
+      pdf: 'docum/oporto-book-digital.pdf',
+      cover: '',
+      estado: 'Nuevo · 2026'
+    },
+    {
+      slug: 'reserva-90',
+      title: 'Reserva 90 NEO',
+      ciudad: 'Cartagena',
+      sector: 'Zona Norte',
+      precio: 'Brochure',
+      body: 'Refugio natural ideal para inversionistas que valoran la tranquilidad, espacios verdes y valorización sostenida en Cartagena.',
+      pdf: 'docum/reserva-90-NEO-book-digital.pdf',
+      cover: '',
+      estado: ''
+    },
+    {
+      slug: 'itaca',
+      title: 'Ítaca Tower',
+      ciudad: 'Cartagena',
+      sector: 'Manga',
+      precio: 'Brochure',
+      body: 'Interiores contemporáneos y piscina panorámica. Para quienes buscan estilo, funcionalidad y ubicación premium en Cartagena.',
+      pdf: 'docum/itaca-tower-book-digital-2024.pdf',
+      cover: '',
+      estado: ''
+    },
+    {
+      slug: 'marduk',
+      title: 'Marduk Tower',
+      ciudad: 'Cartagena',
+      sector: 'Serena del Mar',
+      precio: 'Brochure',
+      body: 'Apartamentos modernos con diseño versátil y helipuerto privado. Para inversionistas y residentes que buscan diferenciarse.',
+      pdf: 'docum/marduk-book-digital-2026.pdf',
+      cover: '',
+      estado: ''
+    }
+  ];
+
   function parseValue(value) {
     value = value.trim();
     if (
@@ -118,7 +166,10 @@
     const project = window.cmsProjects.projects.find(function (p) {
       return p.slug === slug || slugify(p.title) === slug;
     });
-    if (!project) return;
+    if (!project) {
+      console.warn('[CMS] Proyecto no encontrado:', slug);
+      return;
+    }
     injectModalStyles();
     let existing = document.getElementById('cms-project-modal');
     if (existing) existing.remove();
@@ -149,7 +200,7 @@
           (project.precio ? '<div class="cms-modal-row"><span>Precio desde</span><span>' + escapeHTML(project.precio) + '</span></div>' : '') +
           (project.unidades ? '<div class="cms-modal-row"><span>Unidades</span><span>' + escapeHTML(String(project.unidades)) + '</span></div>' : '') +
           (project.entrega ? '<div class="cms-modal-row"><span>Entrega estimada</span><span>' + escapeHTML(project.entrega) + '</span></div>' : '') +
-          (project.constructor ? '<div class="cms-modal-row"><span>Constructor</span><span>' + escapeHTML(project.constructor) + '</span></div>' : '') +
+          (project.constructor && typeof project.constructor === 'string' ? '<div class="cms-modal-row"><span>Constructor</span><span>' + escapeHTML(project.constructor) + '</span></div>' : '') +
           (project.area ? '<div class="cms-modal-row"><span>Área construida</span><span>' + escapeHTML(project.area) + '</span></div>' : '') +
           (project.tipologia ? '<div class="cms-modal-row"><span>Tipologías</span><span>' + escapeHTML(project.tipologia) + '</span></div>' : '') +
         '</div>' +
@@ -198,16 +249,14 @@
     const restTitle = words.length ? ' <em>' + escapeHTML(words.join(' ')) + '</em>' : '';
     const sector = escapeHTML(project.sector || project.ciudad || 'Cartagena');
     const description = escapeHTML(project.body || 'Proyecto residencial exclusivo en Cartagena.');
-    const pdf = project.pdf ? escapeHTML(project.pdf) : '';
     const slug = escapeHTML(project.slug || slugify(title));
 
-    const brochure = pdf
-      ? '<button type="button" class="c-arr" style="text-decoration:none;background:transparent;cursor:pointer;" aria-label="Ver información de ' + escapeHTML(title) + '" data-track="open_project_modal" data-project="' + escapeHTML(slugify(title)) + '" onclick="window.cmsProjects.openModal(\'' + slug + '\')">' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-            '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' +
-          '</svg>' +
-        '</button>'
-      : '';
+    /* BOTÓN SIEMPRE VISIBLE - no depende de PDF */
+    const brochure = '<button type="button" class="c-arr" style="text-decoration:none;background:transparent;cursor:pointer;" aria-label="Ver información de ' + escapeHTML(title) + '" data-track="open_project_modal" data-project="' + escapeHTML(slugify(title)) + '" onclick="window.cmsProjects.openModal(\'' + slug + '\')">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>' +
+        '</svg>' +
+      '</button>';
 
     const cover = project.cover ? escapeHTML(project.cover) : '';
     const price = project.precio ? escapeHTML(project.precio) : 'Brochure';
@@ -293,13 +342,18 @@
       return;
     }
     const projects = await loadCmsProjects();
+
+    /* Si GitHub falla o no hay archivos, usamos fallback */
     if (!projects.length) {
-      console.warn('[CMS] No hay proyectos CMS. Se mantienen las tarjetas existentes.');
-      return;
+      console.log('[CMS] Usando proyectos fallback.');
+      window.cmsProjects.projects = FALLBACK_PROJECTS;
+      return; /* Dejamos las tarjetas estáticas intactas */
     }
+
     console.log('[CMS] Renderizando', projects.length, 'proyectos.');
     window.cmsProjects.projects = projects;
     grid.innerHTML = projects.map(renderProjectCard).join('');
+
     grid.querySelectorAll('.reveal').forEach(function (element) {
       element.classList.add('vis');
     });
@@ -337,7 +391,7 @@
     parseFrontMatter: parseFrontMatter,
     openModal: openProjectModal,
     closeModal: closeModal,
-    projects: []
+    projects: FALLBACK_PROJECTS
   };
 
   console.log('[CMS] Adaptador cargado correctamente.');
