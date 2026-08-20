@@ -1,6 +1,57 @@
 (function () {
   'use strict';
 
+  /* ── Inyección automática del contenedor del modal ── */
+  function injectModalContainer() {
+    // 1. Inyectar estilos CSS si no existen
+    if (!document.getElementById('cms-modal-styles')) {
+      const styles = document.createElement('style');
+      styles.id = 'cms-modal-styles';
+      styles.textContent = `
+        .cms-modal-overlay{position:fixed;inset:0;background:rgba(8,35,60,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:99999;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+        .cms-modal-overlay.active{opacity:1;visibility:visible}
+        .cms-modal-box{background:var(--cream,#faf8f5);border:1px solid var(--border,#e5e5e5);border-radius:12px;max-width:500px;width:100%;padding:2rem;position:relative;transform:translateY(20px) scale(.95);transition:transform .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 40px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto}
+        .cms-modal-overlay.active .cms-modal-box{transform:translateY(0) scale(1)}
+        .cms-modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid var(--border,#e5e5e5);border-radius:50%;width:32px;height:32px;font-size:1.2rem;line-height:1;cursor:pointer;color:var(--text-lt,#666);transition:all .2s ease;display:flex;align-items:center;justify-content:center}
+        .cms-modal-close:hover{background:var(--rose,#d7be82);color:#fff;border-color:var(--rose,#d7be82)}
+        .cms-modal-title{font-family:var(--f-serif,Georgia,serif);color:#d7be82;font-size:1.5rem;font-weight:300;margin-bottom:.5rem}
+        .cms-modal-subtitle{color:var(--text-lt,#666);font-size:.9rem;margin-bottom:1.5rem}
+        .cms-modal-body{line-height:1.7;color:var(--text,#333);font-size:.95rem}
+        .cms-modal-body p{margin-bottom:1rem}
+        .cms-modal-footer{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border,#e5e5e5);display:flex;gap:1rem;justify-content:flex-end;flex-wrap:wrap}
+        .cms-modal-btn{padding:.6rem 1.2rem;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:6px;cursor:pointer;transition:all .3s ease;font-family:var(--f-sans,sans-serif);border:1px solid}
+        .cms-modal-btn-primary{background:var(--rose,#d7be82);color:#fff;border-color:var(--rose,#d7be82)}
+        .cms-modal-btn-primary:hover{background:var(--rose-lt,#e8c99a);transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,63,110,.15)}
+        .cms-modal-btn-secondary{background:transparent;color:var(--text,#333);border-color:var(--border,#e5e5e5)}
+        .cms-modal-btn-secondary:hover{border-color:var(--rose,#d7be82);color:var(--rose,#d7be82)}
+      `;
+      document.head.appendChild(styles);
+    }
+
+    // 2. Inyectar el contenedor del modal si no existe
+    if (!document.getElementById('cms-modal')) {
+      const modal = document.createElement('div');
+      modal.id = 'cms-modal';
+      modal.className = 'cms-modal-overlay';
+      modal.onclick = function(e) {
+        if (e.target === modal) window.cmsProjects.closeModal();
+      };
+      modal.innerHTML = `
+        <div class="cms-modal-box">
+          <button class="cms-modal-close" onclick="window.cmsProjects.closeModal()" aria-label="Cerrar modal">&times;</button>
+          <div id="cms-cms-modal-content">
+            <p>Cargando información...</p>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      console.log('[CMS] Contenedor del modal inyectado automáticamente.');
+    }
+  }
+
+  // Ejecutar la inyección inmediatamente
+  injectModalContainer();
+
   const GITHUB_API =
     'https://api.github.com/repos/riano200612-jpg/mariauxi/contents/contenido/proyectos?ref=main';
 
@@ -171,7 +222,7 @@
       return;
     }
     injectModalStyles();
-    let existing = document.getElementById('cms-project-modal');
+    let existing = document.getElementById('cms-modal');
     if (existing) existing.remove();
 
     const title = String(project.title || 'Proyecto');
@@ -182,7 +233,7 @@
     const isDark = theme.cardClass === 'oporto';
 
     const modal = document.createElement('div');
-    modal.id = 'cms-project-modal';
+    modal.id = 'cms-modal';
     modal.className = 'cms-modal-overlay';
     modal.innerHTML =
       '<div class="cms-modal-box" role="dialog" aria-modal="true" aria-label="Información de ' + escapeHTML(title) + '">' +
@@ -234,7 +285,7 @@
   }
 
   function closeModal() {
-    const modal = document.getElementById('cms-project-modal');
+    const modal = document.getElementById('cms-modal');
     if (!modal) return;
     modal.classList.remove('active');
     setTimeout(function () { modal.remove(); }, 400);
