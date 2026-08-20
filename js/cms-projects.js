@@ -188,7 +188,7 @@
     const isDark = theme.cardClass === 'oporto';
 
     return `
-      <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}">
+      <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}${cover ? ' has-photo' : ''}">
         <div
           class="swatch ${escapeHTML(theme.swatch)}"
           ${cover ? `style="background-image:url('${cover}');background-size:cover;background-position:center;"` : ''}

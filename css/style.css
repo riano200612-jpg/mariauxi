@@ -307,9 +307,8 @@
   .s-marduk  .orb { background:#DDBCA0; width:200px; height:200px; bottom:-28px; right:-28px; }
   .s-oporto .orb { background:#245B93; width:200px; height:200px; top:-40px; right:-30px; }
 
-  /* Ocultar texto sobrepuesto en tarjetas Itaca y Marduk (mostrar solo las imágenes) */
-  .swatch.s-itaca + .card-in,
-  .swatch.s-marduk + .card-in {
+  /* Ocultar el texto sobrepuesto solo en tarjetas que tienen foto real de portada */
+  .card.has-photo .card-in {
     display: none;
   }
 
