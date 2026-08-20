@@ -1790,6 +1790,15 @@ if (leadForm) {
   });
 }
 </script>
-  <script src="js/cms-projects.js"></script>
+  <script src="js/cms-projects.js?v=99></script>
+<!-- Contenedor del Modal (Fallback seguro) -->
+<div id="cms-modal" class="cms-modal-overlay" onclick="if(event.target === this) window.cmsProjects.closeModal()">
+  <div class="cms-modal-box">
+    <button class="cms-modal-close" onclick="window.cmsProjects.closeModal()" aria-label="Cerrar modal">&times;</button>
+    <div id="cms-modal-content">
+      <p>Cargando información...</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
