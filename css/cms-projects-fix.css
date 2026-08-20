@@ -1,40 +1,7 @@
-/* ── Tarjetas más compactas ── */
-.card { min-height: 320px !important; }
-
-/* ── Nombre del proyecto más grande y legible ── */
-.c-name { 
-  font-size: clamp(1.4rem, 2.2vw, 2rem) !important; 
-  font-weight: 400 !important;
-  line-height: 1.2 !important;
+/* CMS PROJECTS - FIX VISIBILITY */
+#proyectos .grid .card.reveal,
+#proyectos .grid .card.reveal.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
-
-/* ── Gradient overlay en tarjetas con foto para legibilidad ── */
-.card.has-photo .swatch::after {
-  content: '';
-  position: absolute;
-  left: 0; 
-  right: 0; 
-  bottom: 0;
-  height: 75%;
-  background: linear-gradient(to top, rgba(10,47,82,0.88) 0%, rgba(10,47,82,0.5) 45%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.card.has-photo .card-in {
-  position: relative;
-  z-index: 2 !important;
-}
-
-/* Texto con sombra para mejor lectura sobre imagen */
-.card.has-photo .c-name,
-.card.has-photo .c-desc,
-.card.has-photo .c-price,
-.card.has-photo .c-loc {
-  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
-}
-
-.card.has-photo .c-name { color: #fff !important; }
-.card.has-photo .c-desc { color: rgba(255,255,255,0.9) !important; }
-.card.has-photo .c-price { color: var(--rose-lt) !important; }
-.card.has-photo .c-loc { color: rgba(255,255,255,0.85) !important; }
