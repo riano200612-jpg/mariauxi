@@ -526,9 +526,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .s-marduk  .orb { background:#DDBCA0; width:200px; height:200px; bottom:-28px; right:-28px; }
   .s-oporto .orb { background:#245B93; width:200px; height:200px; top:-40px; right:-30px; }
 
-  /* Ocultar el texto sobrepuesto solo en tarjetas que tienen foto real de portada */
+  /* Overlay elegante en tarjetas con foto real de portada */
   .card.has-photo .card-in {
-    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(10,47,82,0.88) 0%, rgba(10,47,82,0.5) 50%, transparent 100%);
+    color: #fff;
+    padding: 3.5rem 1.5rem 1.5rem;
+    z-index: 3;
+    justify-content: flex-end;
+    min-height: auto;
+    height: auto;
+  }
+  .card.has-photo .c-name,
+  .card.has-photo .c-tag,
+  .card.has-photo .c-desc,
+  .card.has-photo .c-price,
+  .card.has-photo .c-loc {
+    color: #fff !important;
+  }
+  .card.has-photo .c-desc {
+    color: rgba(255,255,255,0.85) !important;
+  }
+  .card.has-photo .c-arr {
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(4px);
+  }
+  .card.has-photo .c-arr:hover {
+    background: #fff;
+    color: var(--rose);
   }
 
   .card-in { position:relative; z-index:2; height:100%; min-height:inherit; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(1.4rem,2vw,1.8rem); }
@@ -1140,7 +1170,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="grid">
     <div class="card reveal oporto">
       <div class="swatch s-oporto"><div class="orb"></div></div>
-      <div class="pill" data-i18n="pill_new">Nuevo</div>
+      
       <div class="card-in" style="color:rgba(255,255,255,0.85);">
         <span class="c-tag" style="color:var(--rose-lt);">La Providencia · VIS</span>
         <h3 class="c-name" style="color:#fff;">Oporto <em>Apartamentos</em></h3>
@@ -1157,7 +1187,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div class="card reveal reserva d1">
       <div class="swatch s-reserva"><div class="orb"></div></div>
-      <div class="pill" data-i18n="pill_new">Nuevo</div>
+      
       <div class="card-in">
         <span class="c-tag" style="color:#5A9A62;">Vía 90A ·</span>
         <h3 class="c-name">Reserva <em style="color:#7BBF82;">90 NEO</em></h3>

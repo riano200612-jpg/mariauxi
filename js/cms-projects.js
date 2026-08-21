@@ -213,13 +213,7 @@
           ${cover ? '' : '<div class="orb"></div>'}
         </div>
 
-        ${
-            project.estado
-              ? `<div class="pill">${escapeHTML(project.estado)}</div>`
-              : project.featured
-                ? '<div class="pill">Destacado</div>'
-                : ''
-          }
+
 
         <div
           class="card-in"
