@@ -532,36 +532,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background-position: center center;
     background-repeat: no-repeat;
   }
+  /* Tarjetas CMS: imagen nítida, sin texto superpuesto */
   .card.has-photo .card-in {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(10,47,82,0.88) 0%, rgba(10,47,82,0.5) 50%, transparent 100%);
-    color: #fff;
-    padding: 3.5rem 1.5rem 1.5rem;
+    background: transparent;
+    padding: 1.2rem 1.5rem;
     z-index: 3;
     justify-content: flex-end;
     min-height: auto;
     height: auto;
+    pointer-events: none;
   }
-  .card.has-photo .c-name,
+  .card.has-photo .card-in > * {
+    pointer-events: auto;
+  }
   .card.has-photo .c-tag,
   .card.has-photo .c-desc,
   .card.has-photo .c-price,
-  .card.has-photo .c-loc {
-    color: #fff !important;
+  .card.has-photo .c-loc,
+  .card.has-photo .c-foot {
+    display: none !important;
   }
-  .card.has-photo .c-desc {
-    color: rgba(255,255,255,0.85) !important;
+  .card.has-photo .c-name {
+    color: #fff !important;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all .35s ease;
+    margin-bottom: 0;
+    display: block;
+  }
+  .card.has-photo:hover .c-name {
+    opacity: 1;
+    transform: translateY(0);
   }
   .card.has-photo .c-arr {
-    border-color: rgba(255,255,255,0.3);
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 4;
+    border-color: rgba(255,255,255,0.35);
     color: #fff;
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.2);
     backdrop-filter: blur(4px);
+    transition: all .3s ease;
+    pointer-events: auto;
   }
-  .card.has-photo .c-arr:hover {
+  .card.has-photo:hover .c-arr {
+    background: #fff;
+    color: var(--rose);
+    border-color: #fff;
+  }
     background: #fff;
     color: var(--rose);
   }
