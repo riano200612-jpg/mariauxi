@@ -532,13 +532,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background-position: center center;
     background-repeat: no-repeat;
   }
-  /* Tarjetas CMS: imagen nítida, sin texto superpuesto */
+  /* Tarjetas CMS: imagen nítida, texto limpio, botón visible */
   .card.has-photo .card-in {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     background: transparent;
+    color: #fff;
     padding: 1.2rem 1.5rem;
     z-index: 3;
     justify-content: flex-end;
@@ -549,13 +550,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .card.has-photo .card-in > * {
     pointer-events: auto;
   }
+  /* Ocultar descripción, tag y precio */
   .card.has-photo .c-tag,
   .card.has-photo .c-desc,
-  .card.has-photo .c-price,
-  .card.has-photo .c-loc,
-  .card.has-photo .c-foot {
+  .card.has-photo .c-price {
     display: none !important;
   }
+  /* Ocultar texto de ubicación y "Brochure" pero MANTENER el botón */
+  .card.has-photo .c-foot span:not(.c-arr),
+  .card.has-photo .c-foot .c-loc {
+    display: none !important;
+  }
+  /* Reposicionar c-foot para que solo quede el botón */
+  .card.has-photo .c-foot {
+    background: transparent;
+    border: none;
+    margin-top: 0;
+    position: absolute;
+    bottom: 1.2rem;
+    right: 1.5rem;
+    left: auto;
+    width: auto;
+    padding: 0;
+    display: block;
+  }
+  /* Nombre del proyecto: aparece suave al hover */
   .card.has-photo .c-name {
     color: #fff !important;
     font-size: 1.3rem;
@@ -572,27 +591,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity: 1;
     transform: translateY(0);
   }
+  /* Botón brochure: visible y funcional */
   .card.has-photo .c-arr {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    z-index: 4;
+    position: static;
     border-color: rgba(255,255,255,0.35);
     color: #fff;
     background: rgba(0,0,0,0.2);
     backdrop-filter: blur(4px);
     transition: all .3s ease;
-    pointer-events: auto;
   }
   .card.has-photo:hover .c-arr {
     background: #fff;
     color: var(--rose);
     border-color: #fff;
   }
-    background: #fff;
-    color: var(--rose);
-  }
-
   .card-in { position:relative; z-index:2; height:100%; min-height:inherit; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(1.4rem,2vw,1.8rem); }
   .pill { position:absolute; top:1.2rem; right:1.2rem; z-index:3; background:rgba(255,255,255,0.75); backdrop-filter:blur(10px); border:1px solid var(--border); padding:.3rem .8rem; font-size:var(--size-xs); letter-spacing:.25em; text-transform:uppercase; color:var(--mauve); border-radius: var(--radius-sm); transition: all 0.35s ease; }
   .card:hover .pill { background:rgba(255,255,255,0.9); border-color:rgba(16,63,110,0.15); }
