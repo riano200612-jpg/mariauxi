@@ -266,3 +266,32 @@ body.cms-modal-open {
     padding: 28px 22px 24px;
   }
 }
+
+/* =========================================================
+   ESTILOS BOOK DIGITAL — Tarjetas Dinámicas con Fondo Centrado
+   ========================================================= */
+.card.has-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.has-photo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.card.has-photo .card-in {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(10,47,82,0.9) 0%, rgba(10,47,82,0.5) 60%, transparent 100%);
+  color: #fff;
+  padding: 2.5rem 1.2rem 1.2rem;
+  z-index: 3;
+}
