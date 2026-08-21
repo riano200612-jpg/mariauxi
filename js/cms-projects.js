@@ -360,13 +360,14 @@
 
     /*
      * Seguridad:
-     * si GitHub/CMS falla, dejamos intactas
-     * las tarjetas actuales.
+     * si GitHub/CMS falla, mostramos mensaje.
+     * El grid está vacío porque todo viene del CMS.
      */
     if (!projects.length) {
       console.warn(
-        '[CMS] No hay proyectos CMS. Se mantienen las tarjetas existentes.'
+        '[CMS] No hay proyectos CMS. Grid vacío.'
       );
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-lt);font-family:var(--f-serif);font-size:1.2rem;">No se pudieron cargar los proyectos. <a href="#" onclick="location.reload()" style="color:var(--rose);text-decoration:underline;">Recargar</a></div>';
       return;
     }
 
