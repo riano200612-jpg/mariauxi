@@ -149,30 +149,47 @@
       : '';
 
     const brochure = pdf
-      ? `
-        <a
-          href="${pdf}"
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-          class="c-arr"
-          style="text-decoration:none;"
-          aria-label="Descargar brochure ${escapeHTML(title)}"
-          data-track="download_pdf"
-          data-project="${escapeHTML(slugify(title))}"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-        </a>
-      `
+      ? (function () {
+        const projectData = JSON.stringify({
+          title: project.title,
+          cover: project.cover,
+          body: project.body,
+          sector: project.sector,
+          ciudad: project.ciudad,
+          estado: project.estado,
+          direccion: project.direccion,
+          precio: project.precio,
+          area: project.area,
+          habitaciones: project.habitaciones,
+          banos: project.banos,
+          parqueaderos: project.parqueaderos,
+          pdf: project.pdf,
+          mapa: project.mapa
+        }).replace(/'/g, "\\'");
+        return `
+          <button
+            type="button"
+            class="c-arr"
+            style="background:transparent;cursor:pointer;"
+            aria-label="Ver brochure ${escapeHTML(title)}"
+            data-track="download_pdf"
+            data-project="${escapeHTML(slugify(title))}"
+            data-modal-project='${projectData}'
+            onclick="CMSProjectModal.open(JSON.parse(this.dataset.modalProject))"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
+        `;
+      })()
       : '';
 
     const cover = project.cover ? escapeHTML(project.cover) : '';
