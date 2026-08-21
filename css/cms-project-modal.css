@@ -1,0 +1,266 @@
+/* =========================================================
+   CMS PROJECT MODAL
+   ========================================================= */
+
+.cms-project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.cms-project-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.cms-project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .72);
+  backdrop-filter: blur(8px);
+}
+
+.cms-project-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1050px, 100%);
+  max-height: min(760px, calc(100vh - 48px));
+  overflow: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+
+  background: #fff;
+  border-radius: 4px;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .28);
+
+  transform: translateY(18px) scale(.98);
+  transition: transform .3s ease;
+}
+
+.cms-project-modal.is-open .cms-project-modal__dialog {
+  transform: translateY(0) scale(1);
+}
+
+.cms-project-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .92);
+  color: #222;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, .12);
+}
+
+.cms-project-modal__media {
+  min-height: 520px;
+  background: #eee;
+}
+
+.cms-project-modal__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+}
+
+.cms-project-modal__content {
+  padding: 54px 42px 42px;
+}
+
+.cms-project-modal__sector {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: #777;
+}
+
+.cms-project-modal__title {
+  margin: 0 0 12px;
+
+  font-family: inherit;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.05;
+  font-weight: 400;
+  color: #222;
+}
+
+.cms-project-modal__status {
+  margin-bottom: 24px;
+}
+
+.cms-project-modal__status span {
+  display: inline-block;
+  padding: 6px 11px;
+
+  border: 1px solid rgba(0, 0, 0, .15);
+
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cms-project-modal__description {
+  margin: 0 0 28px;
+
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.cms-project-modal__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+
+  margin-bottom: 30px;
+}
+
+.cms-project-modal__detail {
+  padding: 13px 15px;
+
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cms-project-modal__detail span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+
+  color: #888;
+}
+
+.cms-project-modal__detail strong {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #222;
+}
+
+.cms-project-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cms-project-modal__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 46px;
+  padding: 0 22px;
+
+  border: 1px solid #222;
+
+  color: #222;
+  text-decoration: none;
+
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  transition:
+    background .2s ease,
+    color .2s ease;
+}
+
+.cms-project-modal__button:hover {
+  background: #222;
+  color: #fff;
+}
+
+.cms-project-modal__button--primary {
+  background: #222;
+  color: #fff;
+}
+
+.cms-project-modal__button--primary:hover {
+  background: #444;
+}
+
+body.cms-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 800px) {
+
+  .cms-project-modal {
+    padding: 12px;
+  }
+
+  .cms-project-modal__dialog {
+    grid-template-columns: 1fr;
+    max-height: calc(100vh - 24px);
+  }
+
+  .cms-project-modal__media,
+  .cms-project-modal__image {
+    min-height: 300px;
+    height: 300px;
+  }
+
+  .cms-project-modal__content {
+    padding: 32px 24px 28px;
+  }
+
+  .cms-project-modal__title {
+    font-size: 34px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .cms-project-modal__details {
+    grid-template-columns: 1fr;
+  }
+
+  .cms-project-modal__media,
+  .cms-project-modal__image {
+    min-height: 240px;
+    height: 240px;
+  }
+
+}
