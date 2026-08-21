@@ -11,7 +11,7 @@ habitaciones: 0
 banos: 0
 parqueaderos: 0
 mapa: ""
-cover: "img/covers/oporto-cover.jpg"
+cover: img/proyectos/oporto-cover.webp
 gallery: []
 video: ""
 pdf: "docum/oporto-book-digital.pdf"
