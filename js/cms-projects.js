@@ -165,7 +165,7 @@
           parqueaderos: project.parqueaderos,
           pdf: project.pdf,
           mapa: project.mapa
-        }).replace(/'/g, "\\'");
+        }).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
         return `
           <button
             type="button"
