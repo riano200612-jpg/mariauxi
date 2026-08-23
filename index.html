@@ -501,11 +501,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .s-marduk  { background:linear-gradient(148deg,#F0EBE7,#E7E0DB,#F0EDE9); }
   .s-oporto  { background:linear-gradient(148deg, #103F6E, #0A2F52, #345775); }
 
-  /* Oporto: dark swatch, pill with dark background and white text */
-  .card.oporto .pill { background:rgba(16,63,110,0.85); border-color:rgba(16,63,110,0.6); color:#ffffff; }
-  .card.oporto .card-in { color:#ffffff; }
-  .card.oporto .c-desc { color:rgba(255,255,255,0.85); }
-  .card.oporto .c-arr { border-color:rgba(255,255,255,0.2); color:#ffffff; }
+  /* Oporto ya no usa swatch oscuro (tiene foto real) — usa los mismos colores estándar que las demás tarjetas */
 
   /* Reserva: light green swatch, pill with subtle green accent */
   .card.reserva .pill { background:rgba(255,255,255,0.9); border-color:rgba(107,175,114,0.2); color:#4A7C50; }
@@ -1022,7 +1018,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .card .card-in {
     position: relative;
     height: 44%;
-    min-height: auto;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1056,6 +1052,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
+    min-height: 0;
   }
 
   /* Footer siempre igual */

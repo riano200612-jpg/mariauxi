@@ -202,7 +202,7 @@
       project.sector || project.ciudad || 'Cartagena'
     );
 
-    const isDark = theme.cardClass === 'oporto';
+    const isDark = false; // Oporto ya tiene foto real, ya no usa swatch oscuro
 
     return `
       <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}${cover ? ' has-photo' : ''}">
