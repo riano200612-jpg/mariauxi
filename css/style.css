@@ -314,8 +314,17 @@
   }
   .card.has-photo .c-tag,
   .card.has-photo .c-desc,
-  .card.has-photo .c-foot {
+  .card.has-photo .c-price,
+  .card.has-photo .c-loc {
     display: none;
+  }
+  .card.has-photo .c-foot {
+    justify-content: flex-end;
+    margin-top: .6rem;
+  }
+  .card.has-photo .c-arr {
+    border-color: rgba(255,255,255,.6);
+    color: #fff;
   }
   .card.has-photo .c-name {
     color: #fff;

@@ -4,141 +4,231 @@ backend:
   branch: main
   base_url: https://mariauxi-oauth.riano200612.workers.dev
   auth_endpoint: auth
-
 site_url: https://mariauxi.com
 display_url: https://mariauxi.com
-
-media_folder: "img/uploads"
-public_folder: "/img/uploads"
-
+media_folder: img/uploads
+public_folder: /img/uploads
 publish_mode: editorial_workflow
 locale: es
-
 collections:
-
-  - name: "proyectos"
-    label: "Proyectos"
-    label_singular: "Proyecto"
-
-    folder: "contenido/proyectos"
-
-    create: true
-    delete: true
-
-    slug: "{{slug}}"
-
+- name: proyectos
+  label: Proyectos
+  label_singular: Proyecto
+  folder: contenido/proyectos
+  create: true
+  delete: true
+  slug: '{{slug}}'
+  fields:
+  - label: Título
+    name: title
+    widget: string
+  - label: Proyecto destacado
+    name: featured
+    widget: boolean
+    default: false
+    required: false
+  - label: Estado
+    name: estado
+    widget: select
+    options:
+    - Disponible
+    - Preventa
+    - En construcción
+    - Entregado
+    - Vendido
+  - label: Ciudad
+    name: ciudad
+    widget: string
+  - label: Barrio / Sector
+    name: sector
+    widget: string
+    required: false
+  - label: Dirección
+    name: direccion
+    widget: string
+    required: false
+  - label: Precio desde
+    name: precio
+    widget: string
+  - label: Área
+    name: area
+    widget: string
+    required: false
+  - label: Habitaciones
+    name: habitaciones
+    widget: number
+    value_type: int
+    required: false
+  - label: Baños
+    name: banos
+    widget: number
+    value_type: int
+    required: false
+  - label: Parqueaderos
+    name: parqueaderos
+    widget: number
+    value_type: int
+    required: false
+  - label: Mapa Google
+    name: mapa
+    widget: string
+    required: false
+  - label: Imagen principal
+    name: cover
+    widget: image
+  - label: Galería
+    name: gallery
+    widget: list
+    required: false
+    field:
+      label: Imagen
+      name: image
+      widget: image
+  - label: Video
+    name: video
+    widget: file
+    required: false
+  - label: Brochure PDF
+    name: pdf
+    widget: file
+    required: false
+  - label: Descripción
+    name: body
+    widget: markdown
+  - label: SEO
+    name: seo
+    widget: object
+    required: false
     fields:
-
-      - label: "Título"
-        name: "title"
-        widget: "string"
-
-      - label: "Proyecto destacado"
-        name: "featured"
-        widget: "boolean"
-        default: false
+    - label: Meta título
+      name: title
+      widget: string
+      required: false
+    - label: Meta descripción
+      name: description
+      widget: text
+      required: false
+    - label: Palabras clave
+      name: keywords
+      widget: string
+      required: false
+- name: paginas
+  label: Páginas del Sitio
+  files:
+  - name: hero
+    label: Portada (Hero)
+    file: contenido/pagina/hero.md
+    fields:
+    - label: Subtítulo
+      name: subtitulo
+      widget: text
+    - label: Texto del botón
+      name: boton_texto
+      widget: string
+    - label: Link del botón
+      name: boton_link
+      widget: string
+    - label: Video WebM
+      name: video_webm
+      widget: file
+    - label: Video MP4
+      name: video_mp4
+      widget: file
+    - label: Imagen de portada (poster)
+      name: poster
+      widget: image
+  - name: contacto
+    label: Contacto
+    file: contenido/pagina/contacto.md
+    fields:
+    - label: Título
+      name: titulo
+      widget: string
+    - label: Etiqueta
+      name: etiqueta
+      widget: string
+    - label: Título urgencia
+      name: urgencia_titulo
+      widget: string
+    - label: Texto urgencia
+      name: urgencia_texto
+      widget: string
+    - label: WhatsApp (solo números)
+      name: whatsapp
+      widget: string
+    - label: Mensaje predefinido WhatsApp
+      name: whatsapp_mensaje
+      widget: text
+    - label: Email
+      name: email
+      widget: string
+      required: false
+    - label: Teléfono
+      name: telefono
+      widget: string
+      required: false
+  - name: ubicaciones
+    label: Ubicaciones
+    file: contenido/pagina/ubicaciones.md
+    fields:
+    - label: Título
+      name: titulo
+      widget: string
+    - label: Subtítulo
+      name: subtitulo
+      widget: text
+    - label: Zonas
+      name: zonas
+      widget: list
+      fields:
+      - label: Nombre
+        name: nombre
+        widget: string
+      - label: Categoría
+        name: categoria
+        widget: string
+    - label: Mapa (embed URL)
+      name: mapa_embed
+      widget: string
+      required: false
+  - name: testimonios
+    label: Testimonios
+    file: contenido/pagina/testimonios.md
+    fields:
+    - label: Título
+      name: titulo
+      widget: string
+    - label: Lista de testimonios
+      name: lista
+      widget: list
+      fields:
+      - label: Nombre
+        name: nombre
+        widget: string
+      - label: Texto
+        name: texto
+        widget: text
+      - label: Fecha
+        name: fecha
+        widget: string
         required: false
-
-      - label: "Estado"
-        name: "estado"
-        widget: "select"
-        options:
-          - Disponible
-          - Preventa
-          - En construcción
-          - Entregado
-          - Vendido
-
-      - label: "Ciudad"
-        name: "ciudad"
-        widget: "string"
-
-      - label: "Barrio / Sector"
-        name: "sector"
-        widget: "string"
-        required: false
-
-      - label: "Dirección"
-        name: "direccion"
-        widget: "string"
-        required: false
-
-      - label: "Precio desde"
-        name: "precio"
-        widget: "string"
-
-      - label: "Área"
-        name: "area"
-        widget: "string"
-        required: false
-
-      - label: "Habitaciones"
-        name: "habitaciones"
-        widget: "number"
-        value_type: "int"
-        required: false
-
-      - label: "Baños"
-        name: "banos"
-        widget: "number"
-        value_type: "int"
-        required: false
-
-      - label: "Parqueaderos"
-        name: "parqueaderos"
-        widget: "number"
-        value_type: "int"
-        required: false
-
-      - label: "Mapa Google"
-        name: "mapa"
-        widget: "string"
-        required: false
-
-      - label: "Imagen principal"
-        name: "cover"
-        widget: "image"
-
-      - label: "Galería"
-        name: "gallery"
-        widget: "list"
-        required: false
-        field:
-          label: "Imagen"
-          name: "image"
-          widget: "image"
-
-      - label: "Video"
-        name: "video"
-        widget: "file"
-        required: false
-
-      - label: "Brochure PDF"
-        name: "pdf"
-        widget: "file"
-        required: false
-
-      - label: "Descripción"
-        name: "body"
-        widget: "markdown"
-
-      - label: "SEO"
-        name: "seo"
-        widget: "object"
-        required: false
-        fields:
-
-          - label: "Meta título"
-            name: "title"
-            widget: "string"
-            required: false
-
-          - label: "Meta descripción"
-            name: "description"
-            widget: "text"
-            required: false
-
-          - label: "Palabras clave"
-            name: "keywords"
-            widget: "string"
-            required: false
+  - name: sitio
+    label: Configuración del Sitio
+    file: contenido/configuracion/sitio.md
+    fields:
+    - label: Nombre de Marca
+      name: nombre_marca
+      widget: string
+    - label: Nombre Comercial
+      name: nombre_comercial
+      widget: string
+    - label: Descripción
+      name: descripcion
+      widget: text
+      required: false
+    - label: Logo
+      name: logo
+      widget: image
+    - label: Favicon
+      name: favicon
+      widget: image
