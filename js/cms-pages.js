@@ -1,170 +1,123 @@
-(function () {
-  'use strict';
+/**
+ * CMS Pages & Config Universal Loader
+ */
 
-  const GITHUB_API_URL = 'https://api.github.com/repos/riano200612-jpg/mariauxi/contents/contenido/pagina?ref=main';
+document.addEventListener('DOMContentLoaded', () => {
+  loadCMSConfig();
+  loadCMSPages();
+});
 
-  function parseFrontmatter(text) {
-    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    if (!match) return {};
+function parseFrontmatter(text) {
+  const meta = {};
+  const matches = text.match(/^---([\s\S]*?)---/);
+  if (!matches) return meta;
+  
+  const yamlBlock = matches[1];
+  const lines = yamlBlock.split('\n');
+  let currentParent = null;
 
-    const yaml = match[1];
-    const result = {};
-    const lines = yaml.split(/\r?\n/);
-    let currentKey = null;
-
-    lines.forEach(line => {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) return;
-
-      if (trimmed.startsWith('-')) {
-        if (!currentKey) return;
-        if (!Array.isArray(result[currentKey])) result[currentKey] = [];
-
-        const itemContent = trimmed.replace(/^-\s*/, '');
-        const colonIndex = itemContent.indexOf(':');
-        if (colonIndex !== -1) {
-          const k = itemContent.slice(0, colonIndex).trim();
-          const v = itemContent.slice(colonIndex + 1).trim().replace(/^['"]|['"]$/g, '');
-          const lastObj = result[currentKey][result[currentKey].length - 1];
-          if (lastObj && typeof lastObj === 'object' && !(k in lastObj)) {
-            lastObj[k] = v;
-          } else {
-            result[currentKey].push({ [k]: v });
-          }
+  lines.forEach(line => {
+    if (!line.trim() || line.trim().startsWith('#')) return;
+    
+    if (line.startsWith('  ') && currentParent) {
+      const parts = line.trim().split(':');
+      if (parts.length >= 2) {
+        const key = parts[0].trim();
+        const val = parts.slice(1).join(':').trim().replace(/^["']|["']$/g, '');
+        meta[currentParent][key] = val;
+      }
+    } else {
+      const parts = line.trim().split(':');
+      if (parts.length >= 2) {
+        const key = parts[0].trim();
+        const val = parts.slice(1).join(':').trim().replace(/^["']|["']$/g, '');
+        if (val === '') {
+          currentParent = key;
+          meta[key] = {};
+        } else {
+          currentParent = null;
+          meta[key] = val;
         }
-        return;
       }
+    }
+  });
+  return meta;
+}
 
-      if (line.startsWith('  ') && currentKey && Array.isArray(result[currentKey])) {
-        const colonIndex = trimmed.indexOf(':');
-        if (colonIndex !== -1) {
-          const k = trimmed.slice(0, colonIndex).trim();
-          const v = trimmed.slice(colonIndex + 1).trim().replace(/^['"]|['"]$/g, '');
-          const lastObj = result[currentKey][result[currentKey].length - 1];
-          if (lastObj) lastObj[k] = v;
-        }
-        return;
-      }
-
-      const colonIndex = trimmed.indexOf(':');
-      if (colonIndex !== -1) {
-        const key = trimmed.slice(0, colonIndex).trim();
-        const val = trimmed.slice(colonIndex + 1).trim().replace(/^['"]|['"]$/g, '');
-        currentKey = key;
-        result[key] = val;
-      }
-    });
-
-    return result;
-  }
-
-  async function fetchFile(filename) {
-    try {
-      const res = await fetch(GITHUB_API_URL);
-      const files = await res.json();
-      const file = files.find(f => f.name === filename);
-      if (!file) return null;
-
-      const rawRes = await fetch(file.download_url);
-      const text = await rawRes.text();
-      return parseFrontmatter(text);
-    } catch (err) {
-      console.error(`Error cargando ${filename}:`, err);
+async function fetchCMSFile(path) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) {
+      console.warn(`No se pudo cargar CMS file [${path}]: HTTP ${res.status}`);
       return null;
     }
+    const text = await res.text();
+    return parseFrontmatter(text);
+  } catch (err) {
+    console.error(`Error de red cargando CMS file [${path}]:`, err);
+    return null;
   }
+}
 
-  async function loadHero() {
-    const data = await fetchFile('hero.md');
-    if (!data) return;
+async function loadCMSConfig() {
+  const sitio = await fetchCMSFile('contenido/configuracion/sitio.md');
+  if (!sitio) return;
 
-    const subtitle = document.querySelector('[data-i18n="hero_subtitle"]');
-    if (subtitle && data.subtitulo) subtitle.textContent = data.subtitulo;
-
-    const cta = document.querySelector('[data-i18n="hero_cta"]');
-    if (cta) {
-      if (data.boton_texto) cta.textContent = data.boton_texto;
-      if (data.boton_link) cta.setAttribute('href', data.boton_link);
+  if (sitio.seo) {
+    if (sitio.seo.title) document.title = sitio.seo.title;
+    if (sitio.seo.description) {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', sitio.seo.description);
     }
-
-    const video = document.querySelector('#hero-video-bg video');
-    if (video && data.poster) video.setAttribute('poster', data.poster);
-
-    const sourceWebm = document.querySelector('#hero-video-bg source[type="video/webm"]');
-    if (sourceWebm && data.video_webm) sourceWebm.setAttribute('src', data.video_webm);
-
-    const sourceMp4 = document.querySelector('#hero-video-bg source[type="video/mp4"]');
-    if (sourceMp4 && data.video_mp4) sourceMp4.setAttribute('src', data.video_mp4);
-  }
-
-  async function loadContacto() {
-    const data = await fetchFile('contacto.md');
-    if (!data) return;
-
-    const tag = document.querySelector('[data-i18n="contact_tag"]');
-    if (tag && data.etiqueta) tag.textContent = data.etiqueta;
-
-    const title = document.querySelector('[data-i18n="contact_title"]');
-    if (title && data.titulo) title.innerHTML = data.titulo;
-
-    const urgTitle = document.querySelector('[data-i18n="contact_urgency_title"]');
-    if (urgTitle && data.urgencia_titulo) urgTitle.textContent = data.urgencia_titulo;
-
-    const urgDesc = document.querySelector('[data-i18n="contact_urgency_desc"]');
-    if (urgDesc && data.urgencia_texto) urgDesc.textContent = data.urgencia_texto;
-  }
-
-  async function loadUbicaciones() {
-    const data = await fetchFile('ubicaciones.md');
-    if (!data) return;
-
-    const tag = document.querySelector('[data-i18n="ubic_tag"]');
-    if (tag && data.titulo) tag.textContent = data.titulo;
-
-    const title = document.querySelector('[data-i18n="ubic_title"]');
-    if (title && data.subtitulo) title.textContent = data.subtitulo;
-
-    if (data.mapa_embed) {
-      const iframe = document.querySelector('#ubicaciones iframe');
-      if (iframe) iframe.src = data.mapa_embed;
-    }
-
-    if (Array.isArray(data.zonas) && data.zonas.length > 0) {
-      const zonesList = document.querySelector('#ubicaciones .zones');
-      if (zonesList) {
-        zonesList.innerHTML = data.zonas.map(z => `
-          <li class="zone">
-            <div class="zone-dot"></div>
-            <span class="zone-nm">${z.nombre || ''}</span>
-            <span class="zone-ct">${z.categoria || ''}</span>
-          </li>
-        `).join('');
-      }
+    if (sitio.seo.keywords) {
+      const metaKeys = document.querySelector('meta[name="keywords"]');
+      if (metaKeys) metaKeys.setAttribute('content', sitio.seo.keywords);
     }
   }
 
-  async function loadTestimonios() {
-    const data = await fetchFile('testimonios.md');
-    if (!data) return;
-
-    if (Array.isArray(data.lista) && data.lista.length > 0) {
-      const item = data.lista[0];
-      const textElem = document.querySelector('[data-i18n="testimonial_text"]');
-      if (textElem && item.texto) {
-        textElem.textContent = `"${item.texto.replace(/^"|"$/g, '')}"`;
-      }
-
-      const citeElem = document.querySelector('[data-i18n="testimonial_cite"]');
-      if (citeElem && item.nombre) {
-        citeElem.textContent = `— ${item.nombre}`;
-      }
+  if (sitio.redes) {
+    if (sitio.redes.instagram) {
+      document.querySelectorAll('a[href*="instagram.com"]').forEach(a => a.href = sitio.redes.instagram);
+    }
+    if (sitio.redes.facebook) {
+      document.querySelectorAll('a[href*="facebook.com"]').forEach(a => a.href = sitio.redes.facebook);
+    }
+    if (sitio.redes.youtube) {
+      document.querySelectorAll('a[href*="youtube.com"]').forEach(a => a.href = sitio.redes.youtube);
     }
   }
+}
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadHero();
-    loadContacto();
-    loadUbicaciones();
-    loadTestimonios();
-  });
-})();
+async function loadCMSPages() {
+  const contacto = await fetchCMSFile('contenido/pagina/contacto.md');
+  if (contacto && contacto.whatsapp) {
+    const waNum = contacto.whatsapp.replace(/\D/g, '');
+    const msg = encodeURIComponent(contacto.whatsapp_mensaje || 'Hola, me gustaría recibir información.');
+    const waUrl = `https://wa.me/${waNum}?text=${msg}`;
+    
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+      a.href = waUrl;
+    });
+  }
+
+  const historia = await fetchCMSFile('contenido/pagina/historia.md');
+  if (historia) {
+    const elExp = document.querySelector('[data-i18n="stat_experience"]');
+    if (elExp && historia.exp_anios) elExp.textContent = historia.exp_anios;
+
+    const elProj = document.querySelector('[data-i18n="stat_projects"]');
+    if (elProj && historia.stat_proyectos) elProj.textContent = historia.stat_proyectos;
+
+    const elUnits = document.querySelector('[data-i18n="stat_units"]');
+    if (elUnits && historia.stat_unidades) elUnits.textContent = historia.stat_unidades;
+
+    const p1 = document.querySelector('[data-i18n="manifesto_p1"]');
+    if (p1 && historia.manifesto_p1) p1.textContent = historia.manifesto_p1;
+
+    const p2 = document.querySelector('[data-i18n="manifesto_p2"]');
+    if (p2 && historia.manifesto_p2) p2.textContent = historia.manifesto_p2;
+
+    const p3 = document.querySelector('[data-i18n="manifesto_p3"]');
+    if (p3 && historia.manifesto_p3) p3.textContent = historia.manifesto_p3;
+  }
+}
