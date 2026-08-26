@@ -17,7 +17,7 @@
           var subtitulo = entry.getIn(['data', 'subtitulo']) || '';
           var boton_texto = entry.getIn(['data', 'boton_texto']) || '';
           var boton_link = entry.getIn(['data', 'boton_link']) || '';
-          var videoPath = entry.getIn(['data', 'video']);
+          var videoPath = entry.getIn(['data', 'video_webm']) || entry.getIn(['data', 'video']);
           var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
 
           return h('div', { style: { position: 'relative', overflow: 'hidden', padding: '50px 20px', background: '#111', color: '#fff', minHeight: '250px', borderRadius: '8px' } },

@@ -41,7 +41,7 @@ collections:
           - { label: "Subtítulo", name: "subtitulo", widget: "string" }
           - { label: "Texto Botón", name: "boton_texto", widget: "string" }
           - { label: "Enlace Botón", name: "boton_link", widget: "string" }
-          - { label: "Video de Fondo", name: "video", widget: "file", required: false }
+          - { label: "Video de Fondo", name: "video_webm", widget: "file", required: false }
 
       - name: "contacto"
         label: "Contacto"
