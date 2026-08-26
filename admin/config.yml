@@ -1,6 +1,11 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: riano200612-jpg/mariauxi
   branch: main
+  base_url: https://mariauxi-oauth.riano200612.workers.dev
+  auth_endpoint: auth
+
+local_backend: true
 
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
@@ -16,14 +21,7 @@ collections:
       - { label: "Subtítulo", name: "subtitle", widget: "string", required: false }
       - { label: "Precio Desde", name: "precio", widget: "string" }
       - { label: "Ubicación", name: "ubicacion", widget: "string" }
-      - { label: "Estado", name: "estado", widget: "select", options: ["En Venta", "Preventa", "Vendido", "Próximamente"] }
-      - { label: "Área", name: "area", widget: "string" }
-      - { label: "Habitaciones", name: "habitaciones", widget: "string" }
-      - { label: "Baños", name: "banos", widget: "string" }
-      - { label: "Imagen Principal", name: "imagen_principal", widget: "image" }
-      - { label: "Galería de Imágenes", name: "galeria", widget: "list", field: { label: "Imagen", name: "imagen", widget: "image" }, required: false }
-      - { label: "Brochure PDF", name: "pdf_brochure", widget: "file", required: false }
-      - { label: "Descripción", name: "body", widget: "markdown" }
+      - { label: "Estado", name: "estado", widget: "select", options: ["En plano", "En construcción", "Entrega inmediata"] }
 
   - name: "paginas"
     label: "Páginas del Sitio"
@@ -35,20 +33,6 @@ collections:
           - { label: "Nombre Marca", name: "nombre_marca", widget: "string" }
           - { label: "Logo", name: "logo", widget: "image" }
           - { label: "Favicon", name: "favicon", widget: "image" }
-          - label: "Redes Sociales"
-            name: "redes"
-            widget: "object"
-            fields:
-              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
-              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
-              - { label: "YouTube URL", name: "youtube", widget: "string", required: false }
-          - label: "SEO Global"
-            name: "seo"
-            widget: "object"
-            fields:
-              - { label: "Meta Título", name: "title", widget: "string" }
-              - { label: "Meta Descripción", name: "description", widget: "text" }
-              - { label: "Keywords", name: "keywords", widget: "string" }
 
       - name: "hero"
         label: "Sección Hero"
@@ -57,46 +41,14 @@ collections:
           - { label: "Subtítulo", name: "subtitulo", widget: "string" }
           - { label: "Texto Botón", name: "boton_texto", widget: "string" }
           - { label: "Enlace Botón", name: "boton_link", widget: "string" }
-          - { label: "Video WebM", name: "video_webm", widget: "file" }
-          - { label: "Video MP4", name: "video_mp4", widget: "file" }
-          - { label: "Imagen Poster", name: "poster", widget: "image" }
 
       - name: "contacto"
-        label: "Sección Contacto"
+        label: "Contacto"
         file: "contenido/pagina/contacto.md"
         fields:
-          - { label: "Etiqueta", name: "tag", widget: "string" }
           - { label: "Título", name: "titulo", widget: "string" }
-          - { label: "Título Urgencia", name: "urgencia_titulo", widget: "string" }
-          - { label: "Descripción Urgencia", name: "urgencia_desc", widget: "string" }
-          - { label: "Número WhatsApp", name: "whatsapp", widget: "string" }
-          - { label: "Mensaje Predefinido WhatsApp", name: "whatsapp_mensaje", widget: "string" }
-
-      - name: "ubicaciones"
-        label: "Sección Ubicaciones"
-        file: "contenido/pagina/ubicaciones.md"
-        fields:
-          - { label: "Etiqueta", name: "tag", widget: "string" }
-          - { label: "Título", name: "titulo", widget: "string" }
-          - { label: "URL Google Maps iFrame", name: "mapa_iframe", widget: "string" }
-          - label: "Zonas"
-            name: "zonas"
-            widget: "list"
-            fields:
-              - { label: "Nombre Zona", name: "nombre", widget: "string" }
-              - { label: "Categoría", name: "categoria", widget: "string" }
-
-      - name: "testimonios"
-        label: "Sección Testimonios"
-        file: "contenido/pagina/testimonios.md"
-        fields:
-          - label: "Lista de Testimonios"
-            name: "lista"
-            widget: "list"
-            fields:
-              - { label: "Texto Testimonio", name: "texto", widget: "text" }
-              - { label: "Autor", name: "autor", widget: "string" }
-              - { label: "Cargo / Rol", name: "rol", widget: "string", required: false }
+          - { label: "Etiqueta", name: "etiqueta", widget: "string" }
+          - { label: "WhatsApp", name: "whatsapp", widget: "string" }
 
       - name: "historia"
         label: "Historia y Manifiesto"
@@ -104,9 +56,7 @@ collections:
         fields:
           - { label: "Título", name: "titulo", widget: "string" }
           - { label: "Subtítulo", name: "subtitulo", widget: "string" }
-          - { label: "Manifiesto Párrafo 1", name: "manifesto_p1", widget: "text" }
-          - { label: "Manifiesto Párrafo 2", name: "manifesto_p2", widget: "text" }
-          - { label: "Manifiesto Párrafo 3", name: "manifesto_p3", widget: "text" }
-          - { label: "Años de Experiencia", name: "exp_anios", widget: "string" }
-          - { label: "Proyectos Entregados", name: "stat_proyectos", widget: "string" }
-          - { label: "Unidades Construidas", name: "stat_unidades", widget: "string" }
+          - { label: "Párrafo 1", name: "manifesto_p1", widget: "text" }
+          - { label: "Párrafo 2", name: "manifesto_p2", widget: "text" }
+          - { label: "Párrafo 3", name: "manifesto_p3", widget: "text" }
+          - { label: "Años Experiencia", name: "exp_anios", widget: "string" }
