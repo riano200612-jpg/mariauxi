@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>María Auxi · CMS</title>
-</head>
-<body>
-<script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>María Auxi · CMS</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      CMS.registerPreviewStyle('/css/style.css');
+
+      var HeroPreview = createClass({
+        render: function() {
+          var entry = this.props.entry;
+          var subtitulo = entry.getIn(['data', 'subtitulo']) || '';
+          var boton_texto = entry.getIn(['data', 'boton_texto']) || '';
+          var boton_link = entry.getIn(['data', 'boton_link']) || '';
+          var videoPath = entry.getIn(['data', 'video']);
+          var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
+
+          return h('div', { style: { position: 'relative', overflow: 'hidden', padding: '50px 20px', background: '#111', color: '#fff', minHeight: '250px', borderRadius: '8px' } },
+            videoUrl ? h('video', {
+              src: videoUrl,
+              autoPlay: true,
+              loop: true,
+              muted: true,
+              playsInline: true,
+              style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }
+            }) : null,
+            h('div', { style: { position: 'relative', zIndex: 2, maxWidth: '600px' } },
+              h('p', { style: { fontSize: '1.1rem', lineHeight: '1.5', marginBottom: '20px' } }, subtitulo),
+              boton_texto ? h('a', { href: boton_link, style: { display: 'inline-block', padding: '12px 24px', background: '#d4af37', color: '#fff', textDecoration: 'none', fontWeight: 'bold', borderRadius: '4px' } }, boton_texto) : null
+            )
+          );
+        }
+      });
+
+      CMS.registerPreviewTemplate('hero', HeroPreview);
+      CMS.registerPreviewTemplate('paginas', HeroPreview);
+    </script>
+  </body>
 </html>
