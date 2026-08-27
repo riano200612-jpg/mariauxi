@@ -11,32 +11,40 @@
     <script>
       CMS.registerPreviewStyle('/css/style.css');
 
-      // Creamos un componente universal para reproducir videos en la vista previa
-      var VideoPreview = createClass({
+      var PaginasPreview = createClass({
         render: function() {
           var entry = this.props.entry;
-          var videoPath = entry.getIn(['data', 'video']);
-          var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
+          var slug = entry.get('slug'); // Identifica en qué sección estamos
+          
+          // Estas son las secciones que llevan video
+          var paginasConVideo = ['hero', 'inversion', 'destacado', 'historia'];
 
-          return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f9f9f9', minHeight: '100vh' } },
-            h('p', { style: { color: '#666', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' } }, "Vista previa del video"),
-            videoUrl ? h('video', {
-              src: videoUrl,
-              controls: true,
-              autoPlay: true,
-              loop: true,
-              muted: true,
-              style: { width: '100%', maxWidth: '320px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', backgroundColor: '#000' }
-            }) : h('p', { style: { color: '#999', fontStyle: 'italic' } }, 'Selecciona un archivo de video para ver la previsualización.')
-          );
+          if (paginasConVideo.indexOf(slug) !== -1) {
+            var videoPath = entry.getIn(['data', 'video']);
+            var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
+
+            return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f9f9f9', minHeight: '100vh' } },
+              h('p', { style: { color: '#666', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' } }, "Vista Previa: " + slug),
+              videoUrl ? h('video', {
+                src: videoUrl,
+                controls: true,
+                autoPlay: true,
+                loop: true,
+                muted: true,
+                style: { width: '100%', maxWidth: '320px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', backgroundColor: '#000' }
+              }) : h('p', { style: { color: '#999', fontStyle: 'italic' } }, 'Selecciona un archivo de video para ver la previsualización.')
+            );
+          } else {
+            return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', background: '#f9f9f9', minHeight: '100vh' } },
+              h('h3', {}, "Sección sin video"),
+              h('p', {}, "Completa los campos a la izquierda. Los cambios se verán al publicar.")
+            );
+          }
         }
       });
 
-      // Le decimos al CMS que use este reproductor en todas las páginas donde configuramos videos
-      CMS.registerPreviewTemplate('hero', VideoPreview);
-      CMS.registerPreviewTemplate('inversion', VideoPreview);
-      CMS.registerPreviewTemplate('destacado', VideoPreview);
-      CMS.registerPreviewTemplate('historia', VideoPreview);
+      // Se registra a la colección general 'paginas'
+      CMS.registerPreviewTemplate('paginas', PaginasPreview);
     </script>
   </body>
 </html>
