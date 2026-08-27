@@ -11,34 +11,32 @@
     <script>
       CMS.registerPreviewStyle('/css/style.css');
 
-      var HeroPreview = createClass({
+      // Creamos un componente universal para reproducir videos en la vista previa
+      var VideoPreview = createClass({
         render: function() {
           var entry = this.props.entry;
-          var subtitulo = entry.getIn(['data', 'subtitulo']) || '';
-          var boton_texto = entry.getIn(['data', 'boton_texto']) || '';
-          var boton_link = entry.getIn(['data', 'boton_link']) || '';
-          var videoPath = entry.getIn(['data', 'video_webm']) || entry.getIn(['data', 'video']);
+          var videoPath = entry.getIn(['data', 'video']);
           var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
 
-          return h('div', { style: { position: 'relative', overflow: 'hidden', padding: '50px 20px', background: '#111', color: '#fff', minHeight: '250px', borderRadius: '8px' } },
+          return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f9f9f9', minHeight: '100vh' } },
+            h('p', { style: { color: '#666', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' } }, "Vista previa del video"),
             videoUrl ? h('video', {
               src: videoUrl,
+              controls: true,
               autoPlay: true,
               loop: true,
               muted: true,
-              playsInline: true,
-              style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }
-            }) : null,
-            h('div', { style: { position: 'relative', zIndex: 2, maxWidth: '600px' } },
-              h('p', { style: { fontSize: '1.1rem', lineHeight: '1.5', marginBottom: '20px' } }, subtitulo),
-              boton_texto ? h('a', { href: boton_link, style: { display: 'inline-block', padding: '12px 24px', background: '#d4af37', color: '#fff', textDecoration: 'none', fontWeight: 'bold', borderRadius: '4px' } }, boton_texto) : null
-            )
+              style: { width: '100%', maxWidth: '320px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', backgroundColor: '#000' }
+            }) : h('p', { style: { color: '#999', fontStyle: 'italic' } }, 'Selecciona un archivo de video para ver la previsualización.')
           );
         }
       });
 
-      CMS.registerPreviewTemplate('hero', HeroPreview);
-      CMS.registerPreviewTemplate('paginas', HeroPreview);
+      // Le decimos al CMS que use este reproductor en todas las páginas donde configuramos videos
+      CMS.registerPreviewTemplate('hero', VideoPreview);
+      CMS.registerPreviewTemplate('inversion', VideoPreview);
+      CMS.registerPreviewTemplate('destacado', VideoPreview);
+      CMS.registerPreviewTemplate('historia', VideoPreview);
     </script>
   </body>
 </html>
