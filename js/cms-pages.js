@@ -1,11 +1,40 @@
 /**
- * CMS Pages & Config Universal Loader
+ * CMS Pages & Config Universal Loader (con soporte universal para videos)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   loadCMSConfig();
   loadCMSPages();
+  loadCMSHero();
 });
+
+// Helper universal para actualizar cualquier reproductor <video>
+function updateVideoElement(videoEl, videoPath, posterPath) {
+  if (!videoEl || !videoPath) return;
+
+  if (posterPath) {
+    videoEl.poster = posterPath;
+  }
+
+  // Si el video actual ya es el mismo, no recargar
+  const currentSource = videoEl.querySelector('source')?.getAttribute('src');
+  if (currentSource === videoPath) return;
+
+  videoEl.innerHTML = '';
+  const source = document.createElement('source');
+  source.src = videoPath;
+  source.type = videoPath.endsWith('.mp4') ? 'video/mp4' : 'video/webm';
+  
+  videoEl.appendChild(source);
+  videoEl.load();
+
+  if (typeof safePlay === 'function') {
+    safePlay(videoEl);
+  } else {
+    const p = videoEl.play();
+    if (p !== undefined) p.catch(() => {});
+  }
+}
 
 function parseFrontmatter(text) {
   const meta = {};
@@ -47,10 +76,7 @@ function parseFrontmatter(text) {
 async function fetchCMSFile(path) {
   try {
     const res = await fetch(path);
-    if (!res.ok) {
-      console.warn(`No se pudo cargar CMS file [${path}]: HTTP ${res.status}`);
-      return null;
-    }
+    if (!res.ok) return null;
     const text = await res.text();
     return parseFrontmatter(text);
   } catch (err) {
@@ -69,22 +95,12 @@ async function loadCMSConfig() {
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) metaDesc.setAttribute('content', sitio.seo.description);
     }
-    if (sitio.seo.keywords) {
-      const metaKeys = document.querySelector('meta[name="keywords"]');
-      if (metaKeys) metaKeys.setAttribute('content', sitio.seo.keywords);
-    }
   }
 
   if (sitio.redes) {
-    if (sitio.redes.instagram) {
-      document.querySelectorAll('a[href*="instagram.com"]').forEach(a => a.href = sitio.redes.instagram);
-    }
-    if (sitio.redes.facebook) {
-      document.querySelectorAll('a[href*="facebook.com"]').forEach(a => a.href = sitio.redes.facebook);
-    }
-    if (sitio.redes.youtube) {
-      document.querySelectorAll('a[href*="youtube.com"]').forEach(a => a.href = sitio.redes.youtube);
-    }
+    if (sitio.redes.instagram) document.querySelectorAll('a[href*="instagram.com"]').forEach(a => a.href = sitio.redes.instagram);
+    if (sitio.redes.facebook) document.querySelectorAll('a[href*="facebook.com"]').forEach(a => a.href = sitio.redes.facebook);
+    if (sitio.redes.youtube) document.querySelectorAll('a[href*="youtube.com"]').forEach(a => a.href = sitio.redes.youtube);
   }
 }
 
@@ -93,11 +109,7 @@ async function loadCMSPages() {
   if (contacto && contacto.whatsapp) {
     const waNum = contacto.whatsapp.replace(/\D/g, '');
     const msg = encodeURIComponent(contacto.whatsapp_mensaje || 'Hola, me gustaría recibir información.');
-    const waUrl = `https://wa.me/${waNum}?text=${msg}`;
-    
-    document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
-      a.href = waUrl;
-    });
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a => a.href = `https://wa.me/${waNum}?text=${msg}`);
   }
 
   const historia = await fetchCMSFile('contenido/pagina/historia.md');
@@ -119,5 +131,35 @@ async function loadCMSPages() {
 
     const p3 = document.querySelector('[data-i18n="manifesto_p3"]');
     if (p3 && historia.manifesto_p3) p3.textContent = historia.manifesto_p3;
+
+    // Si la sección Historia incluye un video
+    if (historia.video) {
+      const historiaVideoEl = document.querySelector('.video-background video') || document.querySelectorAll('.video-phone video')[1];
+      updateVideoElement(historiaVideoEl, historia.video, historia.poster);
+    }
+  }
+}
+
+async function loadCMSHero() {
+  const heroData = await fetchCMSFile('contenido/pagina/hero.md');
+  if (heroData) {
+    if (heroData.subtitulo) {
+      const elSub = document.querySelector('[data-i18n="hero_subtitle"]');
+      if (elSub) elSub.innerHTML = heroData.subtitulo;
+    }
+    if (heroData.boton_texto) {
+      const elBtn = document.querySelector('[data-i18n="hero_cta"]');
+      if (elBtn) elBtn.textContent = heroData.boton_texto;
+    }
+    if (heroData.boton_link) {
+      const elBtnLink = document.querySelector('[data-i18n="hero_cta"]');
+      if (elBtnLink) elBtnLink.setAttribute('href', heroData.boton_link);
+    }
+    
+    // Cargar video del Hero
+    if (heroData.video) {
+      const heroVideoEl = document.querySelector('#hero-video-bg video');
+      updateVideoElement(heroVideoEl, heroData.video, heroData.poster);
+    }
   }
 }
