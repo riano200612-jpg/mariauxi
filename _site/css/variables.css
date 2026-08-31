@@ -1,0 +1,45 @@
+:root{
+    --cream:#F5F8FB;
+    --cream2:#EDF2F7;
+    --white:#FFFFFF;
+    --rose:#103F6E;
+    --rose-lt:#245B93;
+    --rose-dk:#0A2F52;
+    --mauve:#08233C;
+    --text:#49525B;
+    --text-lt:#6B7A8A;
+    --border:rgba(16,63,110,.12);
+    --f-serif:'Cormorant Garamond',serif;
+    --f-sans:'Jost',sans-serif;
+    --size-xs: 0.7rem;
+    --size-sm: 0.8rem;
+    --size-base: 0.9rem;
+    --size-md: 0.95rem;
+    --pad-x: clamp(1.5rem, 5vw, 5rem);
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-full: 50%;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; color-scheme: light; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--f-sans);
+    font-size: var(--size-base);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, video, iframe { max-width:100%; display:block; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--rose-lt); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: rgba(36, 91, 147, 0.12); color: var(--rose-dk); }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+}

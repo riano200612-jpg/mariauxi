@@ -1,0 +1,7 @@
+/* CMS PROJECTS - FIX VISIBILITY */
+#proyectos .grid .card.reveal,
+#proyectos .grid .card.reveal.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}

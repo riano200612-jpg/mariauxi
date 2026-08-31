@@ -1,0 +1,76 @@
+backend:
+  name: github
+  repo: riano200612-jpg/mariauxi
+  branch: main
+  base_url: https://mariauxi-oauth.riano200612.workers.dev
+  auth_endpoint: auth
+
+local_backend: true
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "proyectos"
+    label: "Proyectos"
+    folder: "contenido/proyectos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Subtítulo", name: "subtitle", widget: "string", required: false }
+      - { label: "Precio Desde", name: "precio", widget: "string" }
+      - { label: "Ubicación", name: "ubicacion", widget: "string" }
+      - { label: "Estado", name: "estado", widget: "select", options: ["En plano", "En construcción", "Entrega inmediata"] }
+
+  - name: "paginas"
+    label: "Páginas del Sitio"
+    files:
+      - name: "sitio"
+        label: "Configuración General y SEO"
+        file: "contenido/configuracion/sitio.md"
+        fields:
+          - { label: "Nombre Marca", name: "nombre_marca", widget: "string" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Favicon", name: "favicon", widget: "image" }
+
+      - name: "hero"
+        label: "Sección Hero"
+        file: "contenido/pagina/hero.md"
+        fields:
+          - { label: "Subtítulo", name: "subtitulo", widget: "string" }
+          - { label: "Texto Botón", name: "boton_texto", widget: "string" }
+          - { label: "Enlace Botón", name: "boton_link", widget: "string" }
+          - { label: "Video de Fondo", name: "video", widget: "file", required: false }
+
+      - name: "inversion"
+        label: "Sección Inversión"
+        file: "contenido/pagina/inversion.md"
+        fields:
+          - { label: "Video de Fondo", name: "video", widget: "file", required: false }
+
+      - name: "destacado"
+        label: "Proyecto Destacado (Oporto)"
+        file: "contenido/pagina/destacado.md"
+        fields:
+          - { label: "Video Vertical Oporto", name: "video", widget: "file", required: false }
+
+      - name: "historia"
+        label: "Historia y Manifiesto"
+        file: "contenido/pagina/historia.md"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string", required: false }
+          - { label: "Subtítulo", name: "subtitulo", widget: "string", required: false }
+          - { label: "Párrafo 1", name: "manifesto_p1", widget: "text", required: false }
+          - { label: "Párrafo 2", name: "manifesto_p2", widget: "text", required: false }
+          - { label: "Párrafo 3", name: "manifesto_p3", widget: "text", required: false }
+          - { label: "Años Experiencia", name: "exp_anios", widget: "string", required: false }
+          - { label: "Video Perfil (María Auxi)", name: "video", widget: "file", required: false }
+
+      - name: "contacto"
+        label: "Contacto"
+        file: "contenido/pagina/contacto.md"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string", required: false }
+          - { label: "Etiqueta", name: "etiqueta", widget: "string", required: false }
+          - { label: "WhatsApp", name: "whatsapp", widget: "string" }

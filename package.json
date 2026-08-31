@@ -1,0 +1,22 @@
+{
+  "name": "mariauxi",
+  "version": "1.0.0",
+  "description": "Este repositorio usa Decap CMS con backend GitHub para administrar contenido desde `admin/index.html`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riano200612-jpg/mariauxi.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/riano200612-jpg/mariauxi/issues"
+  },
+  "homepage": "https://github.com/riano200612-jpg/mariauxi#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

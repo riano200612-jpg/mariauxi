@@ -1,0 +1,56 @@
+<h1>Auditoría Completa del Proyecto María Auxi</h1>
+<h2>Resumen</h2>
+<ul>
+<li>Se corrigieron etiquetas HTML inválidas <code>&lt;base target=&quot;_blank&quot;&gt;</code> en <code>index.html</code> y <code>admin/index.html</code>.</li>
+<li>Se creó una acción de GitHub Pages en <code>.github/workflows/github-pages-deploy.yml</code> para desplegar directamente el contenido estático desde la rama <code>main</code>.</li>
+<li>Se validó que <code>CNAME</code> contenga el dominio <code>mariauxi.com</code> y que <code>.nojekyll</code> exista para evitar procesamiento Jekyll en GitHub Pages.</li>
+<li>Se verificó que <code>admin/config.yml</code> y <code>worker/index.js</code> estén presentes y no presenten problemas de referencia directa en la auditoría actual.</li>
+</ul>
+<h2>Cambios aplicados</h2>
+<h3>HTML</h3>
+<ul>
+<li>Eliminadas las etiquetas <code>&lt;base target=&quot;_blank&quot;&gt;</code> redundantes e inválidas en:
+<ul>
+<li><code>index.html</code></li>
+<li><code>admin/index.html</code></li>
+</ul>
+</li>
+<li>Esto evita comportamientos inesperados en la navegación y problemas con el SEO.</li>
+</ul>
+<h3>Flujo de despliegue GitHub Pages</h3>
+<ul>
+<li>Añadido archivo <code>.github/workflows/github-pages-deploy.yml</code> con los siguientes pasos:
+<ul>
+<li>Checkout del repositorio.</li>
+<li>Preparación del artefacto de Pages excluyendo <code>.git</code>, <code>.github</code>, <code>pages-artifact</code>, <code>node_modules</code>, <code>npm-debug.log</code>.</li>
+<li>Opcional: instalación y ejecución de <code>npm run build</code> si existe un script <code>build</code> en <code>package.json</code>.</li>
+<li>Subida del artefacto usando <code>actions/upload-pages-artifact@v1</code>.</li>
+<li>Despliegue con <code>actions/deploy-pages@v1</code>.</li>
+</ul>
+</li>
+<li>Permisos agregados:
+<ul>
+<li><code>contents: read</code></li>
+<li><code>pages: write</code></li>
+<li><code>id-token: write</code></li>
+</ul>
+</li>
+</ul>
+<h3>Configuración de dominio</h3>
+<ul>
+<li>Verificado <code>CNAME</code> contiene <code>mariauxi.com</code> sin espacios adicionales.</li>
+<li>Se confirmó la existencia de <code>.nojekyll</code> y que tenga seguimiento en git.</li>
+</ul>
+<h2>Recomendaciones para producción</h2>
+<ol>
+<li>Asegurar que GitHub Pages esté habilitado en el repositorio y apunte a la rama <code>main</code>.</li>
+<li>Revisar <code>admin/config.yml</code> para confirmar la URL del backend y la rama <code>main</code> en el flujo editorial.</li>
+<li>Mantener los archivos de imágenes y videos fuera del control de versiones si no son necesarios en el repo, y usar almacenamiento CDN o releases para activos grandes.</li>
+<li>Revisar si Cloudflare Worker continúa necesitando <code>CMS_ORIGIN=https://mariauxi.com</code> y actualice <code>wrangler.toml</code> si cambia el dominio.</li>
+</ol>
+<h2>Estado final</h2>
+<ul>
+<li>Commit <code>4f4580b</code> aplicado con los cambios de auditoría.</li>
+<li>El proyecto está listo para que GitHub Pages inicie un despliegue desde <code>main</code>.</li>
+<li>No se detectaron más etiquetas <code>&lt;base&gt;</code> inválidas en el repo.</li>
+</ul>

@@ -1,0 +1,73 @@
+<h1>María Auxi — Configuración de CMS</h1>
+<p>Este repositorio usa Decap CMS con backend GitHub para administrar contenido desde <code>admin/index.html</code>.</p>
+<h2>Estructura relevante</h2>
+<ul>
+<li><code>admin/index.html</code> — panel de administración del CMS</li>
+<li><code>admin/config.yml</code> — única configuración del CMS</li>
+<li><code>contenido/proyectos/</code> — colección de contenido para la colección <code>proyectos</code></li>
+<li><code>img/uploads/</code> — carpeta para archivos multimedia cargados desde el CMS</li>
+</ul>
+<h2>Estado actual</h2>
+<ul>
+<li>El CMS está configurado con backend <code>github</code>.</li>
+<li>El repositorio apuntado es <code>riano200612-jpg/mariauxi</code>.</li>
+<li>La colección <code>proyectos</code> almacena archivos markdown en <code>contenido/proyectos</code>.</li>
+<li>Se creó un ejemplo de contenido: <code>contenido/proyectos/2026-07-17-proyecto-ejemplo.md</code>.</li>
+</ul>
+<h2>Cómo usar el CMS</h2>
+<ol>
+<li>Abre <code>https://&lt;tu-dominio&gt;/admin/index.html</code>.</li>
+<li>Haz login con GitHub.</li>
+<li>El CMS cargará la configuración desde <code>admin/config.yml</code>.</li>
+<li>Puedes crear, editar o borrar proyectos en la colección <code>Proyectos</code>.</li>
+</ol>
+<h2>Configuración de <code>admin/config.yml</code></h2>
+<ul>
+<li><code>backend.name: github</code></li>
+<li><code>backend.repo: riano200612-jpg/mariauxi</code></li>
+<li><code>backend.branch: main</code></li>
+<li><code>backend.base_url: https://mariauxi-oauth.riano200612.workers.dev</code></li>
+<li><code>backend.auth_endpoint: auth</code></li>
+<li><code>media_folder: &quot;img/uploads&quot;</code></li>
+<li><code>public_folder: &quot;/img/uploads&quot;</code></li>
+<li><code>folder: &quot;contenido/proyectos&quot;</code></li>
+<li><code>publish_mode: editorial_workflow</code></li>
+</ul>
+<h2>Requisitos</h2>
+<ul>
+<li>Un repositorio público o privado en GitHub con acceso adecuado.</li>
+<li>El archivo <code>admin/config.yml</code> debe estar disponible en <code>/admin/config.yml</code> desde el sitio.</li>
+<li>La página <code>admin/index.html</code> debe cargar el script de Decap CMS.</li>
+<li>Las carpetas <code>contenido/proyectos</code> e <code>img/uploads</code> deben existir en el repositorio.</li>
+</ul>
+<h2>Flujo de despliegue sugerido</h2>
+<ol>
+<li>Sube los cambios al repositorio GitHub.</li>
+<li>Publica el sitio en GitHub Pages.</li>
+<li>Asegúrate de que <code>https://&lt;tu-dominio&gt;/admin/index.html</code> sea accesible.</li>
+<li>Despliega el Worker OAuth incluido con <code>npx wrangler deploy</code>.</li>
+<li>En el Worker, configura los secretos <code>GITHUB_OAUTH_ID</code> y <code>GITHUB_OAUTH_SECRET</code>.</li>
+<li>En la aplicación OAuth de GitHub, registra como callback <code>https://mariauxi-oauth.riano200612.workers.dev/callback</code>.</li>
+<li>Accede a la página y autentícate con GitHub.</li>
+</ol>
+<blockquote>
+<p>El CMS usa el Worker OAuth definido en <code>worker/index.js</code>; las dos rutas necesarias son <code>/auth</code> y <code>/callback</code>.</p>
+</blockquote>
+<h2>Validaciones realizadas</h2>
+<ul>
+<li>Se creó la carpeta <code>contenido/proyectos</code>.</li>
+<li>Se creó la carpeta <code>img/uploads</code>.</li>
+<li>Se añadió un archivo de ejemplo para validar la colección.</li>
+<li><code>admin/index.html</code> carga Decap CMS, que detecta automáticamente <code>admin/config.yml</code>.</li>
+</ul>
+<h2>Notas importantes</h2>
+<ul>
+<li>Si usas un dominio personalizado, verifica que el admin y <code>admin/config.yml</code> se sirvan correctamente.</li>
+<li>Si el repositorio es privado, revisa permisos y scopes de OAuth de GitHub.</li>
+</ul>
+<h2>Sugerencias adicionales</h2>
+<ul>
+<li>Si tu proyecto usa una rama distinta a <code>main</code>, actualiza <code>backend.branch</code>.</li>
+<li>Si necesitas un flujo editorial completo, mantén <code>publish_mode: editorial_workflow</code>.</li>
+<li>Si el CMS no carga, revisa la consola del navegador en la página <code>/admin/index.html</code> para errores.</li>
+</ul>

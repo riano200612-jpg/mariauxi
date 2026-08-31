@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>María Auxi · CMS</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      CMS.registerPreviewStyle('/css/style.css');
+
+      var PaginasPreview = createClass({
+        render: function() {
+          var entry = this.props.entry;
+          var slug = entry.get('slug'); // Identifica en qué sección estamos
+          
+          // Estas son las secciones que llevan video
+          var paginasConVideo = ['hero', 'inversion', 'destacado', 'historia'];
+
+          if (paginasConVideo.indexOf(slug) !== -1) {
+            var videoPath = entry.getIn(['data', 'video']);
+            var videoUrl = videoPath ? this.props.getAsset(videoPath).toString() : '';
+
+            return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#f9f9f9', minHeight: '100vh' } },
+              h('p', { style: { color: '#666', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' } }, "Vista Previa: " + slug),
+              videoUrl ? h('video', {
+                src: videoUrl,
+                controls: true,
+                autoPlay: true,
+                loop: true,
+                muted: true,
+                style: { width: '100%', maxWidth: '320px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', backgroundColor: '#000' }
+              }) : h('p', { style: { color: '#999', fontStyle: 'italic' } }, 'Selecciona un archivo de video para ver la previsualización.')
+            );
+          } else {
+            return h('div', { style: { padding: '30px', fontFamily: 'sans-serif', background: '#f9f9f9', minHeight: '100vh' } },
+              h('h3', {}, "Sección sin video"),
+              h('p', {}, "Completa los campos a la izquierda. Los cambios se verán al publicar.")
+            );
+          }
+        }
+      });
+
+      // Se registra a la colección general 'paginas'
+      CMS.registerPreviewTemplate('paginas', PaginasPreview);
+    </script>
+  </body>
+</html>
