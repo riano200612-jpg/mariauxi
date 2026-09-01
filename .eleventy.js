@@ -5,7 +5,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("videos");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("contenido");
-  
+  eleventyConfig.addPassthroughCopy("docum");
   return {
     dir: {
       input: ".",
