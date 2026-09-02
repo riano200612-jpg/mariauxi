@@ -1186,20 +1186,197 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
-<section id="inversion-cartagena" class="reveal">
-  <div class="video-background">
-    <video muted loop playsinline preload="none" poster="img/poster-inmobiliario.webp">
-      <source src="/videos/video-inmobiliario-720.webm" type="video/webm">
-      <source src="/videos/video-inmobiliario-720.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="overlay-dark"></div>
-  <div class="inversion-content">
-    <span class="eyebrow" data-i18n="inversion_eyebrow">Oportunidad de Inversión</span>
-    <p data-i18n="inversion_desc">Asegura tu patrimonio en la ciudad más exclusiva y con mayor proyección del Caribe colombiano. Un estilo de vida inigualable respaldado por una alta valorización en finca raíz.</p>
-    <a href="https://wa.me/573104325477?text=Hola%20Mar%C3%ADa%20Auxi%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20proyectos%20inmobiliarios." target="_blank" rel="noopener noreferrer" class="btn-outline" data-track="whatsapp_click" data-project="cartagena" data-i18n="inversion_cta">Invertir ahora</a>
+
+<!-- PORTAFOLIO EXCLUSIVO LUXURY -->
+<section id="portafolio-exclusivo" style="padding: 6rem 1.5rem; background-color: #fafafa; position: relative; z-index: 50; width: 100%; clear: both;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <span style="color: #c59b76; letter-spacing: 0.25em; text-transform: uppercase; font-size: 0.75rem; font-weight: 500;">Portafolio Exclusivo</span>
+      <h2 style="font-family: var(--f-serif, serif); color: #222; margin: 0.8rem 0 1.2rem 0; font-weight: 300; font-size: clamp(1.5rem, 2vw, 1.9rem);">
+        Galerías de <span style="color: #c59b76; font-style: italic;">Nuestros Proyectos</span>
+      </h2>
+      <div style="width: 40px; height: 1px; background: #d4a373; margin: 0 auto;"></div>
+    </div>
+
+    <!-- Tarjetas con llamadas directas -->
+    <div class="lux-grid">
+      <div class="lux-card" onclick="openLuxModal('Oporto Tower')">
+        <div class="lux-bg" style="background-image: url('/img/proyectos/oporto-cover.webp');"></div>
+        <div class="lux-overlay"></div>
+        <div class="lux-content">
+          <span class="lux-badge">Nuevo · 2026</span>
+          <h4>Oporto Tower</h4>
+        </div>
+      </div>
+
+      <div class="lux-card" onclick="openLuxModal('Reserva 90 NEO')">
+        <div class="lux-bg" style="background-image: url('/img/proyectos/reserva-cover.webp');"></div>
+        <div class="lux-overlay"></div>
+        <div class="lux-content">
+          <span class="lux-badge">Exclusivo</span>
+          <h4>Reserva 90 NEO</h4>
+        </div>
+      </div>
+
+      <div class="lux-card" onclick="openLuxModal('Ítaca Tower')">
+        <div class="lux-bg" style="background-image: url('/img/proyectos/itaca-cover.webp');"></div>
+        <div class="lux-overlay"></div>
+        <div class="lux-content">
+          <span class="lux-badge">Arquitectura</span>
+          <h4>Ítaca Tower</h4>
+        </div>
+      </div>
+
+      <div class="lux-card" onclick="openLuxModal('Marduk Tower')">
+        <div class="lux-bg" style="background-image: url('/img/proyectos/marduk-cover.webp');"></div>
+        <div class="lux-overlay"></div>
+        <div class="lux-content">
+          <span class="lux-badge">Vanguardia</span>
+          <h4>Marduk Tower</h4>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- MODAL INMERSIVO -->
+<div id="lux-modal" class="lux-modal">
+  <div class="lux-panel">
+    <div class="lux-head">
+      <h3 id="lux-title" style="font-size: 1.2rem !important; margin: 0; color: #fff; font-weight: 300;">Proyecto</h3>
+      <button onclick="closeLuxModal()" class="lux-close">&times;</button>
+    </div>
+    <div class="lux-body">
+      <button onclick="slideLux(-1)" class="lux-nav prev">&#10094;</button>
+      <div id="lux-img-container"></div>
+      <button onclick="slideLux(1)" class="lux-nav next">&#10095;</button>
+    </div>
+    <div class="lux-foot"><span id="lux-count">0 / 0</span></div>
+  </div>
+</div>
+
+<style>
+  .lux-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; justify-content: center; }
+  @media (max-width: 1024px) { .lux-grid { grid-template-columns: repeat(2, 280px); } }
+  @media (max-width: 600px) { .lux-grid { grid-template-columns: minmax(260px, 300px); } }
+
+  .lux-card { 
+    width: 100%; max-width: 280px; margin: 0 auto; aspect-ratio: 3 / 4; 
+    border-radius: 6px; overflow: hidden; cursor: pointer; position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06); border: 1px solid rgba(215, 190, 130, 0.15); 
+    background: #0b1329; transition: all 0.4s ease;
+  }
+  .lux-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.8s ease; z-index: 1; }
+  .lux-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 5%, rgba(15, 23, 42, 0.2) 60%, transparent 100%); z-index: 2; transition: opacity 0.4s; }
+  .lux-content { position: relative; z-index: 3; padding: 1.5rem; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; color: #fff; transform: translateY(5px); transition: transform 0.4s ease; }
+  
+  .lux-badge { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; color: #d4a373; font-weight: 500; margin-bottom: 0.4rem; opacity: 0.9; }
+  .lux-card h4 { font-family: var(--f-serif, serif); font-size: 1.15rem; margin: 0; font-weight: 400; letter-spacing: 0.02em; white-space: normal; line-height: 1.2; }
+  
+  .lux-card:hover { border-color: rgba(197, 155, 118, 0.5); box-shadow: 0 12px 35px rgba(0,0,0,0.12); }
+  .lux-card:hover .lux-bg { transform: scale(1.05); }
+  .lux-card:hover .lux-content { transform: translateY(0); }
+
+  /* Estilos Modal */
+  .lux-modal { position: fixed; inset: 0; background: rgba(10, 15, 25, 0.95); backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; padding: 1rem; opacity: 0; transition: opacity 0.3s; }
+  .lux-modal.active { display: flex; opacity: 1; }
+  .lux-panel { background: #0f172a; width: 100%; max-width: 900px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(215, 190, 130, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.98); transition: transform 0.3s; }
+  .lux-modal.active .lux-panel { transform: scale(1); }
+  .lux-head { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: #080d1a; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .lux-close { background: none; border: none; color: #64748b; font-size: 2rem; cursor: pointer; line-height: 1; padding: 0; transition: color 0.2s; }
+  .lux-close:hover { color: #f8fafc; }
+  .lux-body { position: relative; background: #000; height: 65vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .lux-nav { position: absolute; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(215, 190, 130, 0.3); color: #fff; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; }
+  .lux-nav:hover { background: #c59b76; border-color: #c59b76; }
+  .lux-nav.prev { left: 1rem; }
+  .lux-nav.next { right: 1rem; }
+  #lux-img-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  #lux-img-container img { max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: opacity 0.2s ease; }
+  .lux-foot { padding: 0.8rem; text-align: center; background: #080d1a; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; letter-spacing: 0.1em; font-size: 0.75rem; }
+</style>
+
+<script>
+  // Inyección blindada sin expresiones regulares problemáticas
+  const projectGalleries = {
+    "Oporto Tower": {{ galerias.oporto | default([]) | dump | safe }},
+    "Reserva 90 NEO": {{ galerias["reserva-90"] | default([]) | dump | safe }},
+    "Ítaca Tower": {{ galerias.itaca | default([]) | dump | safe }},
+    "Marduk Tower": {{ galerias.marduk | default([]) | dump | safe }}
+  };
+
+  let currentLuxImages = [];
+  let currentLuxIndex = 0;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('lux-modal');
+    if(modal && modal.parentNode !== document.body) {
+      document.body.appendChild(modal);
+    }
+  });
+
+  window.openLuxModal = function(title) {
+    currentLuxImages = projectGalleries[title] || [];
+    if (currentLuxImages.length === 0) { 
+      alert("La galería de " + title + " se está cargando o no contiene imágenes."); 
+      return; 
+    }
+    
+    currentLuxIndex = 0;
+    document.getElementById("lux-title").textContent = title;
+    updateLuxModal();
+    
+    document.getElementById("lux-modal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  };
+
+  window.closeLuxModal = function() {
+    document.getElementById("lux-modal").classList.remove("active");
+    document.body.style.overflow = "";
+  };
+
+  window.slideLux = function(direction) {
+    if (!currentLuxImages.length) return;
+    currentLuxIndex = (currentLuxIndex + direction + currentLuxImages.length) % currentLuxImages.length;
+    updateLuxModal();
+  };
+
+  function updateLuxModal() {
+    const imgCont = document.getElementById("lux-img-container");
+    const countEl = document.getElementById("lux-count");
+    
+    let cleanSrc = currentLuxImages[currentLuxIndex];
+    
+    // Reemplazo plano en lugar de regex con barras invertidas
+    if (cleanSrc.startsWith('./')) {
+      cleanSrc = cleanSrc.substring(2);
+    }
+    if (!cleanSrc.startsWith('/')) {
+      cleanSrc = '/' + cleanSrc;
+    }
+    
+    imgCont.style.opacity = 0;
+    setTimeout(() => {
+      imgCont.innerHTML = '<img src="' + cleanSrc + '" alt="Vista del proyecto">';
+      imgCont.style.opacity = 1;
+    }, 150);
+    
+    countEl.innerText = (currentLuxIndex + 1) + " / " + currentLuxImages.length;
+  }
+
+  document.addEventListener("keydown", function(e) {
+    const modal = document.getElementById("lux-modal");
+    if (!modal || !modal.classList.contains("active")) return;
+    if (e.key === "Escape") closeLuxModal();
+    if (e.key === "ArrowLeft") slideLux(-1);
+    if (e.key === "ArrowRight") slideLux(1);
+  });
+  
+  document.getElementById("lux-modal")?.addEventListener("click", function(e) {
+    if (e.target === this) closeLuxModal();
+  });
+</script>
+
 
 <section id="oporto">
   <div class="sec-head reveal">

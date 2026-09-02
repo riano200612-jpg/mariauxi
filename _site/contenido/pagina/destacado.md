@@ -1,3 +1,3 @@
 ---
-video: /img/uploads/video3-1.webm
+video: /img/uploads/video3-1.mp4
 ---
