@@ -205,11 +205,59 @@
     const isDark = false; // Oporto ya tiene foto real, ya no usa swatch oscuro
 
     return `
-      <div class="lux-project-card" onclick="openLuxModal('${escapeHTML(project.title || 'Proyecto')}')">
-        <div class="lux-card-media">
-          <img src="${cover || '/img/placeholder.jpg'}" alt="${escapeHTML(project.title || 'Proyecto')}" loading="lazy">
+      <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}${cover ? ' has-photo' : ''}">
+        <div
+          class="swatch ${escapeHTML(theme.swatch)}"
+          ${cover ? `style="background-image:url('${cover}');background-size:cover;background-position:center;"` : ''}
+        >
+          ${cover ? '' : '<div class="orb"></div>'}
         </div>
-        <button class="lux-glass-btn" type="button">${escapeHTML(project.title || 'Proyecto')}</button>
+
+
+
+        <div
+          class="card-in"
+          style="${isDark ? 'color:rgba(255,255,255,0.85);' : ''}"
+        >
+          <span
+            class="c-tag"
+            style="color:${escapeHTML(theme.tagColor)};"
+          >
+            ${sector}
+          </span>
+
+          <h3
+            class="c-name"
+            style="${isDark ? 'color:#fff;' : ''}"
+          >
+            ${mainTitle}${restTitle}
+          </h3>
+
+          <p
+            class="c-desc"
+            style="${isDark ? 'color:rgba(255,255,255,0.75);' : ''}"
+          >
+            ${description}
+          </p>
+
+          <div class="c-foot">
+            <span
+              class="c-price"
+              style="color:${escapeHTML(theme.tagColor)};"
+            >
+              ${price}
+            </span>
+
+            <span
+              class="c-loc"
+              style="${isDark ? 'color:#fff;' : 'color:var(--text-lt);'}"
+            >
+              ${location}
+            </span>
+
+            ${brochure}
+          </div>
+        </div>
       </div>
     `;
   }
