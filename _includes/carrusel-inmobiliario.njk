@@ -1,0 +1,67 @@
+<script type="application/json" id="lux-project-galleries-data">
+{
+  "Oporto Tower": {
+    "titulo": "Oporto Tower",
+    "tag": "INMOBILIARIA",
+    "desc": "Galería exclusiva de Oporto Tower.",
+    "imagenes": ["/img/carrusel/oporto/oporto.jpeg"]
+  },
+  "Reserva 90 NEO": {
+    "titulo": "Reserva 90 NEO",
+    "tag": "INMOBILIARIA",
+    "desc": "Galería exclusiva de Reserva 90 NEO.",
+    "imagenes": ["/img/carrusel/reserva-90-neo/reserva-neo.jpeg"]
+  },
+  "Ítaca Tower": {
+    "titulo": "Ítaca Tower",
+    "tag": "INMOBILIARIA",
+    "desc": "Galería exclusiva de Ítaca Tower.",
+    "imagenes": ["/img/carrusel/itaca-tower/itaca.jpeg"]
+  },
+  "Marduk Tower": {
+    "titulo": "Marduk Tower",
+    "tag": "INMOBILIARIA",
+    "desc": "Galería exclusiva de Marduk Tower.",
+    "imagenes": ["/img/carrusel/marduk-tower/marduck.jpeg"]
+  }
+}
+</script>
+
+<div class="lux-projects-section">
+  <div class="lux-projects-grid">
+    <div class="lux-project-card" onclick="openLuxModal('Oporto Tower')">
+      <div class="lux-card-media"><img src="/img/carrusel/oporto/oporto.jpeg" alt="Oporto Tower" loading="lazy"></div>
+      <button class="lux-glass-btn" type="button">Oporto Tower</button>
+    </div>
+    <div class="lux-project-card" onclick="openLuxModal('Reserva 90 NEO')">
+      <div class="lux-card-media"><img src="/img/carrusel/reserva-90-neo/reserva-neo.jpeg" alt="Reserva 90 NEO" loading="lazy"></div>
+      <button class="lux-glass-btn" type="button">Reserva 90 NEO</button>
+    </div>
+    <div class="lux-project-card" onclick="openLuxModal('Ítaca Tower')">
+      <div class="lux-card-media"><img src="/img/carrusel/itaca-tower/itaca.jpeg" alt="Ítaca Tower" loading="lazy"></div>
+      <button class="lux-glass-btn" type="button">Ítaca Tower</button>
+    </div>
+    <div class="lux-project-card" onclick="openLuxModal('Marduk Tower')">
+      <div class="lux-card-media"><img src="/img/carrusel/marduk-tower/marduck.jpeg" alt="Marduk Tower" loading="lazy"></div>
+      <button class="lux-glass-btn" type="button">Marduk Tower</button>
+    </div>
+  </div>
+</div>
+
+<div id="modal-proyecto" class="modal-proyecto">
+  <div class="modal-content-wrapper">
+    <button class="lux-modal-cerrar" onclick="cerrarModal()">✕</button>
+    <h3 id="modal-titulo" style="margin-top:0;"></h3>
+    <div class="modal-info-content">
+      <p id="lux-modal-desc"></p>
+      <div style="margin: 15px 0; text-align:center;">
+        <img id="modal-imagen" src="" alt="Vista previa" style="max-height:300px; width:100%; object-fit:cover; border-radius:6px;">
+        <div id="modal-counter" style="margin-top:8px; font-size:0.85rem; color:#666;"></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:15px;">
+        <button onclick="prevModalImage()" style="padding:8px 15px; cursor:pointer;">Anterior</button>
+        <button onclick="nextModalImage()" style="padding:8px 15px; cursor:pointer;">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

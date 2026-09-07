@@ -1,0 +1,30 @@
+.lux-projects-section { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
+.lux-projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+.lux-project-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; height: 260px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.lux-card-media { width: 100%; height: 100%; }
+.lux-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.lux-project-card:hover .lux-card-media img { transform: scale(1.05); }
+
+/* Botón de cristal centrado */
+.lux-glass-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 6px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  pointer-events: none; /* Asegura que el clic lo reciba la tarjeta */
+}
+
+/* Modal */
+.modal-proyecto { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.modal-proyecto.modal-activo { display: flex; }
+.modal-content-wrapper { background: #fff; padding: 25px; border-radius: 10px; max-width: 600px; width: 90%; position: relative; }
+.lux-modal-cerrar { position: absolute; top: 15px; right: 15px; background: #eee; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; }

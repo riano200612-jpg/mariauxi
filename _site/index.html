@@ -77,7 +77,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
 
@@ -1113,6 +1112,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
   <link rel="stylesheet" href="css/cms-projects-fix.css?v=2">
   <link rel="stylesheet" href="css/cms-project-modal.css">
+  <link rel="stylesheet" href="/css/carrusel.css?v=1788807089">
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9XLKSQB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1299,10 +1299,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script>
   // Inyección blindada sin expresiones regulares problemáticas
   const projectGalleries = {
-    "Oporto Tower": [],
-    "Reserva 90 NEO": [],
-    "Ítaca Tower": [],
-    "Marduk Tower": []
+    "Oporto Tower": ["/img/carrusel/oporto-tower/01-fachada-principal.jpg","/img/carrusel/oporto-tower/02-vista-aerea.jpg","/img/carrusel/oporto-tower/03-fachadas-al-atardecer.jpg","/img/carrusel/oporto-tower/04-terraza-mirador.jpg","/img/carrusel/oporto-tower/05-zona-infantil.jpg","/img/carrusel/oporto-tower/06-sala-apartamento.jpg","/img/carrusel/oporto-tower/07-gimnasio.jpg","/img/carrusel/oporto-tower/08-cocina-apartamento.jpg","/img/carrusel/oporto-tower/oporto.jpeg"],
+    "Reserva 90 NEO": ["/img/carrusel/reserva%20neo-tower/01-exterior-atardecer.jpg","/img/carrusel/reserva%20neo-tower/02-piscina-y-fachada.jpg","/img/carrusel/reserva%20neo-tower/03-vista-aerea-proyecto.jpg","/img/carrusel/reserva%20neo-tower/04-gimnasio.jpg","/img/carrusel/reserva%20neo-tower/05-interior-apartamento.jpg","/img/carrusel/reserva%20neo-tower/reserva%20neo.jpeg"],
+    "Ítaca Tower": ["/img/carrusel/itaca-tower/05_itaca_vista_balcon_panoramica.webp","/img/carrusel/itaca-tower/06_itaca_piscina.webp","/img/carrusel/itaca-tower/itaca.jpeg"],
+    "Marduk Tower": ["/img/carrusel/marduk-tower/01_marduk_fachada_torre.webp","/img/carrusel/marduk-tower/02_marduk_solarium_piscina.webp","/img/carrusel/marduk-tower/03_marduk_gimnasio.webp","/img/carrusel/marduk-tower/04_marduk_interior_apartamento.webp","/img/carrusel/marduk-tower/marduck.jpeg"]
   };
 
   let currentLuxImages = [];
@@ -2033,6 +2033,3 @@ if (leadForm) {
 </script>
   <script src="js/cms/cms-project-modal.js"></script>
   <script src="js/cms-projects.js"></script>
-  <script src="js/cms-pages.js"></script>
-</body>
-</html>

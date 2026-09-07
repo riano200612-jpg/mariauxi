@@ -1,6 +1,33 @@
 {
-  "oporto": [],
-  "reserva-90": [],
-  "itaca": [],
-  "marduk": []
+  "oporto": [
+    "/img/carrusel/oporto-tower/01-fachada-principal.jpg",
+    "/img/carrusel/oporto-tower/02-vista-aerea.jpg",
+    "/img/carrusel/oporto-tower/03-fachadas-al-atardecer.jpg",
+    "/img/carrusel/oporto-tower/04-terraza-mirador.jpg",
+    "/img/carrusel/oporto-tower/05-zona-infantil.jpg",
+    "/img/carrusel/oporto-tower/06-sala-apartamento.jpg",
+    "/img/carrusel/oporto-tower/07-gimnasio.jpg",
+    "/img/carrusel/oporto-tower/08-cocina-apartamento.jpg",
+    "/img/carrusel/oporto-tower/oporto.jpeg"
+  ],
+  "reserva-90": [
+    "/img/carrusel/reserva%20neo-tower/01-exterior-atardecer.jpg",
+    "/img/carrusel/reserva%20neo-tower/02-piscina-y-fachada.jpg",
+    "/img/carrusel/reserva%20neo-tower/03-vista-aerea-proyecto.jpg",
+    "/img/carrusel/reserva%20neo-tower/04-gimnasio.jpg",
+    "/img/carrusel/reserva%20neo-tower/05-interior-apartamento.jpg",
+    "/img/carrusel/reserva%20neo-tower/reserva%20neo.jpeg"
+  ],
+  "itaca": [
+    "/img/carrusel/itaca-tower/05_itaca_vista_balcon_panoramica.webp",
+    "/img/carrusel/itaca-tower/06_itaca_piscina.webp",
+    "/img/carrusel/itaca-tower/itaca.jpeg"
+  ],
+  "marduk": [
+    "/img/carrusel/marduk-tower/01_marduk_fachada_torre.webp",
+    "/img/carrusel/marduk-tower/02_marduk_solarium_piscina.webp",
+    "/img/carrusel/marduk-tower/03_marduk_gimnasio.webp",
+    "/img/carrusel/marduk-tower/04_marduk_interior_apartamento.webp",
+    "/img/carrusel/marduk-tower/marduck.jpeg"
+  ]
 }
