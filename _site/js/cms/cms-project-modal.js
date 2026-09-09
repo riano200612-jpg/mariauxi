@@ -1,28 +1,28 @@
 (function (window, document) {
-  'use strict';
+  'use strict'
 
-  let modal = null;
+  let modal = null
 
-  function escapeHTML(value) {
+  function escapeHTML (value) {
     return String(value ?? '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+      .replace(/'/g, '&#039;')
   }
 
-  function createModal() {
+  function createModal () {
     if (document.getElementById('cms-project-modal')) {
-      modal = document.getElementById('cms-project-modal');
-      return modal;
+      modal = document.getElementById('cms-project-modal')
+      return modal
     }
 
-    const wrapper = document.createElement('div');
+    const wrapper = document.createElement('div')
 
-    wrapper.id = 'cms-project-modal';
-    wrapper.className = 'cms-project-modal';
-    wrapper.setAttribute('aria-hidden', 'true');
+    wrapper.id = 'cms-project-modal'
+    wrapper.className = 'cms-project-modal'
+    wrapper.setAttribute('aria-hidden', 'true')
 
     wrapper.innerHTML = `
       <div class="cms-project-modal__backdrop"></div>
@@ -70,37 +70,37 @@
         </div>
 
       </div>
-    `;
+    `
 
-    document.body.appendChild(wrapper);
+    document.body.appendChild(wrapper)
 
-    modal = wrapper;
+    modal = wrapper
 
     modal
       .querySelector('.cms-project-modal__close')
-      .addEventListener('click', close);
+      .addEventListener('click', close)
 
     modal
       .querySelector('.cms-project-modal__backdrop')
-      .addEventListener('click', close);
+      .addEventListener('click', close)
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-        close();
+        close()
       }
-    });
+    })
 
-    return modal;
+    return modal
   }
 
-  function formatDetail(label, value) {
+  function formatDetail (label, value) {
     if (
       value === undefined ||
       value === null ||
       value === '' ||
       value === 0
     ) {
-      return '';
+      return ''
     }
 
     return `
@@ -108,35 +108,41 @@
         <span>${escapeHTML(label)}</span>
         <strong>${escapeHTML(value)}</strong>
       </div>
-    `;
+    `
   }
 
-  function open(project) {
-    createModal();
+  function open (project) {
+    createModal()
 
-    const title = String(project.title || 'Proyecto');
-    const image = String(project.cover || '');
+    const title = String(project.title || 'Proyecto')
+    const image = String(project.cover || '')
     const description = String(
       project.body ||
       'Proyecto residencial exclusivo en Cartagena.'
-    );
+    )
 
-    modal.querySelector('.cms-project-modal__image').src = image;
-    modal.querySelector('.cms-project-modal__image').alt = title;
+    const mediaContainer = modal.querySelector('.cms-project-modal__media')
+    const images = (project.gallery && project.gallery.length > 0) ? project.gallery : (image ? [image] : [])
+    
+    mediaContainer.innerHTML = '<style>.lux-scroll::-webkit-scrollbar { display: none; }</style>' +
+      '<div class="lux-scroll" style="display:flex; overflow-x:auto; scroll-snap-type: x mandatory; width:100%; height:100%; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">' + 
+      images.map(img => `<img src="${img}" alt="${title}" loading="lazy" style="flex:0 0 100%; width:100%; height:100%; object-fit:cover; scroll-snap-align: start;">`).join('') + 
+      '</div>'
+    // (Etiqueta estática reemplazada por el carrusel de lujo)
 
     modal.querySelector('.cms-project-modal__sector').textContent =
-      project.sector || project.ciudad || 'Cartagena';
+      project.sector || project.ciudad || 'Cartagena'
 
     modal.querySelector('.cms-project-modal__title').textContent =
-      title;
+      title
 
     modal.querySelector('.cms-project-modal__description').textContent =
-      description;
+      description
 
     modal.querySelector('.cms-project-modal__status').innerHTML =
       project.estado
         ? `<span>${escapeHTML(project.estado)}</span>`
-        : '';
+        : ''
 
     modal.querySelector('.cms-project-modal__details').innerHTML = `
       ${formatDetail('Ciudad', project.ciudad)}
@@ -147,9 +153,9 @@
       ${formatDetail('Habitaciones', project.habitaciones)}
       ${formatDetail('Baños', project.banos)}
       ${formatDetail('Parqueaderos', project.parqueaderos)}
-    `;
+    `
 
-    const actions = [];
+    const actions = []
 
     if (project.pdf) {
       actions.push(`
@@ -161,7 +167,7 @@
         >
           Ver brochure
         </a>
-      `);
+      `)
     }
 
     if (project.mapa) {
@@ -174,38 +180,37 @@
         >
           Ver ubicación
         </a>
-      `);
+      `)
     }
 
     modal.querySelector('.cms-project-modal__actions').innerHTML =
-      actions.join('');
+      actions.join('')
 
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('is-open')
+    modal.setAttribute('aria-hidden', 'false')
 
-    document.body.classList.add('cms-modal-open');
+    document.body.classList.add('cms-modal-open')
 
     const closeButton =
-      modal.querySelector('.cms-project-modal__close');
+      modal.querySelector('.cms-project-modal__close')
 
     if (closeButton) {
-      closeButton.focus();
+      closeButton.focus()
     }
   }
 
-  function close() {
-    if (!modal) return;
+  function close () {
+    if (!modal) return
 
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('is-open')
+    modal.setAttribute('aria-hidden', 'true')
 
-    document.body.classList.remove('cms-modal-open');
+    document.body.classList.remove('cms-modal-open')
   }
 
   window.CMSProjectModal = {
     create: createModal,
     open,
     close
-  };
-
-})(window, document);
+  }
+})(window, document)

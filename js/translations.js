@@ -184,6 +184,6 @@ const translations = {
     footer_alliances: 'Partnerships',
     footer_rights: 'All rights reserved.'
   }
-};
+}
 
-window.translations = translations;
+window.translations = translations

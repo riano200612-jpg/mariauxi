@@ -12,7 +12,7 @@ banos: 0
 parqueaderos: 0
 mapa: ""
 cover: img/proyectos/itaca-cover.webp
-gallery: []
+gallery: ["/img/carrusel/itaca-tower/page-01.webp", "/img/carrusel/itaca-tower/page-02.webp", "/img/carrusel/itaca-tower/page-03.webp", "/img/carrusel/itaca-tower/05_itaca_vista_balcon_panoramica.webp", "/img/carrusel/itaca-tower/06_itaca_piscina.webp"]
 video: ""
 pdf: "docum/itaca-tower-book-digital-2024.pdf"
 seo:

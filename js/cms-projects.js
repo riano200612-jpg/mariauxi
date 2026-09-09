@@ -1,96 +1,96 @@
 (function () {
-  'use strict';
+  'use strict'
 
   const GITHUB_API =
-    'https://api.github.com/repos/riano200612-jpg/mariauxi/contents/contenido/proyectos?ref=main';
+    'https://api.github.com/repos/riano200612-jpg/mariauxi/contents/contenido/proyectos?ref=main'
 
   const RAW_BASE =
-    'https://raw.githubusercontent.com/riano200612-jpg/mariauxi/main/';
+    'https://raw.githubusercontent.com/riano200612-jpg/mariauxi/main/'
 
-  function parseValue(value) {
-    value = value.trim();
+  function parseValue (value) {
+    value = value.trim()
 
     if (
       (value.startsWith('"') && value.endsWith('"')) ||
       (value.startsWith("'") && value.endsWith("'"))
     ) {
-      return value.slice(1, -1);
+      return value.slice(1, -1)
     }
 
-    if (value === 'true') return true;
-    if (value === 'false') return false;
+    if (value === 'true') return true
+    if (value === 'false') return false
 
     if (/^-?\d+(\.\d+)?$/.test(value)) {
-      return Number(value);
+      return Number(value)
     }
 
-    if (value === '[]') return [];
+    if (value === '[]') return []
 
-    return value;
+    return value
   }
 
-  function parseFrontMatter(text) {
-    const match = text.match(/^---\s*([\s\S]*?)\s*---/);
+  function parseFrontMatter (text) {
+    const match = text.match(/^---\s*([\s\S]*?)\s*---/)
 
-    if (!match) return null;
+    if (!match) return null
 
-    const frontMatter = match[1];
-    const data = {};
+    const frontMatter = match[1]
+    const data = {}
 
     frontMatter.split('\n').forEach(function (line) {
-      const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+      const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/)
 
-      if (!match) return;
+      if (!match) return
 
-      data[match[1]] = parseValue(match[2]);
-    });
+      data[match[1]] = parseValue(match[2])
+    })
 
     return {
-      data: data,
+      data,
       body: text
         .replace(/^---\s*[\s\S]*?\s*---\s*/, '')
         .trim()
-    };
+    }
   }
 
-  function escapeHTML(value) {
+  function escapeHTML (value) {
     return String(value ?? '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
+      .replace(/'/g, '&#039;')
   }
 
-  function slugify(value) {
+  function slugify (value) {
     return String(value || '')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
+      .replace(/^-|-$/g, '')
   }
 
-  function projectClass(project) {
-    const slug = slugify(project.title);
+  function projectClass (project) {
+    const slug = slugify(project.title)
 
-    if (slug.includes('oporto')) return 'oporto';
-    if (slug.includes('reserva')) return 'reserva';
-    if (slug.includes('itaca')) return 'itaca';
-    if (slug.includes('marduk')) return 'marduk';
+    if (slug.includes('oporto')) return 'oporto'
+    if (slug.includes('reserva')) return 'reserva'
+    if (slug.includes('itaca')) return 'itaca'
+    if (slug.includes('marduk')) return 'marduk'
 
-    return '';
+    return ''
   }
 
-  function projectTheme(project) {
-    const slug = slugify(project.title);
+  function projectTheme (project) {
+    const slug = slugify(project.title)
 
     if (slug.includes('oporto')) {
       return {
         swatch: 's-oporto',
         tagColor: 'var(--rose-lt)',
         cardClass: 'oporto'
-      };
+      }
     }
 
     if (slug.includes('reserva')) {
@@ -98,7 +98,7 @@
         swatch: 's-reserva',
         tagColor: '#5A9A62',
         cardClass: 'reserva'
-      };
+      }
     }
 
     if (slug.includes('itaca')) {
@@ -106,7 +106,7 @@
         swatch: 's-itaca',
         tagColor: 'var(--text)',
         cardClass: ''
-      };
+      }
     }
 
     if (slug.includes('marduk')) {
@@ -114,59 +114,59 @@
         swatch: 's-marduk',
         tagColor: 'var(--text)',
         cardClass: ''
-      };
+      }
     }
 
     return {
       swatch: 's-oporto',
       tagColor: 'var(--text)',
       cardClass: ''
-    };
+    }
   }
 
-  function renderProjectCard(project, index) {
-    const theme = projectTheme(project);
-    const extraClass = index === 1 ? ' d1' : index === 2 ? ' d2' : '';
+  function renderProjectCard (project, index) {
+    const theme = projectTheme(project)
+    const extraClass = index === 1 ? ' d1' : index === 2 ? ' d2' : ''
 
-    const title = String(project.title || 'Proyecto');
-    const words = title.split(' ');
+    const title = String(project.title || 'Proyecto')
+    const words = title.split(' ')
 
-    const mainTitle = escapeHTML(words.shift() || title);
+    const mainTitle = escapeHTML(words.shift() || title)
     const restTitle = words.length
       ? ' <em>' + escapeHTML(words.join(' ')) + '</em>'
-      : '';
+      : ''
 
     const sector = escapeHTML(
       project.sector || project.ciudad || 'Cartagena'
-    );
+    )
 
     const description = escapeHTML(
       project.body || 'Proyecto residencial exclusivo en Cartagena.'
-    );
+    )
 
     const pdf = project.pdf
       ? escapeHTML(project.pdf)
-      : '';
+      : ''
 
     const brochure = pdf
       ? (function () {
-        const projectData = JSON.stringify({
-          title: project.title,
-          cover: project.cover,
-          body: project.body,
-          sector: project.sector,
-          ciudad: project.ciudad,
-          estado: project.estado,
-          direccion: project.direccion,
-          precio: project.precio,
-          area: project.area,
-          habitaciones: project.habitaciones,
-          banos: project.banos,
-          parqueaderos: project.parqueaderos,
-          pdf: project.pdf,
-          mapa: project.mapa
-        }).replace(/'/g, '&#39;').replace(/"/g, '&quot;');
-        return `
+          const projectData = JSON.stringify({
+            title: project.title,
+            cover: project.cover,
+            body: project.body,
+            sector: project.sector,
+            ciudad: project.ciudad,
+            estado: project.estado,
+            direccion: project.direccion,
+            precio: project.precio,
+            area: project.area,
+            habitaciones: project.habitaciones,
+            banos: project.banos,
+            parqueaderos: project.parqueaderos,
+            pdf: project.pdf,
+            mapa: project.mapa, gallery: project.gallery
+          }).replace(/'/g, '&#39;').replace(/"/g, '&quot;')
+          return `
           <button
             type="button"
             class="c-arr"
@@ -188,21 +188,21 @@
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
           </button>
-        `;
-      })()
-      : '';
+        `
+        })()
+      : ''
 
-    const cover = project.cover ? escapeHTML(project.cover) : '';
+    const cover = project.cover ? escapeHTML(project.cover) : ''
 
     const price = project.precio
       ? escapeHTML(project.precio)
-      : 'Brochure';
+      : 'Brochure'
 
     const location = escapeHTML(
       project.sector || project.ciudad || 'Cartagena'
-    );
+    )
 
-    const isDark = false; // Oporto ya tiene foto real, ya no usa swatch oscuro
+    const isDark = false // Oporto ya tiene foto real, ya no usa swatch oscuro
 
     return `
       <div class="card reveal ${escapeHTML(theme.cardClass)}${extraClass}${cover ? ' has-photo' : ''}">
@@ -211,6 +211,34 @@
           ${cover ? `style="background-image:url('${cover}');background-size:cover;background-position:center;"` : ''}
         >
           ${cover ? '' : '<div class="orb"></div>'}
+        <!-- Botón translúcido de lujo -->
+        <button type="button" 
+          aria-label="Descubrir ${mainTitle}" 
+          data-modal-project='${JSON.stringify({
+            title: project.title,
+            cover: project.cover,
+            gallery: project.gallery,
+            body: project.body,
+            sector: project.sector,
+            ciudad: project.ciudad,
+            estado: project.estado,
+            direccion: project.direccion,
+            precio: project.precio,
+            area: project.area,
+            habitaciones: project.habitaciones,
+            banos: project.banos,
+            parqueaderos: project.parqueaderos,
+            pdf: project.pdf,
+            mapa: project.mapa
+          }).replace(/'/g, "&#39;").replace(/"/g, "&quot;")}' 
+          onclick="CMSProjectModal.open(JSON.parse(this.dataset.modalProject))" 
+          style="position:absolute; inset:0; width:100%; height:100%; background:rgba(0,0,0,0); color:#fff; border:none; opacity:0; transition:all 0.6s cubic-bezier(0.16, 1, 0.3, 1); cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(0px); -webkit-backdrop-filter:blur(0px); z-index:2; text-decoration:none;" 
+          onmouseover="this.style.opacity='1'; this.style.background='rgba(15,23,30,0.3)'; this.style.backdropFilter='blur(8px)'; this.style.webkitBackdropFilter='blur(8px)';" 
+          onmouseout="this.style.opacity='0'; this.style.background='rgba(0,0,0,0)'; this.style.backdropFilter='blur(0px)'; this.style.webkitBackdropFilter='blur(0px)';">
+          <span style="font-size:0.75rem; font-weight:400; letter-spacing:0.25em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,0.4); padding-bottom:6px; transition:border-color 0.4s ease;" onmouseover="this.style.borderColor='rgba(255,255,255,1)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.4)'">
+            Descubrir
+          </span>
+        </button>
         </div>
 
 
@@ -259,39 +287,34 @@
           </div>
         </div>
       </div>
-    `;
+    `
   }
 
-  async function loadCmsProjects() {
+  async function loadCmsProjects () {
     try {
-      console.log('[CMS] Buscando proyectos en GitHub...');
 
       const response = await fetch(GITHUB_API, {
         headers: {
           Accept: 'application/vnd.github+json'
         },
         cache: 'no-store'
-      });
+      })
 
       if (!response.ok) {
         throw new Error(
           'GitHub respondió con HTTP ' + response.status
-        );
+        )
       }
 
-      const files = await response.json();
+      const files = await response.json()
 
       const markdownFiles = files.filter(function (file) {
         return (
           file.type === 'file' &&
           file.name.toLowerCase().endsWith('.md')
-        );
-      });
+        )
+      })
 
-      console.log(
-        '[CMS] Archivos Markdown encontrados:',
-        markdownFiles.length
-      );
 
       const projects = await Promise.all(
         markdownFiles.map(async function (file) {
@@ -300,24 +323,24 @@
             {
               cache: 'no-store'
             }
-          );
+          )
 
           if (!rawResponse.ok) {
             throw new Error(
               'No se pudo leer ' + file.name
-            );
+            )
           }
 
-          const text = await rawResponse.text();
-          const parsed = parseFrontMatter(text);
+          const text = await rawResponse.text()
+          const parsed = parseFrontMatter(text)
 
           if (!parsed) {
             console.warn(
               '[CMS] Front Matter inválido:',
               file.name
-            );
+            )
 
-            return null;
+            return null
           }
 
           return {
@@ -325,38 +348,37 @@
             body: parsed.body,
             slug: file.name.replace(/\.md$/i, ''),
             source: file.path
-          };
+          }
         })
-      );
+      )
 
-      return projects.filter(Boolean);
-
+      return projects.filter(Boolean)
     } catch (error) {
       console.warn(
         '[CMS] No se pudieron cargar los proyectos:',
         error
-      );
+      )
 
-      return [];
+      return []
     }
   }
 
-  async function renderCmsProjects() {
-    const section = document.getElementById('proyectos');
+  async function renderCmsProjects () {
+    const section = document.getElementById('proyectos')
 
     if (!section) {
-      console.warn('[CMS] No existe #proyectos.');
-      return;
+      console.warn('[CMS] No existe #proyectos.')
+      return
     }
 
-    const grid = section.querySelector('.grid');
+    const grid = section.querySelector('.grid')
 
     if (!grid) {
-      console.warn('[CMS] No existe .grid dentro de #proyectos.');
-      return;
+      console.warn('[CMS] No existe .grid dentro de #proyectos.')
+      return
     }
 
-    const projects = await loadCmsProjects();
+    const projects = await loadCmsProjects()
 
     /*
      * Seguridad:
@@ -366,28 +388,24 @@
     if (!projects.length) {
       console.warn(
         '[CMS] No hay proyectos CMS. Grid vacío.'
-      );
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-lt);font-family:var(--f-serif);font-size:1.2rem;">No se pudieron cargar los proyectos. <a href="#" onclick="location.reload()" style="color:var(--rose);text-decoration:underline;">Recargar</a></div>';
-      return;
+      )
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-lt);font-family:var(--f-serif);font-size:1.2rem;">No se pudieron cargar los proyectos. <a href="#" onclick="location.reload()" style="color:var(--rose);text-decoration:underline;">Recargar</a></div>'
+      return
     }
 
-    console.log(
       '[CMS] Renderizando',
-      projects.length,
-      'proyectos.'
-    );
 
     grid.innerHTML = projects
       .map(renderProjectCard)
-      .join('');
+      .join('')
 
     /*
      * Volvemos a activar los efectos visuales
      * de las tarjetas creadas dinámicamente.
      */
     grid.querySelectorAll('.reveal').forEach(function (element) {
-      element.classList.add('vis');
-    });
+      element.classList.add('vis')
+    })
 
     grid.querySelectorAll('.orb').forEach(function (orb) {
       if (window.IntersectionObserver) {
@@ -397,15 +415,15 @@
               entry.target.classList.toggle(
                 'paused',
                 !entry.isIntersecting
-              );
-            });
+              )
+            })
           },
           { threshold: 0.1 }
-        );
+        )
 
-        observer.observe(orb);
+        observer.observe(orb)
       }
-    });
+    })
 
     /*
      * Analytics para botones creados por el CMS.
@@ -421,19 +439,18 @@
               element_text:
                 this.textContent.trim().substring(0, 50)
             }
-          );
+          )
         }
-      });
-    });
+      })
+    })
   }
 
   window.cmsProjects = {
     load: loadCmsProjects,
     render: renderCmsProjects,
-    parseFrontMatter: parseFrontMatter
-  };
+    parseFrontMatter
+  }
 
-  console.log('[CMS] Adaptador cargado correctamente.');
 
   /*
    * Esperamos a que el HTML esté disponible.
@@ -442,9 +459,8 @@
     document.addEventListener(
       'DOMContentLoaded',
       renderCmsProjects
-    );
+    )
   } else {
-    renderCmsProjects();
+    renderCmsProjects()
   }
-
-})();
+})()

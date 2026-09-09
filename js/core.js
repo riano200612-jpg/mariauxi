@@ -184,259 +184,258 @@ const translations = {
     footer_alliances: 'Partnerships',
     footer_rights: 'All rights reserved.'
   }
-};
+}
 
-function switchLanguage(lang) {
-  if (!translations[lang]) return;
-  document.documentElement.lang = lang === 'es' ? 'es-CO' : 'en-US';
+function switchLanguage (lang) {
+  if (!translations[lang]) return
+  document.documentElement.lang = lang === 'es' ? 'es-CO' : 'en-US'
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
+    const key = el.getAttribute('data-i18n')
     if (translations[lang][key] !== undefined) {
-      el.innerHTML = translations[lang][key];
+      el.innerHTML = translations[lang][key]
     }
-  });
+  })
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
+    const key = el.getAttribute('data-i18n-placeholder')
     if (translations[lang][key] !== undefined) {
-      el.setAttribute('placeholder', translations[lang][key]);
+      el.setAttribute('placeholder', translations[lang][key])
     }
-  });
+  })
   document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-  });
-  try { localStorage.setItem('preferredLanguage', lang); } catch(e) {}
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang)
+  })
+  try { localStorage.setItem('preferredLanguage', lang) } catch (e) {}
   if (typeof trackEvent === 'function') {
-    trackEvent('language_change', { language: lang });
+    trackEvent('language_change', { language: lang })
   }
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    const lang = this.getAttribute('data-lang');
-    switchLanguage(lang);
-  });
-});
+  btn.addEventListener('click', function (e) {
+    e.preventDefault()
+    const lang = this.getAttribute('data-lang')
+    switchLanguage(lang)
+  })
+})
 
-document.addEventListener('DOMContentLoaded', function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlLang = urlParams.get('lang');
-  if (urlLang === 'en') { switchLanguage('en'); return; }
+document.addEventListener('DOMContentLoaded', function () {
+  const urlParams = new URLSearchParams(window.location.search)
+  const urlLang = urlParams.get('lang')
+  if (urlLang === 'en') { switchLanguage('en'); return }
   try {
-    const savedLang = localStorage.getItem('preferredLanguage');
+    const savedLang = localStorage.getItem('preferredLanguage')
     if (savedLang && (savedLang === 'es' || savedLang === 'en')) {
-      switchLanguage(savedLang);
+      switchLanguage(savedLang)
     }
-  } catch(e) {}
-});
+  } catch (e) {}
+})
 
-const menuToggle = document.querySelector('.menu-toggle');
-const mobileDrawer = document.querySelector('.mobile-drawer');
-const overlayMenu = document.querySelector('.overlay-menu');
+const menuToggle = document.querySelector('.menu-toggle')
+const mobileDrawer = document.querySelector('.mobile-drawer')
+const overlayMenu = document.querySelector('.overlay-menu')
 
-function toggleMenu() {
-  menuToggle.classList.toggle('active');
-  mobileDrawer.classList.toggle('active');
-  overlayMenu.classList.toggle('active');
-  menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active'));
+function toggleMenu () {
+  menuToggle.classList.toggle('active')
+  mobileDrawer.classList.toggle('active')
+  overlayMenu.classList.toggle('active')
+  menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active'))
 }
 
-menuToggle.addEventListener('click', toggleMenu);
-overlayMenu.addEventListener('click', toggleMenu);
-document.querySelectorAll('.mobile-drawer a').forEach(link => link.addEventListener('click', toggleMenu));
+menuToggle.addEventListener('click', toggleMenu)
+overlayMenu.addEventListener('click', toggleMenu)
+document.querySelectorAll('.mobile-drawer a').forEach(link => link.addEventListener('click', toggleMenu))
 
 const revealObs = new IntersectionObserver((entries, obs) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.classList.add('vis');
-      obs.unobserve(e.target);
+      e.target.classList.add('vis')
+      obs.unobserve(e.target)
     }
-  });
-}, { threshold: 0.1 });
+  })
+}, { threshold: 0.1 })
 
-document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el))
 
-const navEl = document.querySelector('nav');
-const progressBar = document.getElementById('progress-bar');
-let ticking = false;
+const navEl = document.querySelector('nav')
+const progressBar = document.getElementById('progress-bar')
+let ticking = false
 
 window.addEventListener('scroll', () => {
-  if (ticking) return;
+  if (ticking) return
   window.requestAnimationFrame(() => {
-    const currentScroll = window.scrollY;
-    navEl.classList.toggle('scrolled', currentScroll > 60);
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const height = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = height > 0 ? (scrollTop / height) * 100 : 0;
+    const currentScroll = window.scrollY
+    navEl.classList.toggle('scrolled', currentScroll > 60)
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    const height = document.documentElement.scrollHeight - window.innerHeight
+    const progress = height > 0 ? (scrollTop / height) * 100 : 0
     if (progressBar) {
-      progressBar.style.width = progress + '%';
-      progressBar.setAttribute('aria-valuenow', Math.round(progress));
+      progressBar.style.width = progress + '%'
+      progressBar.setAttribute('aria-valuenow', Math.round(progress))
     }
     if (progress >= 75 && !window.scroll75Tracked) {
-      window.scroll75Tracked = true;
-      trackEvent('scroll_depth', { percent: 75 });
+      window.scroll75Tracked = true
+      trackEvent('scroll_depth', { percent: 75 })
     }
     if (progress >= 90 && !window.scroll90Tracked) {
-      window.scroll90Tracked = true;
-      trackEvent('scroll_depth', { percent: 90 });
+      window.scroll90Tracked = true
+      trackEvent('scroll_depth', { percent: 90 })
     }
-    ticking = false;
-  });
-  ticking = true;
-}, { passive: true });
+    ticking = false
+  })
+  ticking = true
+}, { passive: true })
 
-const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches
 
 if (hoverCapable) {
   document.querySelectorAll('.card').forEach(card => {
-    let rafId = null;
+    let rafId = null
     card.addEventListener('pointermove', e => {
-      if (rafId) return;
+      if (rafId) return
       rafId = requestAnimationFrame(() => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `translateY(-3px) rotateX(${-y * 2.2}deg) rotateY(${x * 2.2}deg) translateZ(0)`;
-        rafId = null;
-      });
-    });
+        const r = card.getBoundingClientRect()
+        const x = (e.clientX - r.left) / r.width - 0.5
+        const y = (e.clientY - r.top) / r.height - 0.5
+        card.style.transform = `translateY(-3px) rotateX(${-y * 2.2}deg) rotateY(${x * 2.2}deg) translateZ(0)`
+        rafId = null
+      })
+    })
     card.addEventListener('pointerleave', () => {
-      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-      card.style.transform = 'translateY(-3px) translateZ(0)';
-    });
-  });
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null }
+      card.style.transform = 'translateY(-3px) translateZ(0)'
+    })
+  })
 }
 
-function safePlay(vid) {
-  if (!vid) return;
-  vid.muted = true;
-  vid.loop = true;
+function safePlay (vid) {
+  if (!vid) return
+  vid.muted = true
+  vid.loop = true
   const playAttempt = () => {
-    const p = vid.play();
-    if (p && typeof p.catch === 'function') p.catch(() => {});
-  };
+    const p = vid.play()
+    if (p && typeof p.catch === 'function') p.catch(() => {})
+  }
   if (vid.readyState >= 2) {
-    playAttempt();
+    playAttempt()
   } else {
-    vid.addEventListener('loadedmetadata', playAttempt, { once: true });
+    vid.addEventListener('loadedmetadata', playAttempt, { once: true })
   }
 }
 
-document.querySelectorAll('#hero-video-bg video').forEach(v => safePlay(v));
+document.querySelectorAll('#hero-video-bg video').forEach(v => safePlay(v))
 
 const vidObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    const v = entry.target;
+    const v = entry.target
     if (entry.isIntersecting && entry.intersectionRatio > 0) {
-      v.loop = true;
-      v.muted = true;
-      const playPromise = v.play();
+      v.loop = true
+      v.muted = true
+      const playPromise = v.play()
       if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {})
       }
       trackEvent('video_play', {
         video_name: v.querySelector('source')?.src.split('/').pop() || 'unknown',
         video_location: v.closest('section')?.id || 'unknown'
-      });
+      })
     } else {
-      v.pause();
+      v.pause()
     }
-  });
-}, { threshold: [0, 0.1], rootMargin: '0px 0px 100px 0px' });
+  })
+}, { threshold: [0, 0.1], rootMargin: '0px 0px 100px 0px' })
 
-document.querySelectorAll('video[preload="none"]').forEach(v => vidObs.observe(v));
+document.querySelectorAll('video[preload="none"]').forEach(v => vidObs.observe(v))
 
-const svgMuted = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>';
-const svgSound = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+const svgMuted = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>'
+const svgSound = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>'
 
 document.querySelectorAll('.video-phone').forEach(card => {
-  const video = card.querySelector('video');
-  const btn = card.querySelector('.video-sound-btn');
-  if (!video || !btn) return;
+  const video = card.querySelector('video')
+  const btn = card.querySelector('.video-sound-btn')
+  if (!video || !btn) return
   const paint = () => {
-    btn.innerHTML = video.muted ? svgMuted : svgSound;
-    btn.setAttribute('aria-pressed', String(!video.muted));
-    btn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Mute video');
-  };
-  paint();
+    btn.innerHTML = video.muted ? svgMuted : svgSound
+    btn.setAttribute('aria-pressed', String(!video.muted))
+    btn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Mute video')
+  }
+  paint()
   btn.addEventListener('click', () => {
-    video.muted = !video.muted;
-    paint();
+    video.muted = !video.muted
+    paint()
     if (!video.muted) {
-      const playPromise = video.play();
+      const playPromise = video.play()
       if (playPromise && typeof playPromise.catch === 'function') {
         playPromise.catch(() => {
-          video.muted = true;
-          paint();
-        });
+          video.muted = true
+          paint()
+        })
       }
     }
-  });
-});
+  })
+})
 
 const orbObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    entry.target.classList.toggle('paused', !entry.isIntersecting);
-  });
-}, { threshold: 0.1 });
+    entry.target.classList.toggle('paused', !entry.isIntersecting)
+  })
+}, { threshold: 0.1 })
 
-document.querySelectorAll('.orb').forEach(orb => orbObs.observe(orb));
+document.querySelectorAll('.orb').forEach(orb => orbObs.observe(orb))
 
 document.addEventListener('visibilitychange', () => {
   document.querySelectorAll('video').forEach(v => {
-    if (document.hidden) v.pause();
-  });
-});
+    if (document.hidden) v.pause()
+  })
+})
 
-function trackEvent(eventName, params = {}) {
-  window.dataLayer = window.dataLayer || [];
+function trackEvent (eventName, params = {}) {
+  window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
-    'event': eventName,
+    event: eventName,
     ...params
-  });
+  })
 }
 
 document.querySelectorAll('[data-track]').forEach(el => {
-  el.addEventListener('click', function() {
+  el.addEventListener('click', function () {
     trackEvent(this.getAttribute('data-track'), {
       project: this.getAttribute('data-project') || '',
       element_text: this.textContent.trim().substring(0, 50)
-    });
-  });
-});
+    })
+  })
+})
 
 document.querySelectorAll('a[href*="wa.me"]').forEach(btn => {
   btn.addEventListener('click', () => {
     trackEvent('whatsapp_click', {
       project: btn.getAttribute('data-project') || 'general'
-    });
-  });
-});
+    })
+  })
+})
 
 document.querySelectorAll('a[href^="tel:"]').forEach(btn => {
   btn.addEventListener('click', () => {
     trackEvent('phone_click', {
       phone_number: btn.href.replace('tel:', '')
-    });
-  });
-});
+    })
+  })
+})
 
 document.querySelectorAll('a[href^="mailto:"]').forEach(btn => {
   btn.addEventListener('click', () => {
     trackEvent('email_click', {
       email_address: btn.href.replace('mailto:', '')
-    });
-  });
-});
+    })
+  })
+})
 
-const leadForm = document.getElementById('lead-form');
+const leadForm = document.getElementById('lead-form')
 if (leadForm) {
-  leadForm.addEventListener('submit', function() {
+  leadForm.addEventListener('submit', function () {
     trackEvent('generate_lead', {
       form_type: 'contacto',
       project: this.proyecto.value,
       interes: this.interes.value
-    });
-  });
+    })
+  })
 }
-

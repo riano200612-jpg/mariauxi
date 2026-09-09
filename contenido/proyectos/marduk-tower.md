@@ -12,7 +12,7 @@ banos: 0
 parqueaderos: 0
 mapa: ""
 cover: img/proyectos/marduk-cover.webp
-gallery: []
+gallery: ["/img/carrusel/marduk-tower/01_marduk_fachada_torre.webp", "/img/carrusel/marduk-tower/02_marduk_solarium_piscina.webp", "/img/carrusel/marduk-tower/03_marduk_gimnasio.webp", "/img/carrusel/marduk-tower/04_marduk_interior_apartamento.webp"]
 video: ""
 pdf: "docum/marduk-book-digital-2026.pdf"
 seo:

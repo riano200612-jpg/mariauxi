@@ -1,9 +1,9 @@
 (function () {
-  'use strict';
+  'use strict'
 
-  let projectGalleries = {};
-  let currentProjectImages = [];
-  let currentIndex = 0;
+  let projectGalleries = {}
+  let currentProjectImages = []
+  let currentIndex = 0
 
   const projects = {
     'Oporto Tower': {
@@ -30,139 +30,139 @@
       tag: 'INMOBILIARIA',
       desc: 'Arquitectura imponente con amenidades de primer nivel en el corazón de Cartagena.'
     }
-  };
+  }
 
   // Elementos del modal (se resuelven en DOMContentLoaded)
-  let modalOverlay, modalImagen, modalCounter, modalTag, modalTitulo, modalDesc;
-  let btnPrev, btnNext, btnClose;
+  let modalOverlay, modalImagen, modalCounter, modalTag, modalTitulo, modalDesc
+  let btnPrev, btnNext, btnClose
 
-  function cargarGalerias() {
-    const dataEl = document.getElementById('lux-project-galleries-data');
-    if (!dataEl) return;
+  function cargarGalerias () {
+    const dataEl = document.getElementById('lux-project-galleries-data')
+    if (!dataEl) return
     try {
-      projectGalleries = JSON.parse(dataEl.textContent);
+      projectGalleries = JSON.parse(dataEl.textContent)
     } catch (err) {
-      console.error('No se pudo parsear lux-project-galleries-data:', err);
-      projectGalleries = {};
+      console.error('No se pudo parsear lux-project-galleries-data:', err)
+      projectGalleries = {}
     }
   }
 
-  function actualizarImagenModal() {
-    if (!currentProjectImages.length) return;
+  function actualizarImagenModal () {
+    if (!currentProjectImages.length) return
 
-    if (currentIndex < 0) currentIndex = currentProjectImages.length - 1;
-    if (currentIndex >= currentProjectImages.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = currentProjectImages.length - 1
+    if (currentIndex >= currentProjectImages.length) currentIndex = 0
 
-    modalImagen.src = currentProjectImages[currentIndex];
-    modalImagen.alt = modalTitulo.textContent || '';
-    modalCounter.textContent = (currentIndex + 1) + ' / ' + currentProjectImages.length;
+    modalImagen.src = currentProjectImages[currentIndex]
+    modalImagen.alt = modalTitulo.textContent || ''
+    modalCounter.textContent = (currentIndex + 1) + ' / ' + currentProjectImages.length
   }
 
-  function mostrarSiguiente() {
-    currentIndex++;
-    actualizarImagenModal();
+  function mostrarSiguiente () {
+    currentIndex++
+    actualizarImagenModal()
   }
 
-  function mostrarAnterior() {
-    currentIndex--;
-    actualizarImagenModal();
+  function mostrarAnterior () {
+    currentIndex--
+    actualizarImagenModal()
   }
 
-  function abrirModal(nombreProyecto) {
-    const info = projects[nombreProyecto];
+  function abrirModal (nombreProyecto) {
+    const info = projects[nombreProyecto]
     if (!info) {
-      console.warn('Proyecto no encontrado:', nombreProyecto);
-      return;
+      console.warn('Proyecto no encontrado:', nombreProyecto)
+      return
     }
 
-    currentProjectImages = projectGalleries[info.key] || [];
-    currentIndex = 0;
+    currentProjectImages = projectGalleries[info.key] || []
+    currentIndex = 0
 
-    modalTag.textContent = info.tag;
-    modalTitulo.textContent = info.titulo;
-    modalDesc.textContent = info.desc;
+    modalTag.textContent = info.tag
+    modalTitulo.textContent = info.titulo
+    modalDesc.textContent = info.desc
 
-    actualizarImagenModal();
+    actualizarImagenModal()
 
-    modalOverlay.classList.add('modal-activo');
-    modalOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    modalOverlay.classList.add('modal-activo')
+    modalOverlay.setAttribute('aria-hidden', 'false')
+    document.body.style.overflow = 'hidden'
 
-    btnClose && btnClose.focus();
+    btnClose && btnClose.focus()
   }
 
-  function cerrarModal() {
-    modalOverlay.classList.remove('modal-activo');
-    modalOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+  function cerrarModal () {
+    modalOverlay.classList.remove('modal-activo')
+    modalOverlay.setAttribute('aria-hidden', 'true')
+    document.body.style.overflow = ''
   }
 
-  function manejarTeclado(event) {
-    if (!modalOverlay.classList.contains('modal-activo')) return;
+  function manejarTeclado (event) {
+    if (!modalOverlay.classList.contains('modal-activo')) return
 
     if (event.key === 'Escape') {
-      cerrarModal();
+      cerrarModal()
     } else if (event.key === 'ArrowRight') {
-      mostrarSiguiente();
+      mostrarSiguiente()
     } else if (event.key === 'ArrowLeft') {
-      mostrarAnterior();
+      mostrarAnterior()
     }
   }
 
-  function init() {
-    cargarGalerias();
+  function init () {
+    cargarGalerias()
 
-    modalOverlay = document.getElementById('modal-proyecto');
-    if (!modalOverlay) return;
+    modalOverlay = document.getElementById('modal-proyecto')
+    if (!modalOverlay) return
 
-    modalImagen = document.getElementById('modal-imagen');
-    modalCounter = document.getElementById('modal-counter');
-    modalTag = document.getElementById('lux-modal-tag');
-    modalTitulo = document.getElementById('modal-titulo');
-    modalDesc = document.getElementById('lux-modal-desc');
-    btnClose = document.getElementById('lux-modal-close-btn');
-    btnPrev = modalOverlay.querySelector('.lux-gallery-btn.prev');
-    btnNext = modalOverlay.querySelector('.lux-gallery-btn.next');
+    modalImagen = document.getElementById('modal-imagen')
+    modalCounter = document.getElementById('modal-counter')
+    modalTag = document.getElementById('lux-modal-tag')
+    modalTitulo = document.getElementById('modal-titulo')
+    modalDesc = document.getElementById('lux-modal-desc')
+    btnClose = document.getElementById('lux-modal-close-btn')
+    btnPrev = modalOverlay.querySelector('.lux-gallery-btn.prev')
+    btnNext = modalOverlay.querySelector('.lux-gallery-btn.next')
 
-    btnClose && btnClose.addEventListener('click', cerrarModal);
-    btnPrev && btnPrev.addEventListener('click', mostrarAnterior);
-    btnNext && btnNext.addEventListener('click', mostrarSiguiente);
+    btnClose && btnClose.addEventListener('click', cerrarModal)
+    btnPrev && btnPrev.addEventListener('click', mostrarAnterior)
+    btnNext && btnNext.addEventListener('click', mostrarSiguiente)
 
     modalOverlay.addEventListener('click', function (event) {
       if (event.target === modalOverlay) {
-        cerrarModal();
+        cerrarModal()
       }
-    });
+    })
 
-    document.addEventListener('keydown', manejarTeclado);
+    document.addEventListener('keydown', manejarTeclado)
 
     // Soporte básico de swipe en móvil dentro del wrap de imagen
-    const imgWrap = modalOverlay.querySelector('.lux-modal-img-wrap');
+    const imgWrap = modalOverlay.querySelector('.lux-modal-img-wrap')
     if (imgWrap) {
-      let touchStartX = 0;
+      let touchStartX = 0
       imgWrap.addEventListener('touchstart', function (event) {
-        touchStartX = event.changedTouches[0].screenX;
-      }, { passive: true });
+        touchStartX = event.changedTouches[0].screenX
+      }, { passive: true })
 
       imgWrap.addEventListener('touchend', function (event) {
-        const touchEndX = event.changedTouches[0].screenX;
-        const delta = touchEndX - touchStartX;
-        if (Math.abs(delta) < 50) return;
+        const touchEndX = event.changedTouches[0].screenX
+        const delta = touchEndX - touchStartX
+        if (Math.abs(delta) < 50) return
         if (delta < 0) {
-          mostrarSiguiente();
+          mostrarSiguiente()
         } else {
-          mostrarAnterior();
+          mostrarAnterior()
         }
-      }, { passive: true });
+      }, { passive: true })
     }
   }
 
   // Expuesta globalmente porque el HTML usa onclick="openLuxModal('...')"
-  window.openLuxModal = abrirModal;
+  window.openLuxModal = abrirModal
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', init)
   } else {
-    init();
+    init()
   }
-})();
+})()

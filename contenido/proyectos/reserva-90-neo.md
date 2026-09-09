@@ -12,7 +12,7 @@ banos: 0
 parqueaderos: 0
 mapa: ""
 cover: img/proyectos/reserva-cover.webp
-gallery: []
+gallery: ["/img/carrusel/reserva neo-tower/01-exterior-atardecer.jpg", "/img/carrusel/reserva neo-tower/02-piscina-y-fachada.jpg", "/img/carrusel/reserva neo-tower/03-vista-aerea-proyecto.jpg", "/img/carrusel/reserva neo-tower/04-gimnasio.jpg", "/img/carrusel/reserva neo-tower/05-interior-apartamento.jpg"]
 video: ""
 pdf: "docum/reserva-90-NEO-book-digital.pdf"
 seo:

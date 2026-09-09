@@ -12,7 +12,7 @@ banos: 0
 parqueaderos: 0
 mapa: ""
 cover: img/proyectos/oporto-cover.webp
-gallery: []
+gallery: ["/img/carrusel/oporto-tower/01-fachada-principal.jpg", "/img/carrusel/oporto-tower/02-vista-aerea.jpg", "/img/carrusel/oporto-tower/03-fachadas-al-atardecer.jpg", "/img/carrusel/oporto-tower/04-terraza-mirador.jpg", "/img/carrusel/oporto-tower/05-zona-infantil.jpg", "/img/carrusel/oporto-tower/06-sala-apartamento.jpg", "/img/carrusel/oporto-tower/07-gimnasio.jpg", "/img/carrusel/oporto-tower/08-cocina-apartamento.jpg"]
 video: ""
 pdf: "docum/oporto-book-digital.pdf"
 seo:
