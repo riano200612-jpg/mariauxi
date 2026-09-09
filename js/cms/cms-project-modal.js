@@ -122,7 +122,7 @@
     )
 
     const mediaContainer = modal.querySelector('.cms-project-modal__media')
-    const images = (project.gallery && project.gallery.length > 0) ? project.gallery : (image ? [image] : [])
+    const images = Array.isArray(project.gallery) && project.gallery.length > 0 ? project.gallery : (image ? [image] : [])
     
     mediaContainer.innerHTML = '<style>.lux-scroll::-webkit-scrollbar { display: none; }</style>' +
       '<div class="lux-scroll" style="display:flex; overflow-x:auto; scroll-snap-type: x mandatory; width:100%; height:100%; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">' + 
