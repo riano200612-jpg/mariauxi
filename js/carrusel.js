@@ -12,221 +12,157 @@
       tag: 'INMOBILIARIA',
       desc: 'Exclusivo diseño arquitectónico con acabados de alta gama y vistas panorámicas excepcionales.'
     },
-
     'Reserva 90 NEO': {
       key: 'reserva-90',
       titulo: 'Reserva 90 NEO',
       tag: 'INMOBILIARIA',
-      desc: 'Modernidad y confort en una ubicación privilegiada con zonas sociales incomparables.'
+      desc: 'Un concepto residencial contemporáneo que combina confort, naturaleza y diseño de vanguardia.'
     },
-
     'Ítaca Tower': {
       key: 'itaca',
       titulo: 'Ítaca Tower',
       tag: 'INMOBILIARIA',
-      desc: 'Vanguardia y elegancia diseñadas para maximizar tu estilo de vida y bienestar diario.'
+      desc: 'Vistas privilegiadas y espacios pensados para una vida frente al mar.'
     },
-
     'Marduk Tower': {
       key: 'marduk',
       titulo: 'Marduk Tower',
       tag: 'INMOBILIARIA',
-      desc: 'Espacios sofisticados pensados para la exclusividad, el confort y la alta valorización.'
+      desc: 'Arquitectura imponente con amenidades de primer nivel en el corazón de Cartagena.'
     }
   };
 
-  function cargarDatosGalerias() {
-    const elemento = document.getElementById('lux-project-galleries-data');
+  // Elementos del modal (se resuelven en DOMContentLoaded)
+  let modalOverlay, modalImagen, modalCounter, modalTag, modalTitulo, modalDesc;
+  let btnPrev, btnNext, btnClose;
 
-    if (!elemento) {
-      console.error('[Carrusel] No existe #lux-project-galleries-data');
-      return;
-    }
-
+  function cargarGalerias() {
+    const dataEl = document.getElementById('lux-project-galleries-data');
+    if (!dataEl) return;
     try {
-      projectGalleries = JSON.parse(elemento.textContent || '{}');
-      console.log('[Carrusel] Galerías cargadas:', projectGalleries);
-    } catch (error) {
-      console.error('[Carrusel] Error leyendo galerías:', error);
+      projectGalleries = JSON.parse(dataEl.textContent);
+    } catch (err) {
+      console.error('No se pudo parsear lux-project-galleries-data:', err);
+      projectGalleries = {};
     }
   }
 
-  function actualizarImagen() {
-    const imagen = document.getElementById('modal-imagen');
-    const contador = document.getElementById('modal-counter');
+  function actualizarImagenModal() {
+    if (!currentProjectImages.length) return;
 
-    if (!imagen || !currentProjectImages.length) return;
+    if (currentIndex < 0) currentIndex = currentProjectImages.length - 1;
+    if (currentIndex >= currentProjectImages.length) currentIndex = 0;
 
-    imagen.src = currentProjectImages[currentIndex];
-    imagen.alt = `Imagen ${currentIndex + 1} de ${currentProjectImages.length}`;
+    modalImagen.src = currentProjectImages[currentIndex];
+    modalImagen.alt = modalTitulo.textContent || '';
+    modalCounter.textContent = (currentIndex + 1) + ' / ' + currentProjectImages.length;
+  }
 
-    if (contador) {
-      contador.textContent =
-        `${currentIndex + 1} / ${currentProjectImages.length}`;
-    }
+  function mostrarSiguiente() {
+    currentIndex++;
+    actualizarImagenModal();
+  }
+
+  function mostrarAnterior() {
+    currentIndex--;
+    actualizarImagenModal();
   }
 
   function abrirModal(nombreProyecto) {
-    const proyecto = projects[nombreProyecto];
-
-    if (!proyecto) {
-      console.warn('[Carrusel] Proyecto no encontrado:', nombreProyecto);
+    const info = projects[nombreProyecto];
+    if (!info) {
+      console.warn('Proyecto no encontrado:', nombreProyecto);
       return;
     }
 
-    const imagenes = projectGalleries[proyecto.key];
-
-    if (!Array.isArray(imagenes) || !imagenes.length) {
-      console.warn(
-        `[Carrusel] No hay imágenes para ${nombreProyecto}`
-      );
-      return;
-    }
-
-    currentProjectImages = imagenes;
+    currentProjectImages = projectGalleries[info.key] || [];
     currentIndex = 0;
 
-    const modal = document.getElementById('modal-proyecto');
-    const titulo = document.getElementById('modal-titulo');
-    const tag = document.getElementById('lux-modal-tag');
-    const desc = document.getElementById('lux-modal-desc');
+    modalTag.textContent = info.tag;
+    modalTitulo.textContent = info.titulo;
+    modalDesc.textContent = info.desc;
 
-    if (!modal) {
-      console.error('[Carrusel] No existe #modal-proyecto');
-      return;
-    }
+    actualizarImagenModal();
 
-    if (titulo) titulo.textContent = proyecto.titulo;
-    if (tag) tag.textContent = proyecto.tag;
-    if (desc) desc.textContent = proyecto.desc;
+    modalOverlay.classList.add('modal-activo');
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
 
-    actualizarImagen();
-
-    modal.classList.add('modal-activo');
-    document.body.classList.add('lux-modal-open');
+    btnClose && btnClose.focus();
   }
 
   function cerrarModal() {
-    const modal = document.getElementById('modal-proyecto');
+    modalOverlay.classList.remove('modal-activo');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
 
-    if (modal) {
-      modal.classList.remove('modal-activo');
+  function manejarTeclado(event) {
+    if (!modalOverlay.classList.contains('modal-activo')) return;
+
+    if (event.key === 'Escape') {
+      cerrarModal();
+    } else if (event.key === 'ArrowRight') {
+      mostrarSiguiente();
+    } else if (event.key === 'ArrowLeft') {
+      mostrarAnterior();
     }
-
-    document.body.classList.remove('lux-modal-open');
-
-    currentProjectImages = [];
-    currentIndex = 0;
   }
 
-  function siguienteImagen() {
-    if (!currentProjectImages.length) return;
+  function init() {
+    cargarGalerias();
 
-    currentIndex =
-      (currentIndex + 1) % currentProjectImages.length;
+    modalOverlay = document.getElementById('modal-proyecto');
+    if (!modalOverlay) return;
 
-    actualizarImagen();
-  }
+    modalImagen = document.getElementById('modal-imagen');
+    modalCounter = document.getElementById('modal-counter');
+    modalTag = document.getElementById('lux-modal-tag');
+    modalTitulo = document.getElementById('modal-titulo');
+    modalDesc = document.getElementById('lux-modal-desc');
+    btnClose = document.getElementById('lux-modal-close-btn');
+    btnPrev = modalOverlay.querySelector('.lux-gallery-btn.prev');
+    btnNext = modalOverlay.querySelector('.lux-gallery-btn.next');
 
-  function anteriorImagen() {
-    if (!currentProjectImages.length) return;
+    btnClose && btnClose.addEventListener('click', cerrarModal);
+    btnPrev && btnPrev.addEventListener('click', mostrarAnterior);
+    btnNext && btnNext.addEventListener('click', mostrarSiguiente);
 
-    currentIndex =
-      (currentIndex - 1 + currentProjectImages.length) %
-      currentProjectImages.length;
-
-    actualizarImagen();
-  }
-
-  window.openLuxModal = abrirModal;
-  window.cerrarModal = cerrarModal;
-  window.closeLuxModal = cerrarModal;
-  window.nextModalImage = siguienteImagen;
-  window.prevModalImage = anteriorImagen;
-
-  document.addEventListener('DOMContentLoaded', function () {
-    cargarDatosGalerias();
-
-    const modal = document.getElementById('modal-proyecto');
-    const closeButton = document.getElementById('lux-modal-close-btn');
-    const nextButton = document.querySelector('.lux-gallery-btn.next');
-    const prevButton = document.querySelector('.lux-gallery-btn.prev');
-    const imagen = document.getElementById('modal-imagen');
-
-    /* Botón X */
-    if (closeButton) {
-      closeButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+    modalOverlay.addEventListener('click', function (event) {
+      if (event.target === modalOverlay) {
         cerrarModal();
-      });
-    }
-
-    /* Fondo del modal */
-    if (modal) {
-      modal.addEventListener('click', function (event) {
-        if (event.target === modal) {
-          cerrarModal();
-        }
-      });
-    }
-
-    /* Flechas */
-    if (nextButton) {
-      nextButton.addEventListener('click', function (event) {
-        event.stopPropagation();
-        siguienteImagen();
-      });
-    }
-
-    if (prevButton) {
-      prevButton.addEventListener('click', function (event) {
-        event.stopPropagation();
-        anteriorImagen();
-      });
-    }
-
-    /* Teclado */
-    document.addEventListener('keydown', function (event) {
-      if (!modal || !modal.classList.contains('modal-activo')) {
-        return;
       }
-
-      if (event.key === 'Escape') cerrarModal();
-      if (event.key === 'ArrowRight') siguienteImagen();
-      if (event.key === 'ArrowLeft') anteriorImagen();
     });
 
-    /* Swipe móvil */
-    if (imagen) {
+    document.addEventListener('keydown', manejarTeclado);
+
+    // Soporte básico de swipe en móvil dentro del wrap de imagen
+    const imgWrap = modalOverlay.querySelector('.lux-modal-img-wrap');
+    if (imgWrap) {
       let touchStartX = 0;
-      let touchEndX = 0;
+      imgWrap.addEventListener('touchstart', function (event) {
+        touchStartX = event.changedTouches[0].screenX;
+      }, { passive: true });
 
-      imagen.addEventListener(
-        'touchstart',
-        function (event) {
-          touchStartX = event.changedTouches[0].screenX;
-        },
-        { passive: true }
-      );
-
-      imagen.addEventListener(
-        'touchend',
-        function (event) {
-          touchEndX = event.changedTouches[0].screenX;
-
-          const distancia = touchEndX - touchStartX;
-
-          if (Math.abs(distancia) < 50) return;
-
-          if (distancia < 0) {
-            siguienteImagen();
-          } else {
-            anteriorImagen();
-          }
-        },
-        { passive: true }
-      );
+      imgWrap.addEventListener('touchend', function (event) {
+        const touchEndX = event.changedTouches[0].screenX;
+        const delta = touchEndX - touchStartX;
+        if (Math.abs(delta) < 50) return;
+        if (delta < 0) {
+          mostrarSiguiente();
+        } else {
+          mostrarAnterior();
+        }
+      }, { passive: true });
     }
-  });
+  }
+
+  // Expuesta globalmente porque el HTML usa onclick="openLuxModal('...')"
+  window.openLuxModal = abrirModal;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

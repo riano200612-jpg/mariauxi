@@ -1,67 +1,123 @@
 <script type="application/json" id="lux-project-galleries-data">
 {
-  "Oporto Tower": {
-    "titulo": "Oporto Tower",
-    "tag": "INMOBILIARIA",
-    "desc": "Galería exclusiva de Oporto Tower.",
-    "imagenes": ["/img/carrusel/oporto/oporto.jpeg"]
-  },
-  "Reserva 90 NEO": {
-    "titulo": "Reserva 90 NEO",
-    "tag": "INMOBILIARIA",
-    "desc": "Galería exclusiva de Reserva 90 NEO.",
-    "imagenes": ["/img/carrusel/reserva-90-neo/reserva-neo.jpeg"]
-  },
-  "Ítaca Tower": {
-    "titulo": "Ítaca Tower",
-    "tag": "INMOBILIARIA",
-    "desc": "Galería exclusiva de Ítaca Tower.",
-    "imagenes": ["/img/carrusel/itaca-tower/itaca.jpeg"]
-  },
-  "Marduk Tower": {
-    "titulo": "Marduk Tower",
-    "tag": "INMOBILIARIA",
-    "desc": "Galería exclusiva de Marduk Tower.",
-    "imagenes": ["/img/carrusel/marduk-tower/marduck.jpeg"]
-  }
+  "oporto": [
+    "/img/carrusel/oporto-tower/01-fachada-principal.jpg",
+    "/img/carrusel/oporto-tower/02-vista-aerea.jpg",
+    "/img/carrusel/oporto-tower/03-fachadas-al-atardecer.jpg",
+    "/img/carrusel/oporto-tower/04-terraza-mirador.jpg",
+    "/img/carrusel/oporto-tower/05-zona-infantil.jpg",
+    "/img/carrusel/oporto-tower/06-sala-apartamento.jpg",
+    "/img/carrusel/oporto-tower/07-gimnasio.jpg",
+    "/img/carrusel/oporto-tower/08-cocina-apartamento.jpg"
+  ],
+  "reserva-90": [
+    "/img/carrusel/reserva%20neo-tower/01-exterior-atardecer.jpg",
+    "/img/carrusel/reserva%20neo-tower/02-piscina-y-fachada.jpg",
+    "/img/carrusel/reserva%20neo-tower/03-vista-aerea-proyecto.jpg",
+    "/img/carrusel/reserva%20neo-tower/04-gimnasio.jpg",
+    "/img/carrusel/reserva%20neo-tower/05-interior-apartamento.jpg"
+  ],
+  "itaca": [
+    "/img/carrusel/itaca-tower/05_itaca_vista_balcon_panoramica.webp",
+    "/img/carrusel/itaca-tower/06_itaca_piscina.webp"
+  ],
+  "marduk": [
+    "/img/carrusel/marduk-tower/01_marduk_fachada_torre.webp",
+    "/img/carrusel/marduk-tower/02_marduk_solarium_piscina.webp",
+    "/img/carrusel/marduk-tower/03_marduk_gimnasio.webp",
+    "/img/carrusel/marduk-tower/04_marduk_interior_apartamento.webp"
+  ]
 }
 </script>
 
 <div class="lux-projects-section">
   <div class="lux-projects-grid">
+
     <div class="lux-project-card" onclick="openLuxModal('Oporto Tower')">
-      <div class="lux-card-media"><img src="/img/carrusel/oporto/oporto.jpeg" alt="Oporto Tower" loading="lazy"></div>
+      <div class="lux-card-media">
+        <img src="/img/carrusel/oporto-tower/01-fachada-principal.jpg"
+             alt="Oporto Tower"
+             loading="lazy">
+      </div>
       <button class="lux-glass-btn" type="button">Oporto Tower</button>
     </div>
+
     <div class="lux-project-card" onclick="openLuxModal('Reserva 90 NEO')">
-      <div class="lux-card-media"><img src="/img/carrusel/reserva-90-neo/reserva-neo.jpeg" alt="Reserva 90 NEO" loading="lazy"></div>
+      <div class="lux-card-media">
+        <img src="/img/carrusel/reserva%20neo-tower/01-exterior-atardecer.jpg"
+             alt="Reserva 90 NEO"
+             loading="lazy">
+      </div>
       <button class="lux-glass-btn" type="button">Reserva 90 NEO</button>
     </div>
+
     <div class="lux-project-card" onclick="openLuxModal('Ítaca Tower')">
-      <div class="lux-card-media"><img src="/img/carrusel/itaca-tower/itaca.jpeg" alt="Ítaca Tower" loading="lazy"></div>
+      <div class="lux-card-media">
+        <img src="/img/carrusel/itaca-tower/05_itaca_vista_balcon_panoramica.webp"
+             alt="Ítaca Tower"
+             loading="lazy">
+      </div>
       <button class="lux-glass-btn" type="button">Ítaca Tower</button>
     </div>
+
     <div class="lux-project-card" onclick="openLuxModal('Marduk Tower')">
-      <div class="lux-card-media"><img src="/img/carrusel/marduk-tower/marduck.jpeg" alt="Marduk Tower" loading="lazy"></div>
+      <div class="lux-card-media">
+        <img src="/img/carrusel/marduk-tower/01_marduk_fachada_torre.webp"
+             alt="Marduk Tower"
+             loading="lazy">
+      </div>
       <button class="lux-glass-btn" type="button">Marduk Tower</button>
     </div>
+
   </div>
 </div>
 
-<div id="modal-proyecto" class="modal-proyecto">
-  <div class="modal-content-wrapper">
-    <button class="lux-modal-cerrar" onclick="cerrarModal()">✕</button>
-    <h3 id="modal-titulo" style="margin-top:0;"></h3>
-    <div class="modal-info-content">
-      <p id="lux-modal-desc"></p>
-      <div style="margin: 15px 0; text-align:center;">
-        <img id="modal-imagen" src="" alt="Vista previa" style="max-height:300px; width:100%; object-fit:cover; border-radius:6px;">
-        <div id="modal-counter" style="margin-top:8px; font-size:0.85rem; color:#666;"></div>
+<div id="modal-proyecto" class="lux-modal-overlay" aria-hidden="true">
+  <div class="lux-modal-dialog" role="dialog" aria-modal="true">
+
+    <button id="lux-modal-close-btn"
+            class="lux-modal-close"
+            type="button"
+            aria-label="Cerrar">
+      &times;
+    </button>
+
+    <div class="lux-modal-grid">
+
+      <div class="lux-modal-gallery-col">
+
+        <button class="lux-gallery-btn prev"
+                type="button"
+                aria-label="Imagen anterior">
+          &#10094;
+        </button>
+
+        <div class="lux-modal-img-wrap">
+          <img id="modal-imagen"
+               src=""
+               alt=""
+               draggable="false">
+          <span id="modal-counter" class="lux-modal-counter">1 / 1</span>
+        </div>
+
+        <button class="lux-gallery-btn next"
+                type="button"
+                aria-label="Imagen siguiente">
+          &#10095;
+        </button>
+
       </div>
-      <div style="display:flex; justify-content:space-between; margin-top:15px;">
-        <button onclick="prevModalImage()" style="padding:8px 15px; cursor:pointer;">Anterior</button>
-        <button onclick="nextModalImage()" style="padding:8px 15px; cursor:pointer;">Siguiente</button>
+
+      <div class="lux-modal-info-col">
+        <span id="lux-modal-tag" class="lux-modal-tag">
+          INMOBILIARIA
+        </span>
+
+        <h2 id="modal-titulo">Nombre del Proyecto</h2>
+
+        <div id="lux-modal-desc" class="lux-modal-desc"></div>
       </div>
+
     </div>
   </div>
 </div>
