@@ -3,5 +3,5 @@ subtitulo: Más de 25 años liderando proyectos residenciales con ubicación
   estratégica y valorización en el Caribe colombiano.
 boton_texto: Solicitar asesoría
 boton_link: "#contacto"
-video: /img/uploads/descubre_cartagena_comprimido.mp4?v=2
+video: /img/uploads/auxi_hero.mp4
 ---
