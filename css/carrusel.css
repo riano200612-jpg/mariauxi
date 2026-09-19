@@ -59,8 +59,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(6, 12, 24, 0) 40%,
-    rgba(6, 12, 24, 0.85) 100%
+    rgba(6, 12, 24, 0) 45%,
+    rgba(6, 12, 24, 0.55) 100%
   );
   pointer-events: none;
 }
@@ -72,16 +72,17 @@
   right: 16px;
   bottom: 16px;
   z-index: 2;
-  padding: 14px 18px;
+  padding: 8px 14px;
   border: 1px solid rgba(212, 175, 110, 0.35);
-  border-radius: 12px;
-  background: rgba(10, 16, 28, 0.45);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
   color: #f3ead9;
-  font-size: 1rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-align: left;
   cursor: pointer;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
@@ -360,27 +361,4 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   border-color: rgba(212, 175, 55, 0.4);
 }
-.lux-glass-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  padding: 0.85rem 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  border-radius: 50px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-.lux-project-card:hover .lux-glass-btn {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: translate(-50%, -50%) scale(1.05);
-}
+/* Duplicado eliminado: .lux-glass-btn ya está definido arriba */

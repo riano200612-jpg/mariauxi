@@ -68,12 +68,16 @@
     actualizarImagenModal()
   }
 
+  let elementoDisparador = null
+
   function abrirModal (nombreProyecto) {
     const info = projects[nombreProyecto]
     if (!info) {
       console.warn('Proyecto no encontrado:', nombreProyecto)
       return
     }
+
+    elementoDisparador = document.activeElement
 
     currentProjectImages = projectGalleries[info.key] || []
     currentIndex = 0
@@ -93,6 +97,15 @@
 
   function cerrarModal () {
     modalOverlay.classList.remove('modal-activo')
+
+    // Mover el foco fuera del modal ANTES de marcarlo aria-hidden,
+    // para no violar la regla de accesibilidad (foco atrapado en elemento oculto).
+    if (elementoDisparador && typeof elementoDisparador.focus === 'function') {
+      elementoDisparador.focus()
+    } else if (document.activeElement && modalOverlay.contains(document.activeElement)) {
+      document.activeElement.blur()
+    }
+
     modalOverlay.setAttribute('aria-hidden', 'true')
     document.body.style.overflow = ''
   }
