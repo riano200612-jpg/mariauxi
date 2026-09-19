@@ -5,3 +5,28 @@
   visibility: visible !important;
   transform: none !important;
 }
+
+/* FIX: botón translúcido "Descubrir" invisible en táctil (tablet/móvil) */
+/* Por defecto (táctil): visible siempre, sin depender de :hover */
+#proyectos .grid .card .swatch button[aria-label^="Descubrir"] {
+  opacity: 1 !important;
+  background: rgba(15,23,30,0.28) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+/* Solo en dispositivos con mouse real: oculto hasta hacer hover */
+@media (hover: hover) and (pointer: fine) {
+  #proyectos .grid .card .swatch button[aria-label^="Descubrir"] {
+    opacity: 0 !important;
+    background: rgba(0,0,0,0) !important;
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+  }
+  #proyectos .grid .card .swatch button[aria-label^="Descubrir"]:hover {
+    opacity: 1 !important;
+    background: rgba(15,23,30,0.3) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
