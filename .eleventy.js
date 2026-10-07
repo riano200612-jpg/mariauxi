@@ -7,6 +7,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("contenido");
   eleventyConfig.addPassthroughCopy("docum");
+  eleventyConfig.addPassthroughCopy("manifest.json");
   return {
     dir: {
       input: ".",
