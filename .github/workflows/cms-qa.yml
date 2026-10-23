@@ -1,0 +1,40 @@
+name: CMS security and build checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cms-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: cms-qa
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run CMS safeguards
+        run: npm test
+      - name: Build static site without deploying
+        run: npm run build
+      - name: Verify generated CMS assets
+        run: |
+          test -s _site/index.html
+          test -s _site/admin/index.html
+          test -s _site/admin/config.yml
+      - name: Audit production dependency vulnerabilities
+        run: npm audit --omit=dev --audit-level=high
