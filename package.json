@@ -4,7 +4,7 @@
   "description": "Este repositorio usa Decap CMS con backend GitHub para administrar contenido desde `admin/index.html`.",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && node scripts/cms-staging-isolation.cjs",
     "test": "node --test tests/*.test.cjs",
     "check": "npm run test && npm run build"
   },
