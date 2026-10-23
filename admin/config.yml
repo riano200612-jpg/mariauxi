@@ -5,6 +5,8 @@ backend:
   base_url: https://mariauxi-oauth.riano200612.workers.dev
   auth_endpoint: auth
 
+publish_mode: editorial_workflow
+
 local_backend: true
 
 media_folder: "img/uploads"
